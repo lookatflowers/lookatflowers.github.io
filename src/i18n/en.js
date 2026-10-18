@@ -1,0 +1,55 @@
+export default {
+  meta: { title: 'LOOK AT FLOWERS · Spring Edition 2026' },
+  skip: 'Skip to content',
+  lang: { label: 'Language' },
+  provisional: 'Placeholder',
+  nav: {
+    label: 'Sections',
+    info: 'Info',
+    lineup: 'Line-up',
+    schedule: 'Schedule',
+    vendors: 'Vendors',
+    useful: 'Useful',
+    map: 'Map',
+    contact: 'Contact',
+  },
+  info: {
+    title: 'General information',
+    date: 'Date',
+    venue: 'Venue',
+    start: 'Start',
+    access: 'Access',
+    accessText: 'Via Calle General Lagos. Details on the event map.',
+  },
+  lineup: {
+    title: 'Line-up',
+    bands: 'Bands',
+    djs: 'DJs',
+    tbc: 'To be confirmed',
+    confirmed: 'Confirmed',
+    note: 'We will reveal the artists as they get confirmed.',
+  },
+  schedule: {
+    title: 'Schedule',
+    ambient: 'Ambient music',
+    close: 'Closing and teardown',
+    tbc: '¿?',
+  },
+  vendors: {
+    title: 'Vendors',
+    empty: 'We will soon publish the participating vendors.',
+  },
+  useful: {
+    title: 'Useful information',
+    text: 'Access, tips and details for attendees. Content to be defined.',
+  },
+  map: {
+    title: 'Location and map',
+    text: 'Interactive event map in development.',
+  },
+  contact: {
+    title: 'Social media and contact',
+    text: 'Follow us to keep up with all the news.',
+  },
+  footer: 'Site under construction · SOMOS LOOKAT',
+}

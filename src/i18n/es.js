@@ -1,0 +1,55 @@
+export default {
+  meta: { title: 'LOOK AT FLOWERS · Edición Primavera 2026' },
+  skip: 'Saltar al contenido',
+  lang: { label: 'Idioma' },
+  provisional: 'Provisional',
+  nav: {
+    label: 'Secciones',
+    info: 'Info',
+    lineup: 'Line-up',
+    schedule: 'Cronograma',
+    vendors: 'Puestos',
+    useful: 'Útil',
+    map: 'Mapa',
+    contact: 'Contacto',
+  },
+  info: {
+    title: 'Información general',
+    date: 'Fecha',
+    venue: 'Lugar',
+    start: 'Inicio',
+    access: 'Acceso',
+    accessText: 'Por Calle General Lagos. Detalles en el mapa del evento.',
+  },
+  lineup: {
+    title: 'Line-up',
+    bands: 'Bandas',
+    djs: 'DJs',
+    tbc: 'Por confirmar',
+    confirmed: 'Confirmado',
+    note: 'Iremos revelando a las y los artistas a medida que se confirmen.',
+  },
+  schedule: {
+    title: 'Cronograma',
+    ambient: 'Música ambiente',
+    close: 'Cierre y desmontaje',
+    tbc: '¿?',
+  },
+  vendors: {
+    title: 'Puestos de venta',
+    empty: 'Pronto publicaremos los puestos participantes.',
+  },
+  useful: {
+    title: 'Información útil',
+    text: 'Accesos, recomendaciones y datos para asistentes. Contenido por definir.',
+  },
+  map: {
+    title: 'Ubicación y mapa',
+    text: 'Mapa interactivo del evento en desarrollo.',
+  },
+  contact: {
+    title: 'Redes y contacto',
+    text: 'Síguenos para enterarte de todas las novedades.',
+  },
+  footer: 'Sitio en construcción · SOMOS LOOKAT',
+}
