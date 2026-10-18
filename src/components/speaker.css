@@ -1,0 +1,136 @@
+/* Portada con parlante. Aspecto PROVISIONAL: el cono definitivo lo aporta el equipo de arte. */
+
+:root {
+  --header-h: 3.5rem;
+  --size: min(88vw, 78svh);         /* diámetro del parlante */
+  --travel: 75svh;                  /* scroll que recorre el cono (igual que TRAVEL_FRACTION en Speaker.jsx) */
+  --start-y: calc(50svh + var(--header-h) / 2);                    /* centro del cono al cargar */
+  --end-y: calc(var(--header-h) + var(--size) * 0.105 + 0.75rem);  /* centro al final: se ve el logo bajo la cabecera */
+  --p: 0;                           /* avance del scroll 0 → 1 (lo escribe Speaker.jsx) */
+  --pulse: 0;                       /* pulso del audio 0 → 1 (se conectará más adelante) */
+  --spin-duration: 30s;             /* una vuelta del cono */
+}
+
+.header { height: var(--header-h); }
+.footer { position: relative; z-index: 1; background: var(--paper); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ----- Parlante (fijo, detrás del contenido) ----- */
+.speaker {
+  position: fixed;
+  z-index: 0;
+  left: 50%;
+  top: var(--start-y);
+  width: var(--size);
+  aspect-ratio: 1;
+  transform: translate(-50%, calc(-50% + (var(--end-y) - var(--start-y)) * var(--p)));
+  pointer-events: none;
+}
+.speaker__pulse {
+  position: absolute;
+  inset: 0;
+  transform: scale(calc(1 + var(--pulse) * 0.04));
+}
+.speaker__layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+.speaker__spin {
+  animation: speaker-spin var(--spin-duration) linear infinite;
+  will-change: transform;
+}
+@keyframes speaker-spin { to { transform: rotate(360deg); } }
+
+.speaker__frame { fill: #e9e9e6; stroke: rgb(0 0 0 / 0.18); stroke-width: 3; }
+.fill-pink { fill: var(--pink); }
+.fill-green { fill: var(--green); }
+.fill-violet { fill: var(--violet); }
+.fill-yellow { fill: var(--yellow); }
+.fill-ink { fill: var(--ink); }
+
+/* Tapa central con el logo: no gira, para que se lea siempre */
+.speaker__cap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 21%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border: calc(var(--size) * 0.009) solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 0 0 calc(var(--size) * 0.014) rgb(0 0 0 / 0.35);
+}
+.speaker__cap img { width: 90%; height: auto; }
+
+/* ----- Escena de portada ----- */
+.stage {
+  position: relative;
+  z-index: 1;
+  height: calc(var(--travel) + 100svh);
+}
+.stage__scroll {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  margin: 0;
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: calc(1 - var(--p) * 4);
+  pointer-events: none;
+}
+.stage__scroll::after {
+  content: '';
+  width: 1px;
+  height: 2rem;
+  background: currentColor;
+}
+/* El texto aparece justo debajo del cono cuando este ya subió */
+.stage__copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--travel) + var(--end-y) + var(--size) * 0.49 + 2rem - var(--header-h));
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+.stage__edition {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.stage__slogan {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.2rem, 10vw, 6rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+
+/* El resto del sitio sube como una cortina y tapa el parlante */
+.curtain {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .speaker__spin { animation: none; }
+}

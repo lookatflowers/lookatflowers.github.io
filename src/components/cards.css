@@ -1,0 +1,231 @@
+/* Sistema de cartas. Aspecto PROVISIONAL (solo estructura y funcionamiento):
+   el arte del reverso y del marco lo define el equipo de diseño. */
+
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+}
+.group + .group { margin-top: 3.5rem; }
+
+/* ----- Carta ----- */
+.card {
+  --card-border: rgb(37 37 37 / 0.4);
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 63 / 88; /* proporción de carta coleccionable */
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--paper);
+  font: inherit;
+  text-align: left;
+  perspective: 900px;
+  container-type: inline-size;
+  transition: transform 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.card--confirmed { --card-border: var(--green); cursor: pointer; }
+@media (hover: hover) {
+  .card--confirmed:hover { transform: translateY(-4px); }
+}
+.card--tbc { opacity: 0.85; }
+
+.card__inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+.card.is-flipped .card__inner { transform: rotateY(180deg); }
+
+.card__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid var(--card-border);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: var(--ink);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.card__face--reveal { transform: rotateY(180deg); }
+
+/* Cara de la incógnita */
+.card__face--mystery {
+  align-items: center;
+  justify-content: center;
+}
+.card__face--mystery::before { /* marco interior */
+  content: '';
+  position: absolute;
+  inset: 0.45rem;
+  border: 1.5px solid rgb(242 242 239 / 0.25);
+  border-radius: 0.55rem;
+  pointer-events: none;
+}
+.card__mark {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 42cqw;
+  line-height: 1;
+  color: var(--pink);
+}
+.card--tbc .card__mark { opacity: 0.55; }
+
+.card__kind {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+.card__kind--inline { position: static; display: block; margin: 0; }
+
+/* Señal de confirmado: esquina + borde verde */
+.card__badge {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.5rem 0.15rem 0.3rem;
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--ink);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.card__check { width: 0.85rem; height: 0.85rem; }
+
+.card__hint {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+.card__face--mystery .card__hint {
+  position: absolute;
+  bottom: 0.9rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+/* Cara revelada */
+.card__photo {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  object-fit: cover;
+}
+.card__photo--empty {
+  background:
+    repeating-linear-gradient(135deg, rgb(242 242 239 / 0.08) 0 0.6rem, transparent 0.6rem 1.2rem),
+    var(--violet);
+}
+.card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.6rem 0.75rem 0.75rem;
+  background: var(--ink);
+}
+.card__name {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.1rem;
+  line-height: 1;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.card__provisional {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.05rem 0.4rem;
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ----- Ventana de información ampliada ----- */
+.dialog {
+  width: min(92vw, 34rem);
+  max-height: 90svh;
+  padding: 0;
+  border: 3px solid var(--ink);
+  border-radius: 1rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+.dialog[open] { animation: dialog-in 0.22s ease-out; }
+.dialog::backdrop { background: rgb(37 37 37 / 0.72); }
+@keyframes dialog-in {
+  from { opacity: 0; transform: translateY(0.75rem) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+.dialog__body { position: relative; display: grid; gap: 1.1rem; padding: 1rem 1rem 1.5rem; }
+.dialog__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+.dialog__close svg { width: 1.1rem; height: 1.1rem; }
+.dialog__photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.6rem;
+}
+.dialog__photo--empty {
+  background:
+    repeating-linear-gradient(135deg, rgb(242 242 239 / 0.1) 0 0.7rem, transparent 0.7rem 1.4rem),
+    var(--violet);
+}
+.dialog__title { font-size: clamp(1.8rem, 7vw, 2.6rem); margin-top: 0.25rem; }
+.dialog__tag { display: inline-block; margin: 0.5rem 0 0; }
+.dialog__bio { margin: 0; }
+.dialog__links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
+.dialog__links a {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.dialog__links a:hover { background: var(--ink); color: var(--paper); }
+
+body:has(dialog[open]) { overflow: hidden; } /* sin scroll de fondo con la ventana abierta */
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .card__inner { transition-duration: 0.01ms; }
+  .dialog[open] { animation: none; }
+}

@@ -1,6 +1,7 @@
 export default {
   meta: { title: 'LOOK AT FLOWERS · Spring Edition 2026' },
   skip: 'Skip to content',
+  hero: { scroll: 'Scroll' },
   lang: { label: 'Language' },
   provisional: 'Placeholder',
   nav: {
@@ -28,6 +29,16 @@ export default {
     tbc: 'To be confirmed',
     confirmed: 'Confirmed',
     note: 'We will reveal the artists as they get confirmed.',
+  },
+  cards: {
+    band: 'Band',
+    dj: 'DJ',
+    reveal: 'Tap to reveal',
+    more: 'Read more',
+    close: 'Close',
+    noBio: 'Bio coming soon.',
+    ariaReveal: '{name}, confirmed. Press to reveal.',
+    ariaMore: '{name}. Press to read more.',
   },
   schedule: {
     title: 'Schedule',

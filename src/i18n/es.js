@@ -1,6 +1,7 @@
 export default {
   meta: { title: 'LOOK AT FLOWERS · Edición Primavera 2026' },
   skip: 'Saltar al contenido',
+  hero: { scroll: 'Desliza' },
   lang: { label: 'Idioma' },
   provisional: 'Provisional',
   nav: {
@@ -28,6 +29,16 @@ export default {
     tbc: 'Por confirmar',
     confirmed: 'Confirmado',
     note: 'Iremos revelando a las y los artistas a medida que se confirmen.',
+  },
+  cards: {
+    band: 'Banda',
+    dj: 'DJ',
+    reveal: 'Toca para revelar',
+    more: 'Ver reseña',
+    close: 'Cerrar',
+    noBio: 'Reseña próximamente.',
+    ariaReveal: '{name}, confirmado. Pulsa para revelar.',
+    ariaMore: '{name}. Pulsa para ver la reseña.',
   },
   schedule: {
     title: 'Cronograma',
