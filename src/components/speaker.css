@@ -9,7 +9,9 @@
   --p: 0;                           /* avance del scroll 0 → 1 (lo escribe Speaker.jsx) */
   --pulse: 0;                       /* pulso del audio 0 → 1 (se conectará más adelante) */
   --spin-duration: 30s;             /* una vuelta del cono */
+  --stage-fg: var(--ink);           /* color del texto de portada (cambia con el fondo) */
 }
+html[data-bg='noche'] { --stage-fg: var(--paper); }
 
 .header { height: var(--header-h); }
 .footer { position: relative; z-index: 1; background: var(--paper); }
@@ -90,6 +92,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: var(--stage-fg);
   opacity: calc(1 - var(--p) * 4);
   pointer-events: none;
 }
@@ -113,6 +116,7 @@
   font-size: 0.9rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  color: var(--stage-fg);
 }
 .stage__slogan {
   margin: 0;
@@ -121,7 +125,7 @@
   font-size: clamp(2.2rem, 10vw, 6rem);
   line-height: 1;
   text-transform: uppercase;
-  color: var(--pink);
+  color: var(--stage-fg);
 }
 
 /* El resto del sitio sube como una cortina y tapa el parlante */

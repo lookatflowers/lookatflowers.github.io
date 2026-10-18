@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import logo from '../assets/brand/logo.svg'
 import { blobPath } from '../utils/blob'
+import { registerPulseTarget } from '../utils/pulse'
 import './speaker.css'
 
 // Recorrido de scroll (fracción del alto de pantalla) en el que el cono sube.
@@ -60,10 +61,12 @@ function useScrollProgress() {
  */
 export default function Speaker() {
   useScrollProgress()
+  const pulseRef = useRef(null)
+  useEffect(() => registerPulseTarget(pulseRef.current), [])
 
   return (
     <div className="speaker" aria-hidden="true">
-      <div className="speaker__pulse">
+      <div className="speaker__pulse" ref={pulseRef}>
         <svg className="speaker__layer speaker__spin" viewBox="0 0 1000 1000" focusable="false">
           <defs>
             <clipPath id="speaker-cone-clip"><circle cx={C} cy={C} r="352" /></clipPath>
