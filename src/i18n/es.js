@@ -42,8 +42,8 @@ export default {
   },
   schedule: {
     title: 'Cronograma',
-    ambient: 'Música ambiente',
-    close: 'Cierre y desmontaje',
+    ambient: 'Bienvenida',
+    close: 'Despedida',
     tbc: '¿?',
   },
   vendors: {

@@ -12,6 +12,7 @@ export const stages = [
       { time: '16:45', kind: 'artist', artistId: 'band-4' },
       { time: '17:30', kind: 'artist', artistId: 'band-5' },
       { time: '18:15', kind: 'artist', artistId: 'band-6' },
+      { time: '19:30', kind: 'close'},
     ],
   },
   {

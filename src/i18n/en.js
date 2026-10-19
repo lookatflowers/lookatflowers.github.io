@@ -42,8 +42,8 @@ export default {
   },
   schedule: {
     title: 'Schedule',
-    ambient: 'Ambient music',
-    close: 'Closing and teardown',
+    ambient: 'Welcome',
+    close: 'Farewell',
     tbc: '¿?',
   },
   vendors: {
