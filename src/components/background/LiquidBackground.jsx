@@ -4,12 +4,21 @@ import { DEFAULT_LOOK, LOOKS, MOTION, PALETTES } from './palettes'
 import { FRAG, VERT } from './shader'
 import './background.css'
 
-/** Para probar sin tocar código: ?bg=primavera|noche  &estilo=suave|marmol */
+/** Para probar sin tocar código (se combinan con &):
+ *   ?bg=primavera|noche      paleta
+ *   ?estilo=suave|marmol     preajuste completo (dureza, resolución y orden de colores)
+ *   ?dureza=0..1             bordes entre colores: 0 degradado suave · 1 bordes definidos
+ *   ?rampa=suave|marmol      orden de los colores del relieve (por defecto, el del estilo)
+ *  Ejemplo: ?dureza=0.5&rampa=marmol */
 function readLook() {
   const q = new URLSearchParams(window.location.search)
   const bg = Object.hasOwn(PALETTES, q.get('bg')) ? q.get('bg') : DEFAULT_LOOK.bg
   const estilo = Object.hasOwn(LOOKS, q.get('estilo')) ? q.get('estilo') : DEFAULT_LOOK.estilo
-  return { bg, estilo }
+  const rampa = Object.hasOwn(LOOKS, q.get('rampa')) ? LOOKS[q.get('rampa')].ramp : LOOKS[estilo].ramp
+  const raw = q.get('dureza')
+  const num = raw === null || raw.trim() === '' ? NaN : Number(raw)
+  const dureza = Number.isFinite(num) ? Math.min(1, Math.max(0, num)) : null
+  return { bg, estilo, rampa, dureza }
 }
 
 function buildProgram(gl) {
@@ -48,7 +57,7 @@ export default function LiquidBackground() {
   useEffect(() => {
     const canvas = canvasRef.current
     const root = document.documentElement
-    const { bg, estilo } = readLook()
+    const { bg, estilo, rampa, dureza } = readLook()
     root.dataset.bg = bg // el texto de la portada se adapta al fondo
 
     const gl = canvas.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'low-power' })
@@ -71,14 +80,17 @@ export default function LiquidBackground() {
 
     const look = LOOKS[estilo]
     const palette = PALETTES[bg]
-    const ramp = palette[look.ramp]
+    const ramp = palette[rampa]
+    // Con ?dureza= se reemplaza la dureza del estilo; más dureza pide más resolución
+    // interna (0.5 → 0.75) para que los bordes no se vean borrosos al ampliar.
+    const sharp = dureza ?? look.sharp
     gl.uniform3fv(loc('u_col'), new Float32Array(ramp.cols.flat()))
     gl.uniform1fv(loc('u_edge'), new Float32Array(ramp.edges))
     gl.uniform3fv(loc('u_glow'), new Float32Array(palette.glow))
-    gl.uniform1f(loc('u_sharp'), look.sharp)
+    gl.uniform1f(loc('u_sharp'), sharp)
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    let scale = look.scale
+    let scale = dureza === null ? look.scale : 0.5 + 0.25 * dureza
     let phase = 40
     let energy = 0
     let last = 0

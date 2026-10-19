@@ -68,8 +68,12 @@ void main() {
 
   float x = clamp(0.5 + 0.95 * f + 0.22 * r.x, 0.0, 1.0);
 
-  // Ancho de transición entre colores: amplio = degradado, mínimo = borde de mármol
-  float w = mix(0.15, max(fwidth(x) * 1.2, 0.0015), u_sharp);
+  // Ancho de transición entre colores: amplio = degradado, mínimo = borde de mármol.
+  // Se interpola en escala exponencial (no lineal) para que los valores intermedios
+  // de u_sharp (0.2, 0.5...) se noten de forma pareja y no todo ocurra cerca de 1.
+  float wSoft = 0.15;
+  float wHard = max(fwidth(x) * 1.2, 0.0015);
+  float w = wSoft * pow(wHard / wSoft, u_sharp);
   vec3 c = u_col[0];
   for (int i = 0; i < 5; i++) {
     c = mix(c, u_col[i + 1], smoothstep(u_edge[i] - w, u_edge[i] + w, x));
