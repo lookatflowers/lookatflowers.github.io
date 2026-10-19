@@ -49,6 +49,7 @@ export default {
   vendors: {
     title: 'Puestos de venta',
     empty: 'Pronto publicaremos los puestos participantes.',
+    visit: 'Ver más',
   },
   useful: {
     title: 'Información útil',

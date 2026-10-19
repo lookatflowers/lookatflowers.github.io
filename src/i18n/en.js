@@ -49,6 +49,7 @@ export default {
   vendors: {
     title: 'Vendors',
     empty: 'We will soon publish the participating vendors.',
+    visit: 'Visit',
   },
   useful: {
     title: 'Useful information',

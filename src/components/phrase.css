@@ -1,0 +1,37 @@
+/* Frases grandes entre secciones. Aspecto PROVISIONAL (colores y tamaño a criterio de arte). */
+
+.phrase {
+  --k: 0; /* progreso de scroll 0 → 1 (lo escribe bandProgress.js) */
+  --tone: var(--pink);
+  overflow: hidden;
+  padding: clamp(1.5rem, 6vw, 4rem) 0;
+  border-top: 1px solid rgb(37 37 37 / 0.15);
+  user-select: none;
+  pointer-events: none;
+}
+.phrase--pink { --tone: var(--pink); }
+.phrase--green { --tone: var(--green); }
+.phrase--violet { --tone: var(--violet); }
+.phrase--ink { --tone: var(--ink); }
+
+.phrase__text {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(4.5rem, 20vw, 16rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  color: var(--tone);
+  /* se desliza hacia la izquierda mientras se baja (el % es el ancho de la propia frase) */
+  transform: translateX(calc(8vw - var(--k) * 55%));
+  will-change: transform;
+}
+
+/* Las letras se encienden en oleada: la oleada termina cuando la frase va por la mitad de la pantalla */
+.phrase__char {
+  --kk: clamp(0, calc(var(--k) * 1.8), 1);
+  --lit: clamp(0, calc(var(--kk) * (var(--n) + 5) - var(--i)), 1);
+  display: inline-block;
+  opacity: calc(0.12 + 0.88 * var(--lit));
+}

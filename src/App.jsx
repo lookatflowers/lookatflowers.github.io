@@ -6,6 +6,7 @@ import Header from './components/Header'
 import Speaker from './components/Speaker'
 import LiquidBackground from './components/background/LiquidBackground'
 import { startDemoPulse } from './utils/demoPulse'
+import PhraseBand from './components/PhraseBand'
 import Hero from './sections/Hero'
 import Info from './sections/Info'
 import Lineup from './sections/Lineup'
@@ -28,11 +29,14 @@ function Page() {
         <Hero />
         <div className="curtain">
           <Info />
+          <PhraseBand id="slogan" />
           <Lineup />
           <Schedule />
+          <PhraseBand id="fci" />
           <Vendors />
           <Useful />
           <MapSection />
+          <PhraseBand id="primavera" />
           <Contact />
         </div>
       </main>

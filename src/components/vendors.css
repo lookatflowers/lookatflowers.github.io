@@ -1,0 +1,38 @@
+/* Tarjetas de puestos. Aspecto PROVISIONAL, a propósito más sobrio que las cartas de artistas. */
+.vendors {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+}
+.vendor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100%;
+  padding: 1.1rem 1.1rem 1.25rem;
+  border: 2px solid var(--ink);
+  border-radius: 0.75rem;
+  background: var(--paper);
+}
+.vendor__category {
+  align-self: flex-start;
+  margin: 0;
+  padding: 0.05rem 0.5rem;
+  border: 1px solid currentColor;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.vendor__name { font-size: clamp(1.3rem, 4vw, 1.8rem); overflow-wrap: anywhere; }
+.vendor__description { margin: 0; font-size: 0.95rem; }
+.vendor__link {
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-underline-offset: 0.25em;
+}
+.vendor__link:hover { color: var(--pink); }
