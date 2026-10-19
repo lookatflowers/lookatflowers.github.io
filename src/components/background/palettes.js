@@ -36,7 +36,9 @@ export const LOOKS = {
   marmol: { sharp: 1, scale: 0.75, ramp: 'hard' },
 }
 
-export const DEFAULT_LOOK = { bg: 'primavera', estilo: 'suave' }
+// Estilo por defecto: mármol (bordes definidos). Equivale a ?dureza=1&rampa=marmol.
+// Para volver al degradado suave: estilo: 'suave'.
+export const DEFAULT_LOOK = { bg: 'primavera', estilo: 'marmol' }
 
 // Movimiento: velocidad base del fluido y cuánto se acelera con el pulso (0 = nada)
 export const MOTION = { speed: 0.6, boost: 1.8 }
