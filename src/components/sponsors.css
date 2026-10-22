@@ -1,17 +1,17 @@
 /* Matriz de logos. El tamaño se fija por ALTURA (--sponsor-h): los logos muy horizontales quedan
    igual de altos y más anchos. Los medianos miden --sponsor-medium de un grande. */
 .sponsors {
-  --sponsor-h: clamp(6rem, 18vw, 10rem);
-  --sponsor-medium: 0.65;
+  --sponsor-h: clamp(3.6rem, 10.8vw, 6rem); /* altura de un logo grande */
+  --sponsor-medium: 0.8667; /* mediano = 0.52 del tamaño grande anterior (80 % del mediano anterior) */
   display: grid;
-  gap: clamp(1rem, 3vw, 2rem);
+  gap: clamp(2rem, 5vw, 3.5rem); /* entre la fila de grandes y la de medianos */
 }
 .sponsors__row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: clamp(0.75rem, 3vw, 2.5rem);
+  gap: clamp(2rem, 6vw, 4.5rem) clamp(2.25rem, 7vw, 5rem); /* entre logos de una fila */
   margin: 0;
   padding: 0;
   list-style: none;
