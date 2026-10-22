@@ -1,3 +1,9 @@
+// Fondo en dos pasadas:
+//  1. FIELD_FRAG: el fluido (ruido con deformación de dominio, lo costoso) a resolución reducida,
+//     guardado en una textura RGBA8 con 16 bits de precisión (alto + bajo).
+//  2. COLOR_FRAG: a resolución nativa de pantalla lee ese campo con interpolación bilineal y
+//     resuelve colores, bordes de mármol, luz y grano. Es barato, y los bordes quedan nítidos.
+
 export const VERT = `#version 300 es
 void main() {
   // Triángulo que cubre toda la pantalla, sin buffers
@@ -5,18 +11,13 @@ void main() {
   gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0);
 }`
 
-export const FRAG = `#version 300 es
+export const FIELD_FRAG = `#version 300 es
 precision highp float;
 out vec4 outColor;
 
-uniform vec2  u_res;
-uniform float u_t;        // fase del tiempo (acumulada: cambiar la velocidad no da saltos)
-uniform float u_energy;   // pulso suavizado 0..1
-uniform float u_sharp;    // 0 suave .. 1 mármol
-uniform vec2  u_center;   // centro de la luz (pantalla 0..1)
-uniform vec3  u_glow;
-uniform vec3  u_col[6];
-uniform float u_edge[5];
+uniform vec2  u_res;   // tamaño de la textura del campo
+uniform float u_aspect; // proporción de la pantalla (no de la textura)
+uniform float u_t;      // fase del tiempo (acumulada: cambiar la velocidad no da saltos)
 
 // Ruido simplex 2D (Ashima Arts / Ian McEwan, MIT)
 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -56,8 +57,7 @@ float fbm(vec2 p) {
 
 void main() {
   vec2 uv = gl_FragCoord.xy / u_res;
-  float aspect = u_res.x / u_res.y;
-  vec2 p = (uv - 0.5) * vec2(aspect, 1.0) * 0.38;
+  vec2 p = (uv - 0.5) * vec2(u_aspect, 1.0) * 0.38;
   float t = u_t;
 
   // Deformación de dominio: el fluido se pliega sobre sí mismo
@@ -68,11 +68,67 @@ void main() {
 
   float x = clamp(0.5 + 0.95 * f + 0.22 * r.x, 0.0, 1.0);
 
+  // 16 bits en dos canales de 8: alto y bajo
+  float v = x * 255.0;
+  outColor = vec4(floor(v) / 255.0, fract(v), 0.0, 1.0);
+}`
+
+export const COLOR_FRAG = `#version 300 es
+precision highp float;
+out vec4 outColor;
+
+uniform sampler2D u_field;
+uniform vec2  u_fieldRes;
+uniform vec2  u_res;     // tamaño del lienzo en píxeles de dispositivo
+uniform float u_dpr;     // píxeles de dispositivo por píxel CSS (el grano va por píxel CSS)
+uniform float u_energy;  // pulso suavizado 0..1
+uniform float u_sharp;   // 0 suave .. 1 mármol
+uniform vec2  u_center;  // centro de la luz (pantalla 0..1)
+uniform vec3  u_glow;
+uniform vec3  u_col[6];
+uniform float u_edge[5];
+uniform float u_grain;   // cantidad de grano 0..1
+uniform float u_seed;    // cambia a saltos: el grano "vibra"
+
+float fieldAt(ivec2 c) {
+  vec4 s = texelFetch(u_field, clamp(c, ivec2(0), ivec2(u_fieldRes) - 1), 0);
+  return s.r + s.g / 255.0;
+}
+
+// Interpolación bilineal manual (los datos van empaquetados, no se pueden filtrar directo)
+float field(vec2 uv) {
+  vec2 tc = uv * u_fieldRes - 0.5;
+  vec2 i0 = floor(tc);
+  vec2 f = tc - i0;
+  ivec2 c = ivec2(i0);
+  float a = fieldAt(c);
+  float b = fieldAt(c + ivec2(1, 0));
+  float d = fieldAt(c + ivec2(0, 1));
+  float e = fieldAt(c + ivec2(1, 1));
+  return mix(mix(a, b, f.x), mix(d, e, f.x), f.y);
+}
+
+float hash(vec2 p) {
+  vec3 p3 = fract(vec3(p.xyx) * 0.1031);
+  p3 += dot(p3, p3.yzx + 33.33);
+  return fract((p3.x + p3.y) * p3.z);
+}
+
+// Mezcla "soft-light" (misma fórmula que mix-blend-mode: soft-light de CSS)
+vec3 softLight(vec3 cb, float s) {
+  vec3 dk = mix(((16.0 * cb - 12.0) * cb + 4.0) * cb, sqrt(cb), step(0.25, cb));
+  return s <= 0.5 ? cb - (1.0 - 2.0 * s) * cb * (1.0 - cb) : cb + (2.0 * s - 1.0) * (dk - cb);
+}
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / u_res;
+  float aspect = u_res.x / u_res.y;
+  float x = field(uv);
+
   // Ancho de transición entre colores: amplio = degradado, mínimo = borde de mármol.
-  // Se interpola en escala exponencial (no lineal) para que los valores intermedios
-  // de u_sharp (0.2, 0.5...) se noten de forma pareja y no todo ocurra cerca de 1.
+  // Se interpola en escala exponencial para que los valores intermedios de u_sharp se noten parejo.
   float wSoft = 0.15;
-  float wHard = max(fwidth(x) * 1.2, 0.0015);
+  float wHard = max(fwidth(x) * 1.2, 0.0008);
   float w = wSoft * pow(wHard / wSoft, u_sharp);
   vec3 c = u_col[0];
   for (int i = 0; i < 5; i++) {
@@ -87,6 +143,12 @@ void main() {
 
   // Viñeta muy suave
   c *= 1.0 - 0.16 * dot(uv - 0.5, uv - 0.5) * 2.0;
+  c = clamp(c, 0.0, 1.0);
+
+  // Grano de película a resolución nativa (por píxel CSS), mezclado en soft-light
+  vec2 cell = floor(gl_FragCoord.xy / u_dpr);
+  float n = 0.5 + (hash(cell + u_seed * 17.13) - 0.5) * 0.7;
+  c = mix(c, softLight(c, n), u_grain);
 
   outColor = vec4(c, 1.0);
 }`

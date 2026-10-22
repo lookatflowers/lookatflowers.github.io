@@ -1,4 +1,5 @@
-/* Fondo líquido con grano. Ajustes rápidos: --grain (cantidad de grano, 0–1). */
+/* Fondo líquido con grano. El grano va dentro del shader (GRAIN en LiquidBackground.jsx);
+   la capa CSS de grano solo acompaña al degradado de respaldo (al cargar o sin WebGL2). */
 
 .liquid {
   --grain: 0.5;
@@ -20,7 +21,11 @@ html[data-bg='noche'] .liquid {
   width: 100%;
   height: 100%;
   display: block;
+  opacity: 0; /* aparece con su primer cuadro válido: nunca se ve negro */
+  transition: opacity 0.4s ease;
 }
+.liquid[data-gl='ready'] .liquid__canvas { opacity: 1; }
+.liquid[data-gl='ready'] .liquid__grain { display: none; }
 
 /* Grano de película a resolución nativa: ruido SVG que "vibra" en saltos */
 .liquid__grain {

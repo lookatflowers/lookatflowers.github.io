@@ -30,10 +30,11 @@ export const PALETTES = {
 }
 
 // sharp: 0 = degradados suaves · 1 = bordes definidos
-// scale: resolución interna respecto a la pantalla (menos = más liviano)
+// scale: resolución del fluido respecto a la pantalla. Los colores, bordes y grano van siempre a
+//        resolución nativa; menos = más liviano (el degradado suave aguanta menos).
 export const LOOKS = {
-  suave: { sharp: 0, scale: 0.5, ramp: 'soft' },
-  marmol: { sharp: 1, scale: 0.75, ramp: 'hard' },
+  suave: { sharp: 0, scale: 0.35, ramp: 'soft' },
+  marmol: { sharp: 1, scale: 0.5, ramp: 'hard' },
 }
 
 // Estilo por defecto: mármol (bordes definidos). Equivale a ?dureza=1&rampa=marmol.

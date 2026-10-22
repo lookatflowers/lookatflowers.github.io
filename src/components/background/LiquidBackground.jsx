@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { pulse } from '../../utils/pulse'
 import { DEFAULT_LOOK, LOOKS, MOTION, PALETTES } from './palettes'
-import { FRAG, VERT } from './shader'
+import { COLOR_FRAG, FIELD_FRAG, VERT } from './shader'
 import './background.css'
 
 /** Para probar sin tocar código (se combinan con &):
@@ -21,7 +21,7 @@ function readLook() {
   return { bg, estilo, rampa, dureza }
 }
 
-function buildProgram(gl) {
+function buildProgram(gl, frag) {
   const compile = (type, source) => {
     const shader = gl.createShader(type)
     gl.shaderSource(shader, source)
@@ -32,125 +32,201 @@ function buildProgram(gl) {
     return shader
   }
   const program = gl.createProgram()
-  gl.attachShader(program, compile(gl.VERTEX_SHADER, VERT))
-  gl.attachShader(program, compile(gl.FRAGMENT_SHADER, FRAG))
+  const vs = compile(gl.VERTEX_SHADER, VERT)
+  const fs = compile(gl.FRAGMENT_SHADER, frag)
+  gl.attachShader(program, vs)
+  gl.attachShader(program, fs)
   gl.linkProgram(program)
+  gl.deleteShader(vs)
+  gl.deleteShader(fs)
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
     throw new Error(gl.getProgramInfoLog(program) || 'Error al enlazar el shader')
   }
   return program
 }
 
-const MAX_PIXELS = 700_000 // tope de píxeles internos (pantallas 4K)
+// Resolución de salida: nativa de la pantalla (píxeles de dispositivo), con tope para 4K.
+const MAX_OUT_PIXELS = 3_700_000 // ~2560 × 1440
+// Escalones de calidad: si el equipo no da la talla se baja UN escalón, y nunca se vuelve a subir
+// (así no hay vaivén ni tirones repetidos). field: multiplica la resolución del fluido · dpr: tope
+// de densidad de la salida.
+const QUALITY = [
+  { field: 1, dpr: 2 },
+  { field: 0.8, dpr: 1.5 },
+  { field: 0.66, dpr: 1.25 },
+  { field: 0.5, dpr: 1 },
+]
+const GRAIN = 0.5 // cantidad de grano 0–1 (antes --grain en background.css)
+const GRAIN_STEP = 0.18 // segundos entre "saltos" del grano
+const SLOW_FRAME = 0.025 // s: por encima de esto (≈ 40 fps) se considera que el equipo no da la talla
 
 /**
- * Fondo líquido con grano (WebGL2, sin librerías). Dibuja a menor resolución que la
- * pantalla —es un fluido suave— y el grano va en una capa CSS a resolución nativa.
+ * Fondo líquido con grano (WebGL2, sin librerías). Dos pasadas: el fluido a resolución reducida
+ * (lo costoso) y los colores, bordes de mármol, luz y grano a resolución nativa (barato y nítido).
  *  - Se acelera y se ilumina con `pulse` (el audio, o ?pulso=120 para la demo).
  *  - Solo corre mientras se ve la portada o alguna frase grande (el resto del sitio lo tapa
  *    con fondo blanco); también se detiene con la pestaña oculta.
+ *  - El lienzo aparece recién con su primer cuadro válido: nunca se ve negro. Mientras tanto,
+ *    o si WebGL2 falla, queda el degradado CSS de respaldo con grano CSS.
+ *  - Si el navegador pierde el contexto WebGL, vuelve el respaldo y se recupera solo.
  *  - Con "reducir movimiento" dibuja un solo cuadro fijo.
- *  - Si WebGL2 falla, queda el degradado CSS de respaldo.
  */
 export default function LiquidBackground() {
   const canvasRef = useRef(null)
+  const wrapRef = useRef(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
+    const wrap = wrapRef.current
     const root = document.documentElement
     const { bg, estilo, rampa, dureza } = readLook()
     root.dataset.bg = bg // el texto de la portada se adapta al fondo
 
-    const gl = canvas.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'low-power' })
-    if (!gl) return undefined
-
-    let program
-    try {
-      program = buildProgram(gl)
-    } catch (err) {
-      console.error('[LiquidBackground]', err)
-      return undefined
-    }
-    gl.useProgram(program)
-
-    const loc = (name) => gl.getUniformLocation(program, name)
-    const uRes = loc('u_res')
-    const uT = loc('u_t')
-    const uEnergy = loc('u_energy')
-    const uCenter = loc('u_center')
-
     const look = LOOKS[estilo]
     const palette = PALETTES[bg]
     const ramp = palette[rampa]
-    // Con ?dureza= se reemplaza la dureza del estilo; más dureza pide más resolución
-    // interna (0.5 → 0.75) para que los bordes no se vean borrosos al ampliar.
     const sharp = dureza ?? look.sharp
-    gl.uniform3fv(loc('u_col'), new Float32Array(ramp.cols.flat()))
-    gl.uniform1fv(loc('u_edge'), new Float32Array(ramp.edges))
-    gl.uniform3fv(loc('u_glow'), new Float32Array(palette.glow))
-    gl.uniform1f(loc('u_sharp'), sharp)
-
+    // Resolución base del fluido respecto a la salida: el degradado suave aguanta menos
+    const fieldBase = dureza === null ? look.scale : 0.35 + 0.15 * dureza
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    let scale = dureza === null ? look.scale : 0.5 + 0.25 * dureza
+
+    let gl = null
+    let field = null // { prog, u, tex, fbo, w, h }
+    let color = null // { prog, u }
+    let level = 0
+    let outW = 0
+    let outH = 0
+    let cssW = 0
+    let cssH = 0
     let phase = 40
     let energy = 0
+    let clock = 0
     let last = 0
     let raf = 0
-    let frames = -20 // se ignoran los primeros cuadros (compilación)
+    let frames = -30 // se ignoran los primeros cuadros (compilación, carga)
     let acc = 0
-    let startY = 0
-    let endY = 0
-    let height = 1
+    let lost = false
 
-    const resize = () => {
-      const w0 = window.innerWidth * scale
-      const h0 = window.innerHeight * scale
-      const k = Math.min(1, Math.sqrt(MAX_PIXELS / (w0 * h0)))
-      const w = Math.max(2, Math.round(w0 * k))
-      const h = Math.max(2, Math.round(h0 * k))
-      if (canvas.width !== w || canvas.height !== h) {
-        canvas.width = w
-        canvas.height = h
-        gl.viewport(0, 0, w, h)
-        gl.uniform2f(uRes, w, h)
+    const setReady = (ready) => {
+      if (ready) wrap.dataset.gl = 'ready'
+      else delete wrap.dataset.gl
+    }
+
+    const init = () => {
+      gl = canvas.getContext('webgl2', { antialias: false, alpha: false, depth: false, stencil: false })
+      if (!gl) return false
+      try {
+        const fp = buildProgram(gl, FIELD_FRAG)
+        const cp = buildProgram(gl, COLOR_FRAG)
+        const uniforms = (prog, names) => Object.fromEntries(names.map((n) => [n, gl.getUniformLocation(prog, n)]))
+        field = { prog: fp, u: uniforms(fp, ['u_res', 'u_aspect', 'u_t']), tex: gl.createTexture(), fbo: gl.createFramebuffer(), w: 0, h: 0 }
+        color = {
+          prog: cp,
+          u: uniforms(cp, ['u_field', 'u_fieldRes', 'u_res', 'u_dpr', 'u_energy', 'u_sharp', 'u_center', 'u_glow', 'u_col', 'u_edge', 'u_grain', 'u_seed']),
+        }
+      } catch (err) {
+        console.error('[LiquidBackground]', err)
+        return false
       }
-      // Dónde está el centro del parlante (mismas medidas que speaker.css)
-      const W = window.innerWidth
-      const H = window.innerHeight
+      gl.useProgram(color.prog)
+      gl.uniform3fv(color.u.u_col, new Float32Array(ramp.cols.flat()))
+      gl.uniform1fv(color.u.u_edge, new Float32Array(ramp.edges))
+      gl.uniform3fv(color.u.u_glow, new Float32Array(palette.glow))
+      gl.uniform1f(color.u.u_sharp, sharp)
+      gl.uniform1f(color.u.u_grain, GRAIN)
+      gl.uniform1i(color.u.u_field, 0)
+      outW = 0 // fuerza a recalcular tamaños
+      outH = 0
+      return true
+    }
+
+    /** Ajusta lienzo y textura del fluido al tamaño real del elemento. false si aún no tiene tamaño. */
+    const resize = () => {
+      cssW = canvas.clientWidth
+      cssH = canvas.clientHeight
+      if (!gl || lost || cssW < 1 || cssH < 1) return false
+      const q = QUALITY[level]
+      const dpr = Math.min(window.devicePixelRatio || 1, q.dpr)
+      const k = Math.min(1, Math.sqrt(MAX_OUT_PIXELS / (cssW * dpr * cssH * dpr)))
+      const w = Math.max(1, Math.round(cssW * dpr * k))
+      const h = Math.max(1, Math.round(cssH * dpr * k))
+      if (w !== outW || h !== outH) {
+        canvas.width = outW = w
+        canvas.height = outH = h
+      }
+      const fw = Math.max(2, Math.round(w * fieldBase * q.field))
+      const fh = Math.max(2, Math.round(h * fieldBase * q.field))
+      if (fw !== field.w || fh !== field.h) {
+        field.w = fw
+        field.h = fh
+        gl.bindTexture(gl.TEXTURE_2D, field.tex)
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, fw, fh, 0, gl.RGBA, gl.UNSIGNED_BYTE, null)
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+        gl.bindFramebuffer(gl.FRAMEBUFFER, field.fbo)
+        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, field.tex, 0)
+      }
+      return true
+    }
+
+    /** Altura del centro del parlante (mismas medidas que speaker.css), 0..1 desde abajo. */
+    const lightCenter = () => {
       const header = document.querySelector('.header')?.offsetHeight ?? 56
-      const size = Math.min(W * 0.88, H * 0.78)
-      height = H
-      startY = H * 0.5 + header / 2
-      endY = header + size * 0.105 + 12
+      const size = Math.min(cssW * 0.88, cssH * 0.78)
+      const startY = cssH * 0.5 + header / 2
+      const endY = header + size * 0.105 + 12
+      const p = parseFloat(root.style.getPropertyValue('--p')) || 0
+      return 1 - (startY + (endY - startY) * p) / cssH
     }
 
     const draw = () => {
-      const p = parseFloat(root.style.getPropertyValue('--p')) || 0
-      const y = startY + (endY - startY) * p
-      gl.uniform1f(uT, phase)
-      gl.uniform1f(uEnergy, energy)
-      gl.uniform2f(uCenter, 0.5, 1 - y / height)
+      if (!gl || lost || outW < 1 || cssH < 1) return
+      // 1. Fluido, a resolución reducida
+      gl.bindFramebuffer(gl.FRAMEBUFFER, field.fbo)
+      gl.viewport(0, 0, field.w, field.h)
+      gl.useProgram(field.prog)
+      gl.uniform2f(field.u.u_res, field.w, field.h)
+      gl.uniform1f(field.u.u_aspect, cssW / cssH)
+      gl.uniform1f(field.u.u_t, phase)
       gl.drawArrays(gl.TRIANGLES, 0, 3)
+      // 2. Color, luz y grano, a resolución nativa
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null)
+      gl.viewport(0, 0, outW, outH)
+      gl.useProgram(color.prog)
+      gl.activeTexture(gl.TEXTURE0)
+      gl.bindTexture(gl.TEXTURE_2D, field.tex)
+      gl.uniform2f(color.u.u_fieldRes, field.w, field.h)
+      gl.uniform2f(color.u.u_res, outW, outH)
+      gl.uniform1f(color.u.u_dpr, outW / cssW)
+      gl.uniform1f(color.u.u_energy, energy)
+      gl.uniform2f(color.u.u_center, 0.5, lightCenter())
+      gl.uniform1f(color.u.u_seed, Math.floor(clock / GRAIN_STEP) % 997)
+      gl.drawArrays(gl.TRIANGLES, 0, 3)
+      setReady(true)
     }
 
     // Ventanas por las que se ve el fondo: la portada y las frases grandes
     const windows = new Set()
-    const shouldRun = () => !reduced && !document.hidden && windows.size > 0
+    const shouldRun = () => !reduced && !lost && Boolean(gl) && !document.hidden && windows.size > 0
 
     const frame = (now) => {
       raf = 0
-      const dt = Math.min(0.05, (now - last) / 1000)
+      const real = Math.max(0, (now - last) / 1000)
+      const dt = Math.min(0.05, real) // tras un tirón, el fluido no da un salto
       last = now
+      clock += dt
       energy += (pulse.value - energy) * (1 - Math.exp(-dt * 9)) // suaviza el pulso
       phase += dt * MOTION.speed * (1 + energy * MOTION.boost) // el pulso acelera el fluido
       draw()
 
-      // Calidad adaptativa: si el equipo no da la talla, baja la resolución interna
+      // Calidad adaptativa: mide ~2 s seguidos con el tiempo real; si va lento, baja un escalón
       frames += 1
-      if (frames > 0) acc += dt
-      if (frames === 45) {
-        if (acc / 45 > 0.032 && scale > 0.3) {
-          scale *= 0.8
+      if (frames > 0) acc += real
+      if (frames === 120) {
+        if (acc / 120 > SLOW_FRAME && level < QUALITY.length - 1) {
+          level += 1
           resize()
         }
         frames = 0
@@ -162,16 +238,30 @@ export default function LiquidBackground() {
     const start = () => {
       if (raf || !shouldRun()) return
       last = performance.now()
+      frames = Math.min(frames, -10) // tras una pausa no se miden los primeros cuadros
       raf = requestAnimationFrame(frame)
     }
+    const stop = () => {
+      if (raf) cancelAnimationFrame(raf)
+      raf = 0
+    }
     const onResize = () => {
-      resize()
-      if (!raf) draw()
+      if (resize() && !raf) draw()
+      start()
     }
     const onLost = (e) => {
-      e.preventDefault()
-      canvas.style.visibility = 'hidden' // deja ver el degradado de respaldo
+      e.preventDefault() // permite que el navegador lo restaure
+      lost = true
+      stop()
+      setReady(false) // vuelve el degradado de respaldo
     }
+    const onRestored = () => {
+      lost = false
+      if (init() && resize()) draw()
+      start()
+    }
+
+    if (!init()) return undefined
 
     let io = null
     const targets = document.querySelectorAll('.stage, .phrase')
@@ -183,29 +273,40 @@ export default function LiquidBackground() {
           if (e.isIntersecting) windows.add(e.target)
           else windows.delete(e.target)
         }
-        start()
+        if (windows.size === 0) stop()
+        else start()
       })
       targets.forEach((el) => io.observe(el))
     }
+    // Tamaño real del lienzo: cubre la carga con la ventana aún en 0, el zoom y la rotación
+    const ro = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(onResize)
+    ro?.observe(canvas)
 
-    resize()
-    draw()
+    if (resize()) draw()
     start()
     window.addEventListener('resize', onResize)
     document.addEventListener('visibilitychange', start)
     canvas.addEventListener('webglcontextlost', onLost)
+    canvas.addEventListener('webglcontextrestored', onRestored)
     return () => {
+      stop()
       io?.disconnect()
+      ro?.disconnect()
       window.removeEventListener('resize', onResize)
       document.removeEventListener('visibilitychange', start)
       canvas.removeEventListener('webglcontextlost', onLost)
-      if (raf) cancelAnimationFrame(raf)
-      gl.deleteProgram(program)
+      canvas.removeEventListener('webglcontextrestored', onRestored)
+      if (!lost) {
+        gl.deleteProgram(field.prog)
+        gl.deleteProgram(color.prog)
+        gl.deleteTexture(field.tex)
+        gl.deleteFramebuffer(field.fbo)
+      }
     }
   }, [])
 
   return (
-    <div className="liquid" aria-hidden="true">
+    <div className="liquid" aria-hidden="true" ref={wrapRef}>
       <canvas ref={canvasRef} className="liquid__canvas" />
       <div className="liquid__grain" />
     </div>
