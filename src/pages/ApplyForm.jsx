@@ -3,6 +3,7 @@ import Rich from '../components/Rich'
 import { festival } from '../data/festival'
 import { useLang } from '../i18n/useLang'
 import { buildEmail } from '../utils/applyEmail'
+import { displayText } from '../utils/displayText'
 
 const emptyRow = (columns) => Object.fromEntries(columns.map((c) => [c.id, '']))
 
@@ -155,7 +156,7 @@ function Ready({ app, values, onEdit }) {
 
   return (
     <section className="ready" aria-labelledby={`${app.id}-ready`}>
-      <h3 id={`${app.id}-ready`} ref={ref} tabIndex={-1} className="ready__title">{t('apply.readyTitle')}</h3>
+      <h3 id={`${app.id}-ready`} ref={ref} tabIndex={-1} className="ready__title">{displayText(t('apply.readyTitle'))}</h3>
       <ol className="ready__steps">
         <li>{t('apply.step1')}</li>
         {app.attachments.length > 0 && (
@@ -219,7 +220,7 @@ export default function ApplyForm({ app, closed }) {
 
       {app.sections.map((section, i) => (
         <fieldset className="step" key={i}>
-          <legend className="step__title"><span className="step__n" aria-hidden="true">{i + 1}</span>{tr(section.title)}</legend>
+          <legend className="step__title"><span className="step__n" aria-hidden="true">{i + 1}</span>{displayText(tr(section.title))}</legend>
           {section.hint && <p className="step__hint">{tr(section.hint)}</p>}
           <div className="step__grid">
             {section.fields.map((field) => (
@@ -230,7 +231,7 @@ export default function ApplyForm({ app, closed }) {
       ))}
 
       <fieldset className="step step--commit">
-        <legend className="step__title"><span className="step__n" aria-hidden="true">✓</span>{t('apply.commitments')}</legend>
+        <legend className="step__title"><span className="step__n" aria-hidden="true">✓</span>{displayText(t('apply.commitments'))}</legend>
         <ul className="commitments">
           {app.commitments.map((c, i) => <li key={i}>{tr(c)}</li>)}
         </ul>

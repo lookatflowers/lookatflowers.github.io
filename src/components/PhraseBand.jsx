@@ -3,6 +3,7 @@ import { phrases } from '../data/phrases'
 import { useLang } from '../i18n/useLang'
 import { observeBand } from '../utils/bandProgress'
 import './phrase.css'
+import { displayText } from '../utils/displayText'
 
 /** Frase gigante decorativa: se desplaza en horizontal al hacer scroll vertical y sus
  *  letras se "encienden" de izquierda a derecha. Repite texto que ya existe en la página,
@@ -14,7 +15,7 @@ export default function PhraseBand({ id }) {
 
   const phrase = phrases[id]
   if (!phrase) return null
-  const chars = Array.from(tr(phrase.text))
+  const chars = Array.from(displayText(tr(phrase.text)))
 
   return (
     <div ref={ref} className="phrase" aria-hidden="true">

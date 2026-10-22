@@ -2,6 +2,7 @@ import Section from '../components/Section'
 import { applications, applyUrl } from '../data/applications'
 import { useLang } from '../i18n/useLang'
 import { daysLeft, formatDeadline } from '../utils/deadline'
+import { displayText } from '../utils/displayText'
 
 /** Sección de la portada con accesos a cada tipo de postulación. */
 export default function Apply() {
@@ -12,7 +13,7 @@ export default function Apply() {
         {applications.map((a) => (
           <li key={a.id}>
             <a className="apply-button" href={applyUrl(a.id)}>
-              {tr(a.label)}
+              {displayText(tr(a.label))}
               <span className="apply-button__date">
                 {daysLeft(a.deadline) < 0 ? t('apply.closed') : `${t('apply.until')} ${formatDeadline(a.deadline, lang, { short: true })}`}
               </span>

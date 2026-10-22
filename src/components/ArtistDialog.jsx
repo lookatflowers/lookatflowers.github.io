@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useLang } from '../i18n/useLang'
 import { publicUrl } from '../utils/assets'
 import './cards.css'
+import { displayText } from '../utils/displayText'
 
 const LINK_LABELS = {
   instagram: 'Instagram',
@@ -50,7 +51,7 @@ export default function ArtistDialog({ artist, onClose }) {
           {artist.tbc && <p className="dialog__tbc">{t('cards.tbc')}</p>}
           <div>
             <p className="card__kind card__kind--inline">{t(`cards.${artist.kind}`)}</p>
-            <h3 id="artist-dialog-title" className="dialog__title">{artist.name}</h3>
+            <h3 id="artist-dialog-title" className="dialog__title">{displayText(artist.name)}</h3>
           </div>
           <p className="dialog__bio">{tr(artist.bio) || t('cards.noBio')}</p>
           {links.length > 0 && (

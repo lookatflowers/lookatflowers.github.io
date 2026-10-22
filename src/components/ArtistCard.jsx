@@ -1,6 +1,7 @@
 import { useLang } from '../i18n/useLang'
 import { publicUrl } from '../utils/assets'
 import './cards.css'
+import { displayText } from '../utils/displayText'
 
 /** Frente con la incógnita. */
 function MysteryFace({ label, hidden }) {
@@ -36,7 +37,7 @@ function PhotoFace({ artist, label, back, tbc, hidden }) {
       )}
       <span className="card__info">
         <span className="card__kind card__kind--inline">{label}</span>
-        <span className="card__name">{artist.name}</span>
+        <span className="card__name">{displayText(artist.name)}</span>
         <span className="card__hint">{t('cards.more')}</span>
       </span>
       {tbc && <span className="card__tbc-badge">{t('cards.tbc')}</span>}

@@ -10,6 +10,7 @@ import { LanguageProvider } from '../i18n/LanguageProvider'
 import { useLang } from '../i18n/useLang'
 import { daysLeft, formatDeadline } from '../utils/deadline'
 import ApplyForm from './ApplyForm'
+import { displayText } from '../utils/displayText'
 
 const ids = applications.map((a) => a.id)
 
@@ -51,13 +52,13 @@ function Panel({ app, active }) {
     >
       <header className="apply-panel__head">
         <p className="apply-panel__stage">{tr(app.stage)}</p>
-        <h2 className="apply-panel__title">{tr(app.label)}</h2>
+        <h2 className="apply-panel__title">{displayText(tr(app.label))}</h2>
         <p className="apply-panel__intro">{tr(app.intro)}</p>
         <Deadline iso={app.deadline} />
       </header>
 
       <section aria-labelledby={`${app.id}-facts`}>
-        <h3 id={`${app.id}-facts`} className="apply-h3">{t('apply.essentials')}</h3>
+        <h3 id={`${app.id}-facts`} className="apply-h3">{displayText(t('apply.essentials'))}</h3>
         <ul className="facts-grid">
           {app.facts.map((f, i) => (
             <li key={i} className="fact">
@@ -70,7 +71,7 @@ function Panel({ app, active }) {
       </section>
 
       <section aria-labelledby={`${app.id}-rules`}>
-        <h3 id={`${app.id}-rules`} className="apply-h3">{t('apply.rules')}</h3>
+        <h3 id={`${app.id}-rules`} className="apply-h3">{displayText(t('apply.rules'))}</h3>
         <p className="field__hint">{t('apply.rulesHint')}</p>
         <div className="rules">
           {app.rules.map((rule, i) => (
@@ -83,7 +84,7 @@ function Panel({ app, active }) {
       </section>
 
       <section aria-labelledby={`${app.id}-form`}>
-        <h3 id={`${app.id}-form`} className="apply-h3">{t('apply.formTitle')}</h3>
+        <h3 id={`${app.id}-form`} className="apply-h3">{displayText(t('apply.formTitle'))}</h3>
         <ApplyForm app={app} closed={closed} />
       </section>
     </div>
@@ -130,7 +131,7 @@ function Page() {
             <img src={logo} alt="" width="1000" height="1000" />
           </a>
         </div>
-        <h1 className="apply-page__title">{t('apply.pageTitle')}</h1>
+        <h1 className="apply-page__title">{displayText(t('apply.pageTitle'))}</h1>
         <div className="apply-tabs" role="tablist" aria-label={t('apply.tabsLabel')} ref={tabsRef} onKeyDown={onKeyDown}>
           {applications.map((app) => (
             <button
@@ -143,7 +144,7 @@ function Page() {
               tabIndex={active === app.id ? 0 : -1}
               onClick={() => select(app.id)}
             >
-              {tr(app.label)}
+              {displayText(tr(app.label))}
             </button>
           ))}
         </div>
