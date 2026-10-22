@@ -123,13 +123,13 @@ function Page() {
   return (
     <>
       <a className="skip" href="#apply-main">{t('skip')}</a>
-      <div className="apply-logo">
-        <a href={import.meta.env.BASE_URL} aria-label={festival.name}>
-          <img src={logo} alt="" width="1000" height="1000" />
-        </a>
-      </div>
       <Header home={false} />
       <main id="apply-main" className="apply-page">
+        <div className="apply-logo">
+          <a href={import.meta.env.BASE_URL} aria-label={festival.name}>
+            <img src={logo} alt="" width="1000" height="1000" />
+          </a>
+        </div>
         <h1 className="apply-page__title">{t('apply.pageTitle')}</h1>
         <div className="apply-tabs" role="tablist" aria-label={t('apply.tabsLabel')} ref={tabsRef} onKeyDown={onKeyDown}>
           {applications.map((app) => (

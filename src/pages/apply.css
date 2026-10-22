@@ -3,14 +3,13 @@
 .apply-logo {
   display: grid;
   place-items: center;
-  padding: 1.5rem var(--gutter) 1rem;
-  background: var(--paper);
+  margin: 0 0 clamp(1.5rem, 5vw, 2.5rem);
 }
 .apply-logo img { width: clamp(5rem, 22vw, 8rem); height: auto; }
 
 .apply-page {
   min-height: 60svh;
-  padding: clamp(2.5rem, 8vw, 5rem) var(--gutter);
+  padding: clamp(1.75rem, 6vw, 3rem) var(--gutter) clamp(2.5rem, 8vw, 5rem);
   background: var(--paper);
 }
 .apply-page__title {

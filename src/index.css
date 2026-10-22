@@ -23,6 +23,18 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Anderson Grotesk trae Á, É, Í, Ó, Ú, Ñ... pero dibujadas SIN tilde. Solo esas letras se
+   toman de JetBrains Mono (ExtraBold), que sí las tiene. Si arte consigue una versión de la
+   fuente con tildes, basta con borrar este bloque y 'Display Accents' de --font-display. */
+@font-face {
+  font-family: 'Display Accents';
+  src: url('./assets/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+00C0-00C5, U+00C8-00CF, U+00D1-00D6, U+00D9-00DC, U+00E0-00E5, U+00E8-00EF, U+00F1-00F6, U+00F9-00FC;
+}
+
 /* ===== Tokens de marca ===== */
 :root {
   --pink: #D44488;   /* principal original */
@@ -33,7 +45,7 @@
   --paper: #F2F2EF;  /* blanco apagado (PROVISIONAL) */
 
   /* Anderson Grotesk no incluye ¿ ni ¡: el navegador los toma de la siguiente fuente */
-  --font-display: 'Anderson Grotesk', 'JetBrains Mono', system-ui, sans-serif;
+  --font-display: 'Display Accents', 'Anderson Grotesk', 'JetBrains Mono', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 
   --gutter: clamp(1rem, 4vw, 2.5rem);
