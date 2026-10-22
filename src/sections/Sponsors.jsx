@@ -5,43 +5,39 @@ import { publicUrl } from '../utils/assets'
 import '../components/sponsors.css'
 
 const isSafeUrl = (url) => typeof url === 'string' && /^https?:\/\//i.test(url)
+const SIZES = ['large', 'medium']
 
-// Cuadros de muestra mientras no haya logos
-const SAMPLES = [
-  ...Array.from({ length: 3 }, () => ({ size: 'full' })),
-  ...Array.from({ length: 4 }, () => ({ size: 'small' })),
-]
-
+/** Logo con su nombre al pasar el cursor (o al enfocarlo con teclado). */
 function Logo({ sponsor }) {
-  const img = <img src={publicUrl(sponsor.svg)} alt={sponsor.name} loading="lazy" decoding="async" />
+  const content = (
+    <>
+      <img src={publicUrl(sponsor.svg)} alt={sponsor.name} loading="lazy" decoding="async" />
+      <span className="sponsor__name" aria-hidden="true">{sponsor.name}</span>
+    </>
+  )
   return isSafeUrl(sponsor.link) ? (
-    <a href={sponsor.link} target="_blank" rel="noopener noreferrer">{img}</a>
-  ) : img
-}
-
-function Row({ items, size, render }) {
-  const row = items.filter((s) => (s.size === 'small' ? 'small' : 'full') === size)
-  if (row.length === 0) return null
-  return (
-    <ul className={`sponsors__row sponsors__row--${size}`}>
-      {row.map((s, i) => <li key={s.name ?? i} className="sponsor">{render(s)}</li>)}
-    </ul>
+    <a className="sponsor__link" href={sponsor.link} target="_blank" rel="noopener noreferrer">{content}</a>
+  ) : (
+    <span className="sponsor__link">{content}</span>
   )
 }
 
 export default function Sponsors() {
   const { t } = useLang()
-  const empty = sponsors.length === 0
-  const items = empty ? SAMPLES : sponsors
-  const render = empty
-    ? (s) => <span className="sponsor__sample" role="img" aria-label={t('sponsors.sample')}>{s.size === 'small' ? '70%' : '100%'}</span>
-    : (s) => <Logo sponsor={s} />
+  if (sponsors.length === 0) return null
 
   return (
     <Section id="sponsors" title={t('sponsors.title')}>
       <div className="sponsors">
-        <Row items={items} size="full" render={render} />
-        <Row items={items} size="small" render={render} />
+        {SIZES.map((size) => {
+          const row = sponsors.filter((s) => (s.size === 'medium' ? 'medium' : 'large') === size)
+          if (row.length === 0) return null
+          return (
+            <ul key={size} className={`sponsors__row sponsors__row--${size}`}>
+              {row.map((s) => <li key={s.svg} className="sponsor"><Logo sponsor={s} /></li>)}
+            </ul>
+          )
+        })}
       </div>
     </Section>
   )

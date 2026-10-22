@@ -105,7 +105,6 @@ export default {
   },
   sponsors: {
     title: 'Auspicios y colaboradores',
-    sample: 'Logo de muestra',
   },
   contact: {
     title: 'Redes y contacto',

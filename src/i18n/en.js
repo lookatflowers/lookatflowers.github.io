@@ -105,7 +105,6 @@ export default {
   },
   sponsors: {
     title: 'Sponsors and partners',
-    sample: 'Sample logo',
   },
   contact: {
     title: 'Social media and contact',
