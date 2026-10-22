@@ -205,7 +205,7 @@
 .apply-buttons > li { container-type: inline-size; } /* la letra se ajusta al ancho del botón */
 .apply-button {
   display: grid;
-  place-items: center;
+  place-content: center;
   min-height: clamp(5rem, 16vw, 8rem);
   padding: 1rem;
   border: 3px solid var(--ink);
@@ -220,6 +220,14 @@
   transition: background 0.2s ease, color 0.2s ease;
 }
 .apply-button:hover { background: var(--ink); color: var(--paper); }
+.apply-button__date {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
 
 /* ----- Redes y contacto ----- */
 .contact-links {

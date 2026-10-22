@@ -3,10 +3,13 @@ import '../App.css'
 import './apply.css'
 import logo from '../assets/brand/logo.svg'
 import Header from '../components/Header'
+import Rich from '../components/Rich'
 import { applications } from '../data/applications'
 import { festival } from '../data/festival'
 import { LanguageProvider } from '../i18n/LanguageProvider'
 import { useLang } from '../i18n/useLang'
+import { daysLeft, formatDeadline } from '../utils/deadline'
+import ApplyForm from './ApplyForm'
 
 const ids = applications.map((a) => a.id)
 
@@ -16,10 +19,28 @@ const tabFromHash = () => {
   return ids.includes(id) ? id : ids[0]
 }
 
-const isSafeUrl = (url) => typeof url === 'string' && /^https?:\/\//i.test(url)
+/** Plazo con cuenta regresiva. */
+function Deadline({ iso }) {
+  const { lang, t } = useLang()
+  const left = daysLeft(iso)
+  let badge = t('apply.daysLeft').replace('{n}', left)
+  if (left === 1) badge = t('apply.oneDay')
+  if (left === 0) badge = t('apply.lastDay')
+  if (left < 0) badge = t('apply.closed')
+  return (
+    <p className={`deadline${left < 0 ? ' deadline--closed' : ''}${left >= 0 && left <= 2 ? ' deadline--soon' : ''}`}>
+      <span className="deadline__icon" aria-hidden="true">📅</span>
+      <span className="deadline__text">
+        {t('apply.deadline')} <strong>{formatDeadline(iso, lang)}</strong>
+      </span>
+      <span className="deadline__badge">{badge}</span>
+    </p>
+  )
+}
 
 function Panel({ app, active }) {
   const { t, tr } = useLang()
+  const closed = daysLeft(app.deadline) < 0
   return (
     <div
       id={`panel-${app.id}`}
@@ -27,29 +48,43 @@ function Panel({ app, active }) {
       aria-labelledby={`tab-${app.id}`}
       className="apply-panel"
       hidden={!active}
-      tabIndex={0}
     >
-      <section>
-        <h2>{t('apply.info')}</h2>
-        {app.info.map((p, i) => <p key={i}>{tr(p)}</p>)}
-      </section>
-      <section>
-        <h2>{t('apply.how')}</h2>
-        {app.how.map((p, i) => <p key={i}>{tr(p)}</p>)}
-      </section>
-      <section>
-        <h2>{t('apply.links')}</h2>
-        <ul className="apply-panel__links">
-          {app.links.map((link, i) => (
-            <li key={i}>
-              {isSafeUrl(link.url) ? (
-                <a href={link.url} target="_blank" rel="noopener noreferrer">{tr(link.label)}</a>
-              ) : (
-                <span className="apply-panel__soon">{tr(link.label)} · {t('apply.linkSoon')}</span>
-              )}
+      <header className="apply-panel__head">
+        <p className="apply-panel__stage">{tr(app.stage)}</p>
+        <h2 className="apply-panel__title">{tr(app.label)}</h2>
+        <p className="apply-panel__intro">{tr(app.intro)}</p>
+        <Deadline iso={app.deadline} />
+      </header>
+
+      <section aria-labelledby={`${app.id}-facts`}>
+        <h3 id={`${app.id}-facts`} className="apply-h3">{t('apply.essentials')}</h3>
+        <ul className="facts-grid">
+          {app.facts.map((f, i) => (
+            <li key={i} className="fact">
+              <span className="fact__icon" aria-hidden="true">{f.icon}</span>
+              <span className="fact__title">{tr(f.title)}</span>
+              <span className="fact__text">{tr(f.text)}</span>
             </li>
           ))}
         </ul>
+      </section>
+
+      <section aria-labelledby={`${app.id}-rules`}>
+        <h3 id={`${app.id}-rules`} className="apply-h3">{t('apply.rules')}</h3>
+        <p className="field__hint">{t('apply.rulesHint')}</p>
+        <div className="rules">
+          {app.rules.map((rule, i) => (
+            <details key={i} className="rule" open={i === 0}>
+              <summary>{tr(rule.title)}</summary>
+              <ul>{rule.items.map((item, n) => <li key={n}><Rich text={tr(item)} /></li>)}</ul>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby={`${app.id}-form`}>
+        <h3 id={`${app.id}-form`} className="apply-h3">{t('apply.formTitle')}</h3>
+        <ApplyForm app={app} closed={closed} />
       </section>
     </div>
   )
