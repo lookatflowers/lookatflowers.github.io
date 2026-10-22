@@ -1,6 +1,10 @@
 /* Andamio provisional: estructura y legibilidad, NO decisiones de diseño.
    La estética definitiva la dirige el equipo de arte. */
 
+:root {
+  --header-h: 3.5rem; /* alto de la cabecera (lo usan el parlante y el fondo) */
+}
+
 .skip {
   position: absolute;
   left: var(--gutter);
@@ -12,6 +16,17 @@
 }
 .skip:focus { top: 0.5rem; }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ----- Cabecera ----- */
 .header {
   position: sticky;
@@ -20,7 +35,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.75rem var(--gutter);
+  height: var(--header-h);
+  padding: 0 var(--gutter);
   background: var(--paper);
   border-bottom: 1px solid rgb(37 37 37 / 0.15);
 }
@@ -33,6 +49,7 @@
 .header__nav {
   display: flex;
   gap: 1.25rem;
+  min-width: 0;
   margin-left: auto;
   overflow-x: auto;
   white-space: nowrap;
@@ -44,7 +61,48 @@
 .header__nav a { text-decoration: none; }
 .header__nav a:hover { color: var(--pink); }
 
-.lang { display: flex; gap: 0.25rem; }
+/* Botón Postulaciones: fuera del menú con scroll, con desplegable propio */
+.apply-menu { position: relative; flex-shrink: 0; }
+.apply-menu__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border: 2px solid var(--pink);
+  background: var(--pink);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.apply-menu__button svg { width: 0.7rem; height: 0.7rem; transition: transform 0.2s ease; }
+.apply-menu__button[aria-expanded='true'] svg { transform: rotate(180deg); }
+.apply-menu__list {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 60;
+  min-width: 12rem;
+  margin: 0;
+  padding: 0.35rem 0;
+  list-style: none;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  box-shadow: 0 0.5rem 1.5rem rgb(37 37 37 / 0.2);
+}
+.apply-menu__list[hidden] { display: none; }
+.apply-menu__list a {
+  display: block;
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.apply-menu__list a:hover, .apply-menu__list a:focus-visible { background: var(--ink); color: var(--paper); }
+
+.lang { display: flex; flex-shrink: 0; gap: 0.25rem; }
 .lang button {
   padding: 0.25rem 0.6rem;
   border: 1px solid var(--ink);
@@ -58,36 +116,26 @@
   color: var(--paper);
 }
 
-/* ----- Portada ----- */
-.hero {
-  min-height: 85svh;
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 1rem;
-  padding: 3rem var(--gutter);
-  text-align: center;
-}
-.hero__logo { width: min(70vw, 26rem); }
-.hero__edition {
-  margin: 0;
-  font-size: 0.9rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-.hero__slogan {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2rem, 9vw, 5rem);
-  line-height: 1;
-  color: var(--pink);
+/* Móvil: marca + Postulaciones + idioma arriba; el menú con scroll en una segunda fila */
+@media (max-width: 40rem) {
+  :root { --header-h: 5.5rem; }
+  .header {
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 0.45rem 0.5rem;
+  }
+  .header__brand { margin-right: auto; font-size: clamp(0.7rem, 3.4vw, 1rem); }
+  .header__nav { order: 3; flex-basis: 100%; margin-left: 0; }
+  .apply-menu__button { gap: 0.3rem; padding: 0.3rem 0.45rem; font-size: 0.68rem; letter-spacing: 0; }
+  .lang button { padding: 0.2rem 0.4rem; font-size: 0.7rem; }
 }
 
-/* ----- Secciones ----- */
+/* ----- Secciones (cada una lleva su propio fondo blanco; las frases dejan ver el fondo animado) ----- */
 .section {
+  position: relative;
   padding: clamp(3rem, 10vw, 7rem) var(--gutter);
   border-top: 1px solid rgb(37 37 37 / 0.15);
+  background: var(--paper);
 }
 .section > h2 {
   margin-bottom: 2rem;
@@ -97,6 +145,7 @@
 .subtitle {
   margin-bottom: 1rem;
   font-size: clamp(1.3rem, 4vw, 2rem);
+  text-transform: none; /* se lee tal cual: "Bandas", "DJs", "Flowers Stage" */
 }
 .columns {
   display: grid;
@@ -112,7 +161,7 @@
   text-transform: uppercase;
   opacity: 0.7;
 }
-.facts dd { margin: 0; font-size: 1.15rem; }
+.facts dd { margin: 0; font-size: 1rem; }
 
 .roster, .slots { list-style: none; margin: 0; padding: 0; }
 .roster li, .slots li {
@@ -126,6 +175,7 @@
 .roster__name { font-weight: 700; }
 .roster li[data-status='tbc'] .roster__name { opacity: 0.5; }
 .slots time { min-width: 4.5ch; font-weight: 700; color: var(--pink); }
+.slots__tbc { display: inline-block; min-width: 2ch; font-family: var(--font-display); font-size: 1.35em; line-height: 1; text-align: center; }
 
 .tag {
   padding: 0.05rem 0.5rem;
@@ -143,9 +193,72 @@
   max-width: 60ch;
 }
 
+/* ----- Postulaciones (portada) ----- */
+.apply-buttons {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.apply-buttons > li { container-type: inline-size; } /* la letra se ajusta al ancho del botón */
+.apply-button {
+  display: grid;
+  place-items: center;
+  min-height: clamp(5rem, 16vw, 8rem);
+  padding: 1rem;
+  border: 3px solid var(--ink);
+  border-radius: 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: min(2.2rem, 9cqi);
+  line-height: 1;
+  text-align: center;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.apply-button:hover { background: var(--ink); color: var(--paper); }
+
+/* ----- Redes y contacto ----- */
+.contact-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 44rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.contact-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  height: 100%;
+  padding: 1.1rem;
+  border: 2px solid var(--ink);
+  border-radius: 0.75rem;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.contact-link:hover { background: var(--ink); color: var(--paper); }
+.contact-link__label {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.1rem, 4vw, 1.6rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+.contact-link__value { font-size: clamp(0.72rem, 2.6vw, 0.9rem); overflow-wrap: anywhere; }
+
+/* ----- Pie: panel blanco que cierra el sitio ----- */
 .footer {
+  position: relative;
+  z-index: 1;
   padding: 2rem var(--gutter);
   border-top: 1px solid rgb(37 37 37 / 0.15);
+  background: var(--paper);
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;

@@ -47,7 +47,8 @@ const MAX_PIXELS = 700_000 // tope de píxeles internos (pantallas 4K)
  * Fondo líquido con grano (WebGL2, sin librerías). Dibuja a menor resolución que la
  * pantalla —es un fluido suave— y el grano va en una capa CSS a resolución nativa.
  *  - Se acelera y se ilumina con `pulse` (el audio, o ?pulso=120 para la demo).
- *  - Se detiene cuando la pestaña no se ve o el contenido ya lo tapó.
+ *  - Solo corre mientras se ve la portada o alguna frase grande (el resto del sitio lo tapa
+ *    con fondo blanco); también se detiene con la pestaña oculta.
  *  - Con "reducir movimiento" dibuja un solo cuadro fijo.
  *  - Si WebGL2 falla, queda el degradado CSS de respaldo.
  */
@@ -116,7 +117,7 @@ export default function LiquidBackground() {
       // Dónde está el centro del parlante (mismas medidas que speaker.css)
       const W = window.innerWidth
       const H = window.innerHeight
-      const header = 3.5 * parseFloat(getComputedStyle(root).fontSize)
+      const header = document.querySelector('.header')?.offsetHeight ?? 56
       const size = Math.min(W * 0.88, H * 0.78)
       height = H
       startY = H * 0.5 + header / 2
@@ -132,7 +133,9 @@ export default function LiquidBackground() {
       gl.drawArrays(gl.TRIANGLES, 0, 3)
     }
 
-    const shouldRun = () => !reduced && !document.hidden && window.scrollY < window.innerHeight * 2
+    // Ventanas por las que se ve el fondo: la portada y las frases grandes
+    const windows = new Set()
+    const shouldRun = () => !reduced && !document.hidden && windows.size > 0
 
     const frame = (now) => {
       raf = 0
@@ -170,15 +173,29 @@ export default function LiquidBackground() {
       canvas.style.visibility = 'hidden' // deja ver el degradado de respaldo
     }
 
+    let io = null
+    const targets = document.querySelectorAll('.stage, .phrase')
+    if (typeof IntersectionObserver === 'undefined' || targets.length === 0) {
+      windows.add(root) // sin IntersectionObserver: siempre activo
+    } else {
+      io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) windows.add(e.target)
+          else windows.delete(e.target)
+        }
+        start()
+      })
+      targets.forEach((el) => io.observe(el))
+    }
+
     resize()
     draw()
     start()
-    window.addEventListener('scroll', start, { passive: true })
     window.addEventListener('resize', onResize)
     document.addEventListener('visibilitychange', start)
     canvas.addEventListener('webglcontextlost', onLost)
     return () => {
-      window.removeEventListener('scroll', start)
+      io?.disconnect()
       window.removeEventListener('resize', onResize)
       document.removeEventListener('visibilitychange', start)
       canvas.removeEventListener('webglcontextlost', onLost)

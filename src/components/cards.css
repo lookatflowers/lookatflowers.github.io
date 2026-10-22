@@ -26,14 +26,14 @@
   text-align: left;
   perspective: 900px;
   container-type: inline-size;
+  cursor: pointer;
   transition: transform 0.25s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.card--confirmed { --card-border: var(--green); cursor: pointer; }
+.card--green { --card-border: var(--green); } /* hay nombre detrás o artista confirmado */
 @media (hover: hover) {
-  .card--confirmed:hover { transform: translateY(-4px); }
+  .card:hover { transform: translateY(-4px); }
 }
-.card--tbc { opacity: 0.85; }
 
 .card__inner {
   position: relative;
@@ -57,14 +57,16 @@
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-.card__face--reveal { transform: rotateY(180deg); }
+.card__face--back { transform: rotateY(180deg); }
 
-/* Cara de la incógnita */
-.card__face--mystery {
+/* Frente con la incógnita */
+.card__face--mystery,
+.card__face--tbc {
   align-items: center;
   justify-content: center;
 }
-.card__face--mystery::before { /* marco interior */
+.card__face--mystery::before,
+.card__face--tbc::before { /* marco interior */
   content: '';
   position: absolute;
   inset: 0.45rem;
@@ -75,11 +77,10 @@
 .card__mark {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 42cqw;
+  font-size: 58cqw;
   line-height: 1;
   color: var(--pink);
 }
-.card--tbc .card__mark { opacity: 0.55; }
 
 .card__kind {
   position: absolute;
@@ -92,24 +93,20 @@
 }
 .card__kind--inline { position: static; display: block; margin: 0; }
 
-/* Señal de confirmado: esquina + borde verde */
-.card__badge {
-  position: absolute;
-  top: 0.55rem;
-  right: 0.55rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.15rem 0.5rem 0.15rem 0.3rem;
-  border-radius: 999px;
-  background: var(--green);
-  color: var(--ink);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+/* Reverso BANDA / POR CONFIRMAR (el color se sortea en cada giro) */
+.card__face--tbc {
+  gap: 0.35rem;
+  padding: 1rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 1;
   text-transform: uppercase;
 }
-.card__check { width: 0.85rem; height: 0.85rem; }
+.card__face--tbc.tone-pink { color: var(--pink); }
+.card__face--tbc.tone-green { color: var(--green); }
+.card__tbc-kind { font-size: 19cqw; }
+.card__tbc-text { font-size: 11cqw; overflow-wrap: anywhere; }
 
 .card__hint {
   font-size: 0.6rem;
@@ -117,15 +114,8 @@
   text-transform: uppercase;
   opacity: 0.8;
 }
-.card__face--mystery .card__hint {
-  position: absolute;
-  bottom: 0.9rem;
-  left: 0;
-  right: 0;
-  text-align: center;
-}
 
-/* Cara revelada */
+/* Cara con foto */
 .card__photo {
   flex: 1;
   min-height: 0;
@@ -152,15 +142,18 @@
   text-transform: uppercase;
   overflow-wrap: anywhere;
 }
-.card__provisional {
+.card__tbc-badge {
   position: absolute;
   top: 0.5rem;
+  left: 0.5rem;
   right: 0.5rem;
-  padding: 0.05rem 0.4rem;
+  padding: 0.2rem 0.4rem;
   background: var(--yellow);
   color: var(--ink);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -209,7 +202,19 @@
     var(--violet);
 }
 .dialog__title { font-size: clamp(1.8rem, 7vw, 2.6rem); margin-top: 0.25rem; }
-.dialog__tag { display: inline-block; margin: 0.5rem 0 0; }
+.dialog__tbc { /* por confirmar: visible y evidente */
+  margin: 0;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--yellow);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.2rem, 5vw, 1.6rem);
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
 .dialog__bio { margin: 0; }
 .dialog__links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
 .dialog__links a {

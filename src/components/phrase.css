@@ -1,28 +1,25 @@
-/* Frases grandes entre secciones. Aspecto PROVISIONAL (colores y tamaño a criterio de arte). */
+/* Frases grandes entre secciones: transparentes, dejan ver el fondo animado detrás.
+   Aspecto PROVISIONAL (tamaño a criterio de arte). */
 
 .phrase {
   --k: 0; /* progreso de scroll 0 → 1 (lo escribe bandProgress.js) */
-  --tone: var(--pink);
   overflow: hidden;
   padding: clamp(1.5rem, 6vw, 4rem) 0;
-  border-top: 1px solid rgb(37 37 37 / 0.15);
   user-select: none;
   pointer-events: none;
 }
-.phrase--pink { --tone: var(--pink); }
-.phrase--green { --tone: var(--green); }
-.phrase--violet { --tone: var(--violet); }
-.phrase--ink { --tone: var(--ink); }
 
 .phrase__text {
   display: inline-block;
   white-space: nowrap;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(4.5rem, 20vw, 16rem);
+  font-size: clamp(3.6rem, 16vw, 12.8rem); /* 80 % del tamaño anterior */
   line-height: 0.9;
   text-transform: uppercase;
-  color: var(--tone);
+  color: #fff;
+  /* Si en pruebas no se lee sobre algún color del fondo, activar una sombra suave:
+  text-shadow: 0 0.04em 0.18em rgb(37 37 37 / 0.35); */
   /* se desliza hacia la izquierda mientras se baja (el % es el ancho de la propia frase) */
   transform: translateX(calc(8vw - var(--k) * 55%));
   will-change: transform;

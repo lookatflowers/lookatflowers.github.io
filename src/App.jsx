@@ -12,8 +12,9 @@ import Info from './sections/Info'
 import Lineup from './sections/Lineup'
 import Schedule from './sections/Schedule'
 import Vendors from './sections/Vendors'
-import Useful from './sections/Useful'
 import MapSection from './sections/MapSection'
+import Apply from './sections/Apply'
+import Sponsors from './sections/Sponsors'
 import Contact from './sections/Contact'
 
 function Page() {
@@ -34,9 +35,10 @@ function Page() {
           <Schedule />
           <PhraseBand id="fci" />
           <Vendors />
-          <Useful />
           <MapSection />
           <PhraseBand id="primavera" />
+          <Apply />
+          <Sponsors />
           <Contact />
         </div>
       </main>

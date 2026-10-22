@@ -5,10 +5,12 @@ export const festival = {
   year: 2026,
   date: '2026-11-06', // AAAA-MM-DD
   startTime: '14:00',
-  venue: 'Muelle Campus Miraflores',
+  venue: 'Espacio 7k - Muelle, Campus Miraflores',
   city: 'Valdivia',
   slogan: 'SOMOS LOOKAT',
+  email: 'lookatflowers.team@gmail.com',
   social: {
     instagram: 'https://www.instagram.com/lookatflowers.cl/',
+    instagramHandle: '@lookatflowers.cl',
   },
 }

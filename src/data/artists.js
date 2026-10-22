@@ -1,50 +1,36 @@
-// Bandas y DJs. Para CONFIRMAR un artista, reemplaza su línea por una entrada
-// completa como las de los ejemplos de abajo (sin el // del inicio).
+// Line-up: una lista para bandas (bands) y otra para DJs (djs). Editar solo aquí.
 //
-// status:  'tbc' (por confirmar) | 'confirmed' (confirmado)
-// kind:    'band' | 'dj'
-// name:    mientras esté 'tbc' solo sirve para identificar la línea; la carta muestra ¿?
-// photo:   ruta dentro de /public, p. ej. 'artists/band-1.webp'
-//          (archivo en public/artists/; recomendado 630×880 px, WebP, < 100 KB)
-// links:   instagram, spotify, soundcloud, youtube, web (los vacíos no se muestran)
-// provisional: true marca contenido de EJEMPLO que no es real (no lo uses en artistas reales).
+// Cada lista admite dos tipos de entrada:
 //
-// EJEMPLO de BANDA confirmada (cópialo y reemplaza la línea de la banda correspondiente):
-// {
-//   id: 'band-1', kind: 'band', status: 'confirmed',
-//   name: 'Nombre de la banda', photo: 'artists/band-1.webp',
-//   bio: {
-//     es: 'Reseña breve de la banda.',
-//     en: 'Short bio of the band.',
+//  CONFIRMADO — ocupa la carta número `slot` (BANDA 1…6 / DJ 1…5) y su franja del cronograma:
+//   {
+//     name: 'Nombre', confirmed: true, slot: 1,
+//     photo: 'artists/nombre.webp',   // archivo en public/artists/ (630×880 px, WebP, < 100 KB)
+//     bio: { es: 'Reseña breve.', en: 'Short bio.' },
+//     links: { instagram: 'https://...', spotify: 'https://...' }, // también soundcloud, youtube, web
 //   },
-//   links: { instagram: 'https://www.instagram.com/usuario/', spotify: 'https://open.spotify.com/...' },
-// },
 //
-// EJEMPLO de DJ confirmado:
-// {
-//   id: 'dj-1', kind: 'dj', status: 'confirmed',
-//   name: 'Nombre del DJ', photo: 'artists/dj-1.webp',
-//   bio: {
-//     es: 'Reseña breve del DJ.',
-//     en: 'Short bio of the DJ.',
-//   },
-//   links: { instagram: 'https://www.instagram.com/usuario/', soundcloud: 'https://soundcloud.com/...' },
-// },
+//  POR CONFIRMAR — entra al sorteo de las cartas libres (photo y bio son opcionales):
+//   { name: 'Nombre', confirmed: false, photo: 'artists/nombre.webp', bio: { es: '...', en: '...' } },
 //
-// IMPORTANTE: el id debe quedar igual (band-1, dj-1...), porque el cronograma
-// (schedule.js) se conecta con cada artista por su id.
-export const artists = [
-  { id: 'band-1', kind: 'band', status: 'tbc', name: 'Banda 1' },
-  { id: 'band-2', kind: 'band', status: 'tbc', name: 'Banda 2' },
-  { id: 'band-3', kind: 'band', status: 'tbc', name: 'Banda 3' },
-  { id: 'band-4', kind: 'band', status: 'tbc', name: 'Banda 4' },
-  { id: 'band-5', kind: 'band', status: 'tbc', name: 'Banda 5' },
-  { id: 'band-6', kind: 'band', status: 'tbc', name: 'Banda 6' },
-  { id: 'dj-1', kind: 'dj', status: 'tbc', name: 'DJ 1' },
-  { id: 'dj-2', kind: 'dj', status: 'tbc', name: 'DJ 2' },
-  { id: 'dj-3', kind: 'dj', status: 'tbc', name: 'DJ 3' },
-  { id: 'dj-4', kind: 'dj', status: 'tbc', name: 'DJ 4' },
-  { id: 'dj-5', kind: 'dj', status: 'tbc', name: 'DJ 5' },
-]
+// Cómo se comporta cada carta:
+//  · Con confirmed: true y slot N  -> la carta N muestra foto + nombre y abre la ventana al tocar.
+//  · Carta libre y HAY entradas por confirmar -> borde verde + "?"; al girar sortea un nombre
+//    (sin repetirlo en otra carta girada). Un 2.º toque abre la ventana marcada "por confirmar".
+//    Si no quedan nombres libres, muestra BANDA / POR CONFIRMAR.
+//  · Carta libre y NO hay entradas por confirmar, o su número está en forzarIncognita
+//    -> "?" que al girar muestra BANDA / POR CONFIRMAR.
 
-export const getArtist = (id) => artists.find((a) => a.id === id)
+export const lineup = {
+  band: { total: 6, forzarIncognita: [] }, // p. ej. [5, 6] deja siempre la incógnita en las cartas 5 y 6
+  dj: { total: 5, forzarIncognita: [] },
+}
+
+export const bands = []
+
+export const djs = []
+
+export const lists = { band: bands, dj: djs }
+
+/** Artista confirmado en la carta `slot` de `type` ('band' | 'dj'), o undefined. */
+export const confirmedAt = (type, slot) => lists[type]?.find((a) => a.confirmed && a.slot === slot)

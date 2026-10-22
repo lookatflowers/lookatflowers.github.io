@@ -42,9 +42,13 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* Sin rebote al pasar el borde (arriba/abajo): el fondo animado no debe asomar.
+   Safari antiguo ignora overscroll-behavior, pero el fondo de html es blanco igualmente. */
 html {
+  background: var(--paper);
+  overscroll-behavior: none;
   scroll-behavior: smooth;
-  scroll-padding-top: 4.5rem;
+  scroll-padding-top: calc(var(--header-h, 3.5rem) + 1rem);
   -webkit-text-size-adjust: 100%;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -53,6 +57,7 @@ html {
 
 body {
   margin: 0;
+  overscroll-behavior: none;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-mono);

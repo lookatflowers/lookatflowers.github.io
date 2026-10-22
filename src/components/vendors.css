@@ -17,14 +17,48 @@
   border-radius: 0.75rem;
   background: var(--paper);
 }
-.vendor__category {
-  align-self: flex-start;
-  margin: 0;
-  padding: 0.05rem 0.5rem;
-  border: 1px solid currentColor;
+.vendor__tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0; padding: 0; list-style: none; }
+
+/* Etiqueta (tarjeta) y filtro: rectángulo violeta */
+.vtag, .chip {
+  padding: 0.2rem 0.6rem;
+  border: 2px solid var(--violet);
+  background: var(--violet);
+  color: #fff;
   font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+.vtag--secondary, .chip--secondary { background: transparent; color: var(--ink); }
+
+/* ----- Filtros ----- */
+.filters { display: grid; gap: 0.6rem; margin-bottom: 1.75rem; }
+.filters__row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.filters__row[hidden] { display: none; }
+.chip {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+/* Elegido: marco negro y ✓ (el violeta se mantiene) */
+.chip[aria-pressed='true'] { border-color: var(--ink); box-shadow: 0 0 0 2px var(--ink); }
+.chip[aria-pressed='true']::before { content: '✓ '; }
+.chip--secondary[aria-pressed='true'] { background: var(--violet); color: #fff; }
+.chip--more { min-width: 2.75rem; letter-spacing: 0; }
+.chip--more[aria-expanded='true'] { background: var(--ink); border-color: var(--ink); }
+@media (hover: hover) {
+  .chip:hover { filter: brightness(1.08); }
+}
+.filters__clear {
+  padding: 0.3rem 0.2rem;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  cursor: pointer;
 }
 .vendor__name { font-size: clamp(1.3rem, 4vw, 1.8rem); overflow-wrap: anywhere; }
 .vendor__description { margin: 0; font-size: 0.95rem; }

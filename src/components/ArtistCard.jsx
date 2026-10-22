@@ -1,87 +1,89 @@
-import { useState } from 'react'
 import { useLang } from '../i18n/useLang'
 import { publicUrl } from '../utils/assets'
 import './cards.css'
 
-function CheckIcon() {
-  return (
-    <svg className="card__check" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M5 12.5 9.5 17 19 7.5" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-/** Cara con la incógnita (por confirmar / confirmado sin revelar). */
-function MysteryFace({ confirmed, kindLabel, hidden }) {
-  const { t } = useLang()
+/** Frente con la incógnita. */
+function MysteryFace({ label, hidden }) {
   return (
     <span className="card__face card__face--mystery" aria-hidden={hidden || undefined}>
-      <span className="card__kind">{kindLabel}</span>
-      <span className="card__mark">¿?</span>
-      {confirmed && (
-        <>
-          <span className="card__badge"><CheckIcon /><span>{t('lineup.confirmed')}</span></span>
-          <span className="card__hint">{t('cards.reveal')}</span>
-        </>
-      )}
+      <span className="card__kind">{label}</span>
+      <span className="card__mark">?</span>
     </span>
   )
 }
 
-/** Cara con foto y nombre (carta revelada). */
-function RevealFace({ artist, kindLabel, hidden }) {
+/** Reverso "BANDA / POR CONFIRMAR" (rosa o verde según `tone`). */
+function TbcFace({ kindLabel, tone, hidden }) {
+  const { t } = useLang()
+  return (
+    <span className={`card__face card__face--back card__face--tbc tone-${tone}`} aria-hidden={hidden || undefined}>
+      <span className="card__tbc-kind">{kindLabel}</span>
+      <span className="card__tbc-text">{t('cards.tbc')}</span>
+    </span>
+  )
+}
+
+/** Cara con foto y nombre. `back`: va en el reverso · `tbc`: marca visible de por confirmar. */
+function PhotoFace({ artist, label, back, tbc, hidden }) {
   const { t } = useLang()
   const photo = publicUrl(artist.photo)
   return (
-    <span className="card__face card__face--reveal" aria-hidden={hidden || undefined}>
+    <span className={`card__face card__face--photo${back ? ' card__face--back' : ''}`} aria-hidden={hidden || undefined}>
       {photo ? (
         <img className="card__photo" src={photo} alt="" loading="lazy" decoding="async" />
       ) : (
         <span className="card__photo card__photo--empty" />
       )}
       <span className="card__info">
-        <span className="card__kind card__kind--inline">{kindLabel}</span>
+        <span className="card__kind card__kind--inline">{label}</span>
         <span className="card__name">{artist.name}</span>
         <span className="card__hint">{t('cards.more')}</span>
       </span>
-      {artist.provisional && <span className="card__provisional">{t('provisional')}</span>}
+      {tbc && <span className="card__tbc-badge">{t('cards.tbc')}</span>}
     </span>
   )
 }
 
 /**
- * Estados:
- *  - status 'tbc'       -> carta con incógnita, sin interacción.
- *  - status 'confirmed' -> incógnita + señal de confirmado; 1.er toque la gira y revela;
- *                          2.º toque llama a onOpen(artist) (ventana de información).
+ * Carta de artista. El modo lo decide Lineup a partir de src/data/artists.js:
+ *  - 'mystery'   "?" -> gira y muestra BANDA / POR CONFIRMAR.
+ *  - 'draw'      borde verde + "?" -> gira y muestra `shown` (nombre sorteado, por confirmar)
+ *                o BANDA / POR CONFIRMAR si ya no quedan nombres libres.
+ *  - 'confirmed' borde verde, foto + nombre de `shown` al frente; sin giro.
  */
-export default function ArtistCard({ artist, onOpen }) {
+export default function ArtistCard({ mode, kind, number, flipped, tone, shown, onClick }) {
   const { t } = useLang()
-  const [revealed, setRevealed] = useState(false)
-  const kindLabel = t(`cards.${artist.kind}`)
+  const kindLabel = t(`cards.${kind}`)
+  const label = `${kindLabel} ${number}`
+  const fill = (key) => t(key).replace('{card}', label).replace('{name}', shown?.name ?? '')
 
-  if (artist.status !== 'confirmed') {
+  if (mode === 'confirmed') {
     return (
-      <div className="card card--tbc" role="img" aria-label={`${kindLabel}: ${t('lineup.tbc')}`}>
+      <button type="button" className="card card--green" aria-label={fill('cards.ariaMore')} onClick={onClick}>
         <span className="card__inner">
-          <MysteryFace confirmed={false} kindLabel={kindLabel} />
+          <PhotoFace artist={shown} label={label} />
         </span>
-      </div>
+      </button>
     )
   }
 
-  const label = t(revealed ? 'cards.ariaMore' : 'cards.ariaReveal').replace('{name}', artist.name)
+  let aria = fill(mode === 'draw' ? 'cards.ariaDraw' : 'cards.ariaMystery')
+  if (flipped) aria = fill(shown ? 'cards.ariaTbcMore' : 'cards.ariaBack')
 
   return (
     <button
       type="button"
-      className={`card card--confirmed${revealed ? ' is-flipped' : ''}`}
-      aria-label={label}
-      onClick={() => (revealed ? onOpen(artist) : setRevealed(true))}
+      className={`card${mode === 'draw' ? ' card--green' : ''}${flipped ? ' is-flipped' : ''}`}
+      aria-label={aria}
+      onClick={onClick}
     >
       <span className="card__inner">
-        <MysteryFace confirmed kindLabel={kindLabel} hidden={revealed} />
-        <RevealFace artist={artist} kindLabel={kindLabel} hidden={!revealed} />
+        <MysteryFace label={label} hidden={flipped} />
+        {shown ? (
+          <PhotoFace artist={shown} label={label} back tbc hidden={!flipped} />
+        ) : (
+          <TbcFace kindLabel={kindLabel} tone={tone} hidden={!flipped} />
+        )}
       </span>
     </button>
   )

@@ -16,18 +16,19 @@ function readInitialLang() {
   return 'es' // español es el idioma principal
 }
 
-export function LanguageProvider({ children }) {
+/** `titleKey`: clave del título de la pestaña (cada página HTML puede tener el suyo). */
+export function LanguageProvider({ children, titleKey = 'meta.title' }) {
   const [lang, setLang] = useState(readInitialLang)
 
   useEffect(() => {
     document.documentElement.lang = lang
-    document.title = dictionaries[lang].meta.title
+    document.title = titleKey.split('.').reduce((node, key) => node?.[key], dictionaries[lang]) ?? document.title
     try {
       localStorage.setItem(STORAGE_KEY, lang)
     } catch {
       /* sin persistencia, no pasa nada */
     }
-  }, [lang])
+  }, [lang, titleKey])
 
   const value = useMemo(() => {
     const dict = dictionaries[lang]

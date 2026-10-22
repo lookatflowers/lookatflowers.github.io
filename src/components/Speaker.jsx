@@ -28,16 +28,24 @@ const SCREWS = Array.from({ length: 8 }, (_, i) => {
   return [C + Math.cos(a) * 444, C + Math.sin(a) * 444]
 })
 
-/** Escribe el avance del scroll (0 → 1, suavizado) en --p de <html>.
+/** Escribe el avance del scroll (0 → 1, suavizado) en --p de <html>, y marca
+ *  data-hero="past" cuando la portada (#top) ya salió de pantalla para ocultar el parlante.
  *  No pasa por el estado de React: evita renderizar en cada fotograma. */
 function useScrollProgress() {
   useEffect(() => {
     const root = document.documentElement
+    const stage = document.getElementById('top')
     let raf = 0
     const update = () => {
       raf = 0
-      const p = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * TRAVEL_FRACTION)))
+      const y = window.scrollY
+      const past = stage ? y > stage.offsetTop + stage.offsetHeight : false
+      const p = Math.min(1, Math.max(0, y / (window.innerHeight * TRAVEL_FRACTION)))
       root.style.setProperty('--p', (p * p * (3 - 2 * p)).toFixed(4))
+      if (past !== (root.dataset.hero === 'past')) {
+        if (past) root.dataset.hero = 'past'
+        else delete root.dataset.hero
+      }
     }
     const schedule = () => {
       if (!raf) raf = requestAnimationFrame(update)

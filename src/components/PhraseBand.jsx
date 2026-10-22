@@ -17,7 +17,7 @@ export default function PhraseBand({ id }) {
   const chars = Array.from(tr(phrase.text))
 
   return (
-    <div ref={ref} className={`phrase phrase--${phrase.tone ?? 'pink'}`} aria-hidden="true">
+    <div ref={ref} className="phrase" aria-hidden="true">
       <span className="phrase__text" style={{ '--n': chars.length }}>
         {chars.map((ch, i) => (
           <span key={i} className="phrase__char" style={{ '--i': i }}>{ch === ' ' ? '\u00A0' : ch}</span>

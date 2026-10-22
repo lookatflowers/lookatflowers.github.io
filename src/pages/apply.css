@@ -1,0 +1,70 @@
+/* Página de postulaciones: fondo blanco plano, sin parlante ni fondo animado. */
+
+.apply-logo {
+  display: grid;
+  place-items: center;
+  padding: 1.5rem var(--gutter) 1rem;
+  background: var(--paper);
+}
+.apply-logo img { width: clamp(5rem, 22vw, 8rem); height: auto; }
+
+.apply-page {
+  min-height: 60svh;
+  padding: clamp(2.5rem, 8vw, 5rem) var(--gutter);
+  background: var(--paper);
+}
+.apply-page__title {
+  max-width: 18ch;
+  margin-bottom: 2rem;
+  font-size: clamp(2rem, 7vw, 4.5rem);
+  color: var(--pink);
+}
+
+/* Pestañas: solo se ve la activa */
+.apply-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 3px solid var(--ink);
+}
+.apply-tabs button {
+  margin-bottom: -3px;
+  padding: 0.7rem 1.1rem;
+  border: 3px solid var(--ink);
+  border-radius: 0.6rem 0.6rem 0 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1rem, 3.6vw, 1.4rem);
+  line-height: 1;
+  cursor: pointer;
+}
+.apply-tabs button[aria-selected='true'] { background: var(--ink); color: var(--paper); }
+@media (hover: hover) {
+  .apply-tabs button[aria-selected='false']:hover { color: var(--pink); border-color: var(--pink); }
+}
+
+.apply-panel { display: grid; gap: 2.25rem; max-width: 65ch; }
+.apply-panel[hidden] { display: none; }
+.apply-panel:focus-visible { outline-offset: 0.75rem; }
+.apply-panel h2 {
+  margin-bottom: 0.75rem;
+  font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+  color: var(--violet);
+}
+.apply-panel p { margin: 0 0 0.75rem; }
+.apply-panel__links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
+.apply-panel__links a,
+.apply-panel__soon {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.apply-panel__links a:hover { background: var(--ink); color: var(--paper); }
+.apply-panel__soon { border-style: dashed; opacity: 0.65; }

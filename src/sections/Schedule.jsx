@@ -1,5 +1,5 @@
 import Section from '../components/Section'
-import { getArtist } from '../data/artists'
+import { confirmedAt } from '../data/artists'
 import { stages } from '../data/schedule'
 import { useLang } from '../i18n/useLang'
 
@@ -9,12 +9,11 @@ export default function Schedule() {
   const labelFor = (slot) => {
     if (slot.kind === 'ambient') return t('schedule.ambient')
     if (slot.kind === 'close') return t('schedule.close')
-    const artist = getArtist(slot.artistId)
-    if (!artist) return t('schedule.tbc')
-    if (artist.status === 'confirmed') return artist.name
-    // Por confirmar: "BANDA 1", "DJ 2"... (el número sale del id: band-1 -> 1)
-    const number = artist.id.split('-')[1]
-    return `${t(`cards.${artist.kind}`)} ${number}`.toUpperCase()
+    const artist = confirmedAt(slot.type, slot.slot)
+    if (artist) return artist.name
+    if (!slot.slot) return <span className="slots__tbc">{t('schedule.tbc')}</span>
+    // Por confirmar: "BANDA 1", "DJ 2"...
+    return `${t(`cards.${slot.type}`)} ${slot.slot}`.toUpperCase()
   }
 
   return (

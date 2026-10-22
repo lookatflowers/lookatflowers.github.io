@@ -1,7 +1,6 @@
 /* Portada con parlante. Aspecto PROVISIONAL: el cono definitivo lo aporta el equipo de arte. */
 
 :root {
-  --header-h: 3.5rem;
   --size: min(88vw, 78svh);         /* diámetro del parlante */
   --travel: 75svh;                  /* scroll que recorre el cono (igual que TRAVEL_FRACTION en Speaker.jsx) */
   --start-y: calc(50svh + var(--header-h) / 2);                    /* centro del cono al cargar */
@@ -10,22 +9,9 @@
   --pulse: 0;                       /* pulso del audio 0 → 1 (se conectará más adelante) */
   --spin-duration: 30s;             /* una vuelta del cono */
   --stage-fg: var(--ink);           /* color del texto de portada (cambia con el fondo) */
+  --hero-tail: 3rem;                /* aire bajo "SOMOS LOOKAT" antes de Información general */
 }
 html[data-bg='noche'] { --stage-fg: var(--paper); }
-
-.header { height: var(--header-h); }
-.footer { position: relative; z-index: 1; background: var(--paper); }
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
 
 /* ----- Parlante (fijo, detrás del contenido) ----- */
 .speaker {
@@ -38,6 +24,8 @@ html[data-bg='noche'] { --stage-fg: var(--paper); }
   transform: translate(-50%, calc(-50% + (var(--end-y) - var(--start-y)) * var(--p)));
   pointer-events: none;
 }
+/* Terminada la portada se oculta: si no, se vería a través de las frases (Speaker.jsx) */
+html[data-hero='past'] .speaker { visibility: hidden; }
 .speaker__pulse {
   position: absolute;
   inset: 0;
@@ -75,10 +63,13 @@ html[data-bg='noche'] { --stage-fg: var(--paper); }
 .speaker__cap img { width: 90%; height: auto; }
 
 /* ----- Escena de portada ----- */
+/* El texto queda en el flujo (no absoluto): la portada mide hasta el texto + --hero-tail,
+   así Información general entra justo debajo. */
 .stage {
   position: relative;
   z-index: 1;
-  height: calc(var(--travel) + 100svh);
+  padding-top: calc(var(--travel) + var(--end-y) + var(--size) * 0.49 + 2rem - var(--header-h));
+  padding-bottom: var(--hero-tail);
 }
 .stage__scroll {
   position: fixed;
@@ -104,10 +95,6 @@ html[data-bg='noche'] { --stage-fg: var(--paper); }
 }
 /* El texto aparece justo debajo del cono cuando este ya subió */
 .stage__copy {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(var(--travel) + var(--end-y) + var(--size) * 0.49 + 2rem - var(--header-h));
   padding: 0 var(--gutter);
   text-align: center;
 }
@@ -128,11 +115,11 @@ html[data-bg='noche'] { --stage-fg: var(--paper); }
   color: var(--stage-fg);
 }
 
-/* El resto del sitio sube como una cortina y tapa el parlante */
+/* El resto del sitio sube como una cortina y tapa el parlante. Ya no es blanca:
+   el blanco lo lleva cada .section, y las frases dejan ver el fondo animado. */
 .curtain {
   position: relative;
   z-index: 1;
-  background: var(--paper);
 }
 
 @media (prefers-reduced-motion: reduce) {
