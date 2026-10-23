@@ -35,7 +35,7 @@ export const applications = [
     id: 'bandas',
     label: L('Bandas', 'Bands'),
     stage: 'Flowers Stage',
-    deadline: '2026-10-29T23:59:59-03:00',
+    deadline: '2026-10-25T23:59:59-03:00',
     subject: 'Postulación BANDA {bandName}',
     intro: L(
       '¿Tienen canciones propias y ganas de tocarlas en vivo? Queremos escucharlas en el Flowers Stage. 🌸',
@@ -251,7 +251,7 @@ export const applications = [
     id: 'emprendimientos',
     label: L('Emprendimientos', 'Vendors'),
     stage: L('Feria', 'Market'),
-    deadline: '2026-10-29T23:59:59-03:00',
+    deadline: '2026-10-31T23:59:59-03:00',
     subject: 'Postulación EMPRENDIMIENTO {businessName}',
     intro: L(
       '¿Creas, diseñas o rescatas cosas lindas? Súmate a la feria del festival. 🌸',

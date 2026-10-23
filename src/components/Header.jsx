@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { applications, applyUrl } from '../data/applications'
 import { useLang } from '../i18n/useLang'
 
-const links = ['info', 'lineup', 'schedule', 'vendors', 'map', 'sponsors', 'contact']
+// const links = ['info', 'lineup', 'schedule', 'vendors', 'map', 'sponsors', 'contact']
+const links = ['info', 'lineup', 'vendors', 'map', 'sponsors', 'contact']
 
 /** Botón "Postulaciones" con su desplegable. Va fuera del menú con scroll horizontal
  *  para que el desplegable no quede recortado. */

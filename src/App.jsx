@@ -34,7 +34,7 @@ function Page() {
           <Info />
           <PhraseBand id="slogan" />
           <Lineup />
-          <Schedule />
+          {/* <Schedule /> */}
           <PhraseBand id="fci" />
           <Vendors />
           <MapSection />
