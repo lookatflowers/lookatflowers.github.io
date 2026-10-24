@@ -1,6 +1,11 @@
-// Line-up: una lista para bandas (bands) y otra para DJs (djs). Editar solo aquí.
+// Line-up: una lista para bandas (bands) y otra para DJs (djs).
 //
-// Cada lista admite dos tipos de entrada:
+// LOS DATOS SE EDITAN EN LA PLANILLA, pestaña "Web Line-up", y se publican con la acción
+// "Actualizar web desde la planilla" de GitHub (o con `npm run sync`). Esa acción reescribe
+// src/data/generated/lineup.json: no lo edites a mano, se pierde en la próxima sincronización.
+// La cantidad de cartas y forzarIncognita se configuran en lineupConfig.js.
+//
+// Forma de cada entrada (la arma el sincronizador):
 //
 //  CONFIRMADO — ocupa la carta número `slot` (BANDA 1…6 / DJ 1…5) y su franja del cronograma:
 //   {
@@ -21,14 +26,13 @@
 //  · Carta libre y NO hay entradas por confirmar, o su número está en forzarIncognita
 //    -> "?" que al girar muestra BANDA / POR CONFIRMAR.
 
-export const lineup = {
-  band: { total: 6, forzarIncognita: [] }, // p. ej. [5, 6] deja siempre la incógnita en las cartas 5 y 6
-  dj: { total: 5, forzarIncognita: [] },
-}
+import data from './generated/lineup.json'
 
-export const bands = []
+export { lineup } from './lineupConfig'
 
-export const djs = []
+export const bands = data.bands
+
+export const djs = data.djs
 
 export const lists = { band: bands, dj: djs }
 

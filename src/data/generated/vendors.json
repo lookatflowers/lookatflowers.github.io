@@ -1,0 +1,9 @@
+[
+  {
+    "name": "Puesto de ejemplo",
+    "primary": ["Comida"],
+    "secondary": [],
+    "description": { "es": "Descripción de ejemplo.", "en": "Sample description." },
+    "link": "https://www.instagram.com/lookatflowers.cl/"
+  }
+]
