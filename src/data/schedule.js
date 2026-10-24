@@ -26,7 +26,6 @@ export const stages = [
       { time: '17:00', kind: 'artist', type: 'dj', slot: 4 },
       { time: '18:00', kind: 'artist', type: 'dj', slot: 5 },
       { time: '19:00', kind: 'artist', type: 'dj', slot: 6 }, // hora provisional: confirmar con producción
-      { time: '19:00', kind: 'artist', type: 'dj', slot: 6 },
       { time: '20:00', kind: 'close' },
     ],
   },
