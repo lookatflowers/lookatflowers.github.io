@@ -1,9 +1,200 @@
 [
   {
-    "name": "Puesto de ejemplo",
-    "primary": ["Comida"],
-    "secondary": [],
-    "description": { "es": "Descripción de ejemplo.", "en": "Sample description." },
-    "link": "https://www.instagram.com/lookatflowers.cl/"
+    "name": "Bonjour Store",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": []
+  },
+  {
+    "name": "Animedreak Valdivia",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Ilustración y arte"
+    ],
+    "description": {
+      "es": "Posters de distintos tamaños y formatos, photocards y stickers."
+    },
+    "link": "https://www.instagram.com/animedreak"
+  },
+  {
+    "name": "Demigurumis",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Hecho a mano"
+    ],
+    "description": {
+      "es": "Amigurumis y accesorios tejidos, temática de caos, bosque y dragones; piezas únicas."
+    },
+    "link": "https://instagram.com/demigurumis"
+  },
+  {
+    "name": "Poleth Artes Visuales",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Ilustración y arte"
+    ],
+    "description": {
+      "es": "Cuadros pintados sobre madera nativa y esculturas de yeso."
+    },
+    "link": "https://www.instagram.com/poleth_artesv"
+  },
+  {
+    "name": "El Bazar de las Maravillas",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Accesorios"
+    ],
+    "description": {
+      "es": "Productos de creación propia inspirados en la naturaleza, Studio Ghibli, Harry Potter y Alicia en el País de las Maravillas."
+    },
+    "link": "https://instagram.com/el.bazar.delas.maravillas"
+  },
+  {
+    "name": "YV Handmade",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Accesorios"
+    ],
+    "description": {
+      "es": "Accesorios hechos a mano con tejido y bordado en mostacillas; línea de intervención textil con materiales reciclados."
+    },
+    "link": "https://www.instagram.com/yv.handmade/"
+  },
+  {
+    "name": "Nexum 3D",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Accesorios"
+    ],
+    "description": {
+      "es": "Impresiones 3D, principalmente de Pokémon."
+    },
+    "link": "https://www.instagram.com/nexum_3d"
+  },
+  {
+    "name": "Lotus Lace",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Accesorios"
+    ],
+    "description": {
+      "es": "Uñas press-on reutilizables con kit de aplicación, en tallas estándar."
+    },
+    "link": "https://www.tiktok.com/@lotus_lace"
+  },
+  {
+    "name": "Ten Confecciones",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Vestuario"
+    ],
+    "link": "https://instagram.com/ten.confecciones"
+  },
+  {
+    "name": "Eco Mehuín",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Artesanía"
+    ],
+    "description": {
+      "es": "Joyas, intervención de prendas y accesorios (llaveros, monederos) hechos a mano con materiales reutilizados."
+    },
+    "link": "https://instagram.com/ecomehuin"
+  },
+  {
+    "name": "Confecciones Jeannisa",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Hecho a mano"
+    ],
+    "description": {
+      "es": "Bolsos, estuches, espejos, llaveros y coletas hechos a mano, desde el diseño y estampado."
+    },
+    "link": "https://instagram.com/confecciones_jeannisa"
+  },
+  {
+    "name": "Aura Solar",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Hecho a mano"
+    ],
+    "description": {
+      "es": "Wax melts artesanales de cera de soya con esencias, junto a sus quemadores."
+    },
+    "link": "https://www.instagram.com/aurasolarcl/"
+  },
+  {
+    "name": "Plantas Ornamentales sucu.civans",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Plantas"
+    ],
+    "description": {
+      "es": "Plantas ornamentales de interior y exterior, accesorios para macetas."
+    },
+    "link": "https://www.instagram.com/sucu.civans"
+  },
+  {
+    "name": "Nairaza Papelería",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Papelería"
+    ],
+    "description": {
+      "es": "Papelería y accesorios: stickers, chapitas, posters."
+    },
+    "link": "https://instagram.com/nairaza.papeleria"
+  },
+  {
+    "name": "Mianny Accesorios",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Accesorios"
+    ],
+    "description": {
+      "es": "Accesorios de piedras naturales, vidrio esmaltado y baño de oro, hechos a mano; también totebags estampadas."
+    },
+    "link": "https://www.instagram.com/mianny_accesorios"
+  },
+  {
+    "name": "Dany González Vidaurre",
+    "primary": [
+      "Emprendimiento"
+    ],
+    "secondary": [
+      "Ilustración y arte"
+    ],
+    "description": {
+      "es": "Linografías, grabados y llaveros con grabados estampados."
+    }
   }
 ]

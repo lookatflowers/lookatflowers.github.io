@@ -183,6 +183,7 @@ async function buildLineup(records) {
   const out = { band: [], dj: [] }
   const usedSlots = { band: new Map(), dj: new Map() }
   const usedNames = { band: new Set(), dj: new Set() }
+  const missingEnglish = []
 
   for (const r of records) {
     const name = r['Nombre'] || ''
@@ -219,7 +220,7 @@ async function buildLineup(records) {
     if (photo) entry.photo = photo
     const bio = bilingual(r['Reseña (ES)'], r['Reseña (EN)'])
     if (bio) entry.bio = bio
-    if (bio && !r['Reseña (EN)']) warn(`${where}: sin reseña en inglés (se mostrará la de español).`)
+    if (bio && !r['Reseña (EN)']) missingEnglish.push(name)
 
     const links = {}
     for (const [col, k] of Object.entries(LINK_KEYS)) {
@@ -232,6 +233,9 @@ async function buildLineup(records) {
     out[type].push(entry)
   }
 
+  if (missingEnglish.length) {
+    warn(`Sin reseña en inglés (se muestra la de español): ${missingEnglish.join(', ')}.`)
+  }
   const order = (a, b) => (a.confirmed === b.confirmed ? (a.slot ?? 0) - (b.slot ?? 0) : a.confirmed ? -1 : 1)
   return { bands: out.band.sort(order), djs: out.dj.sort(order) }
 }

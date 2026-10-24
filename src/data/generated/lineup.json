@@ -1,4 +1,164 @@
 {
-  "bands": [],
-  "djs": []
+  "bands": [
+    {
+      "name": "Desvelo",
+      "confirmed": false
+    },
+    {
+      "name": "El Peso del Arrepentimiento (EPDA)",
+      "confirmed": false
+    },
+    {
+      "name": "ARGE",
+      "confirmed": false
+    },
+    {
+      "name": "Perla",
+      "confirmed": false
+    },
+    {
+      "name": "No Impulse",
+      "confirmed": false,
+      "bio": {
+        "es": "Proyecto de Djent/metalcore instrumental con base actual en Valdivia, con paso por Santiago y Panguipulli. Influencias: Meshuggah, Animals As Leaders, Vein.fm. Formado por Anibal (guitarra/composición) y Tomás (batería)."
+      },
+      "links": {
+        "instagram": "https://instagram.com/noimpulsecl/"
+      }
+    },
+    {
+      "name": "Vorona Band",
+      "confirmed": false,
+      "bio": {
+        "es": "Propuesta ruidosa, intensa y emocional; entre la depresión y el amor, transforma la tristeza en canciones directas, con honestidad romántica y visceral."
+      },
+      "links": {
+        "instagram": "https://instagram.com/vorona.band"
+      }
+    },
+    {
+      "name": "All Our Failures",
+      "confirmed": false,
+      "bio": {
+        "es": "Banda de Metalcore formada en mayo de 2024 en Valdivia. Canciones sobre la vida cotidiana y dilemas sociales; influencias de Trivium, Bullet For My Valentine, Megadeth y Metallica, mezclando Thrash ochentero y Metalcore moderno."
+      },
+      "links": {
+        "web": "https://linktr.ee/allourfailures"
+      }
+    },
+    {
+      "name": "Kemenssen Yerber",
+      "confirmed": false,
+      "bio": {
+        "es": "Proyecto emergente desde 2025 que mezcla rock alternativo, riffs progresivos de guitarra y ritmos en distintos tiempos."
+      },
+      "links": {
+        "instagram": "https://instagram.com/kemenssen_yerber"
+      }
+    },
+    {
+      "name": "Hombres de Marte",
+      "confirmed": false,
+      "bio": {
+        "es": "Banda de rock formada por niños y jóvenes de la Escuela de Rock Los Lagos; canciones originales sobre inclusión, medioambiente y compromiso social. Lema: 'Sonido de Marte con los pies en la tierra'."
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/hombres_de_marte_oficial/"
+      }
+    },
+    {
+      "name": "Hora Punga",
+      "confirmed": false,
+      "links": {
+        "instagram": "https://www.instagram.com/horapunga/"
+      }
+    },
+    {
+      "name": "Bong Voyage Reggae",
+      "confirmed": false,
+      "bio": {
+        "es": "Banda valdiviana de reggae original, con 2 años de experiencia, repertorio propio y más de 20 presentaciones en la región."
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/bongvoyagereggae/"
+      }
+    }
+  ],
+  "djs": [
+    {
+      "name": "BIG POPA",
+      "confirmed": false,
+      "bio": {
+        "es": "DJ set de diferentes estilos urbanos latinos, cargado de energía."
+      },
+      "links": {
+        "instagram": "https://instagram.com/bigpopadj",
+        "soundcloud": "https://on.soundcloud.com/zuej5oELUToXnNGfcS"
+      }
+    },
+    {
+      "name": "Felipebeat Remix Live",
+      "confirmed": false,
+      "bio": {
+        "es": "Más de 15 años de trayectoria; sets como show musical con energía de 'montaña rusa'. En correo posterior agrega que su sello es mezclar en vivo tocando teclado (piano)."
+      },
+      "links": {
+        "instagram": "https://instagram.com/felipebeat.remixlive"
+      }
+    },
+    {
+      "name": "Dj Dash",
+      "confirmed": false,
+      "bio": {
+        "es": "Set inmersivo inspirado en Valdivia: empieza fluido como el río, gana energía y culmina en celebración colectiva."
+      },
+      "links": {
+        "instagram": "https://instagram.com/Dj_Dashchile"
+      }
+    },
+    {
+      "name": "StarrKush",
+      "confirmed": false,
+      "bio": {
+        "es": "Viaje sonoro intenso y envolvente, con energía progresiva y grooves potentes."
+      },
+      "links": {
+        "instagram": "https://instagram.com/starr.kush",
+        "soundcloud": "https://on.soundcloud.com/ek5C5f97k99d3jqyRC"
+      }
+    },
+    {
+      "name": "Dj Stely",
+      "confirmed": false,
+      "bio": {
+        "es": "Propuesta electro house old."
+      },
+      "links": {
+        "instagram": "https://instagram.com/stely_cs",
+        "soundcloud": "https://soundcloud.com/stely10"
+      }
+    },
+    {
+      "name": "VECEIT",
+      "confirmed": false,
+      "bio": {
+        "es": "Viaje musical entre melodías nostálgicas e introspectivas y la intensidad del dubstep/riddim; busca acercar el dubstep a nuevo público en Valdivia."
+      },
+      "links": {
+        "instagram": "https://instagram.com/veceit_prod",
+        "soundcloud": "https://on.soundcloud.com/i0t4zjiEWopRUyxTz9"
+      }
+    },
+    {
+      "name": "DJ JKOBS",
+      "confirmed": false,
+      "bio": {
+        "es": "DJ de Ancud, Chiloé, más de 8 años de trayectoria; se ha presentado en Calafate (Santiago), Estadio Monumental, Dubái Club (Valdivia), Club W (Puerto Montt), Festival Bicentenario y Gira Teletón Chiloé."
+      },
+      "links": {
+        "instagram": "https://instagram.com/jkobs__dj",
+        "soundcloud": "https://soundcloud.com/@jkobs__dj"
+      }
+    }
+  ]
 }
