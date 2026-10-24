@@ -3,7 +3,7 @@
 // p. ej. [5, 6] deja la incógnita en las cartas 5 y 6.
 export const lineup = {
   band: { total: 6, forzarIncognita: [] },
-  dj: { total: 5, forzarIncognita: [] },
+  dj: { total: 6, forzarIncognita: [] },
 }
 
 // Etiquetas principales de los puestos (filtro principal de la sección Puestos)

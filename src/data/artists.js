@@ -7,7 +7,7 @@
 //
 // Forma de cada entrada (la arma el sincronizador):
 //
-//  CONFIRMADO — ocupa la carta número `slot` (BANDA 1…6 / DJ 1…5) y su franja del cronograma:
+//  CONFIRMADO — ocupa la carta número `slot` (BANDA 1…6 / DJ 1…6) y su franja del cronograma:
 //   {
 //     name: 'Nombre', confirmed: true, slot: 1,
 //     photo: 'artists/nombre.webp',   // archivo en public/artists/ (630×880 px, WebP, < 100 KB)
