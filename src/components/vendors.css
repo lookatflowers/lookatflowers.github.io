@@ -74,7 +74,19 @@
   hyphens: manual;
   text-wrap: balance;
 }
-.vendor__tags--products { margin-top: -0.15rem; }
+/* Etiquetas de producto en la tarjeta: texto liviano separado por punto medio (los filtros sí van en recuadro).
+   Cada etiqueta es un bloque en línea: nunca se parte por dentro, solo salta de línea entre etiquetas. */
+.vendor__tags--products { display: block; margin-top: -0.15rem; line-height: 1.55; }
+.vendor__tags--products .vtag--secondary {
+  display: inline-block;
+  margin-right: 0.45em;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--violet);
+  white-space: nowrap;
+}
+.vendor__tags--products .vtag--secondary:not(:last-child)::after { content: '\00a0·'; color: var(--ink); }
 .vendor__description { margin: 0; font-size: 0.95rem; }
 .vendor__link {
   margin-top: auto;
