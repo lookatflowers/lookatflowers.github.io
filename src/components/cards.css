@@ -115,15 +115,16 @@
   opacity: 0.8;
 }
 
-/* Cara con foto: la foto ocupa la carta completa y se ve ENTERA (viene en proporción 63:88,
-   la misma de la carta; contain garantiza que nunca se recorta). El nombre va encima, abajo. */
+/* Cara con foto: la foto llena la carta recortada al centro (un poco cargada hacia arriba, donde
+   suelen estar las caras). La foto completa se ve en la ventana emergente. El nombre va encima, abajo. */
 .card__face--photo { justify-content: flex-end; }
 .card__photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center 30%;
 }
 .card__photo--empty {
   background:
@@ -215,29 +216,32 @@
   cursor: pointer;
 }
 .dialog__close svg { width: 1.1rem; height: 1.1rem; }
-/* Foto entera en proporción de carta (63:88), sin recorte. En el celular cabe a lo alto de la pantalla;
-   en pantallas anchas va a la izquierda y el texto a la derecha. */
+/* Foto completa, en su proporción original (vertical u horizontal), sin recorte. En el celular va arriba
+   y cabe en la pantalla; en pantallas anchas va a la izquierda y el texto a la derecha. */
 .dialog__photo {
   justify-self: center;
-  width: min(100%, calc(72svh * 63 / 88));
-  aspect-ratio: 63 / 88;
-  object-fit: contain;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 65svh;
   border-radius: 0.6rem;
-  background: var(--ink);
 }
 .dialog__text { display: grid; gap: 1.1rem; align-content: start; }
 @media (min-width: 48rem) {
-  .dialog { width: min(92vw, 58rem); }
+  .dialog { width: min(92vw, 64rem); }
   .dialog__body {
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
     align-items: start;
     gap: 1.75rem;
     padding: 1.25rem;
   }
-  .dialog__photo { width: calc(min(80svh, 40rem) * 63 / 88); }
+  .dialog__photo { max-height: 80svh; }
   .dialog__text { padding: 3.25rem 0.5rem 0.5rem 0; }
 }
 .dialog__photo--empty {
+  width: min(100%, calc(65svh * 63 / 88));
+  aspect-ratio: 63 / 88;
   background:
     repeating-linear-gradient(135deg, rgb(242 242 239 / 0.1) 0 0.7rem, transparent 0.7rem 1.4rem),
     var(--violet);
