@@ -5,10 +5,12 @@ import { displayText } from '../utils/displayText'
 
 /** Frente con la incógnita. */
 function MysteryFace({ label, hidden }) {
+  const { t } = useLang()
   return (
     <span className="card__face card__face--mystery" aria-hidden={hidden || undefined}>
       <span className="card__kind">{label}</span>
       <span className="card__mark">?</span>
+      <span className="card__tap">{t('cards.tap')}</span>
     </span>
   )
 }
@@ -52,7 +54,7 @@ function PhotoFace({ artist, label, back, tbc, hidden }) {
  *                o BANDA / POR CONFIRMAR si ya no quedan nombres libres.
  *  - 'confirmed' borde verde, foto + nombre de `shown` al frente; sin giro.
  */
-export default function ArtistCard({ mode, kind, number, flipped, tone, shown, onClick }) {
+export default function ArtistCard({ mode, kind, number, flipped, nudge, tone, shown, onClick }) {
   const { t } = useLang()
   const kindLabel = t(`cards.${kind}`)
   const label = `${kindLabel} ${number}`
@@ -74,7 +76,7 @@ export default function ArtistCard({ mode, kind, number, flipped, tone, shown, o
   return (
     <button
       type="button"
-      className={`card${mode === 'draw' ? ' card--green' : ''}${flipped ? ' is-flipped' : ''}`}
+      className={`card${mode === 'draw' ? ' card--green' : ''}${flipped ? ' is-flipped' : ''}${nudge && !flipped ? ' is-nudging' : ''}`}
       aria-label={aria}
       onClick={onClick}
     >

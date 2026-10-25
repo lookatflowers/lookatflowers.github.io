@@ -157,6 +157,26 @@
   text-transform: uppercase;
 }
 
+/* Invitación a tocar: texto en la incógnita y balanceo ocasional */
+.card__tap {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 0;
+  right: 0;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.card.is-nudging { animation: card-nudge 0.9s ease-in-out; }
+@keyframes card-nudge {
+  0%, 100% { transform: none; }
+  20% { transform: translateY(-6px) rotate(-3deg); }
+  45% { transform: translateY(-6px) rotate(3deg); }
+  70% { transform: translateY(-3px) rotate(-1.5deg); }
+}
+
 /* ----- Ventana de información ampliada ----- */
 .dialog {
   width: min(92vw, 34rem);
@@ -232,5 +252,6 @@ body:has(dialog[open]) { overflow: hidden; } /* sin scroll de fondo con la venta
 
 @media (prefers-reduced-motion: reduce) {
   .card, .card__inner { transition-duration: 0.01ms; }
+  .card.is-nudging { animation: none; }
   .dialog[open] { animation: none; }
 }
