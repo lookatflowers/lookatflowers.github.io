@@ -43,7 +43,6 @@ function Group({ type, title, flipped, nudge, onCard }) {
               <ArtistCard
                 mode={mode}
                 kind={type}
-                number={slot}
                 flipped={isFlipped}
                 nudge={nudge === `${type}-${slot}`}
                 tone={isFlipped ? flipped.tone : 'pink'}

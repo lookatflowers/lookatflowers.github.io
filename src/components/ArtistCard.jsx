@@ -4,11 +4,10 @@ import './cards.css'
 import { displayText } from '../utils/displayText'
 
 /** Frente con la incógnita. */
-function MysteryFace({ label, hidden }) {
+function MysteryFace({ hidden }) {
   const { t } = useLang()
   return (
     <span className="card__face card__face--mystery" aria-hidden={hidden || undefined}>
-      <span className="card__kind">{label}</span>
       <span className="card__mark">?</span>
       <span className="card__tap">{t('cards.tap')}</span>
     </span>
@@ -27,7 +26,7 @@ function TbcFace({ kindLabel, tone, hidden }) {
 }
 
 /** Cara con foto y nombre. `back`: va en el reverso · `tbc`: marca visible de por confirmar. */
-function PhotoFace({ artist, label, back, tbc, hidden }) {
+function PhotoFace({ artist, back, tbc, hidden }) {
   const { t } = useLang()
   const photo = publicUrl(artist.photo)
   return (
@@ -38,7 +37,6 @@ function PhotoFace({ artist, label, back, tbc, hidden }) {
         <span className="card__photo card__photo--empty" />
       )}
       <span className="card__info">
-        <span className="card__kind card__kind--inline">{label}</span>
         <span className="card__name">{displayText(artist.name)}</span>
         <span className="card__hint">{t('cards.more')}</span>
       </span>
@@ -54,17 +52,17 @@ function PhotoFace({ artist, label, back, tbc, hidden }) {
  *                o BANDA / POR CONFIRMAR si ya no quedan nombres libres.
  *  - 'confirmed' borde verde, foto + nombre de `shown` al frente; sin giro.
  */
-export default function ArtistCard({ mode, kind, number, flipped, nudge, tone, shown, onClick }) {
+export default function ArtistCard({ mode, kind, flipped, nudge, tone, shown, onClick }) {
   const { t } = useLang()
   const kindLabel = t(`cards.${kind}`)
-  const label = `${kindLabel} ${number}`
-  const fill = (key) => t(key).replace('{card}', label).replace('{name}', shown?.name ?? '')
+  // Sin número de carta a la vista ("Banda 1"...): el número solo ordena el cronograma.
+  const fill = (key) => t(key).replace('{card}', kindLabel).replace('{name}', shown?.name ?? '')
 
   if (mode === 'confirmed') {
     return (
       <button type="button" className="card card--green" aria-label={fill('cards.ariaMore')} onClick={onClick}>
         <span className="card__inner">
-          <PhotoFace artist={shown} label={label} />
+          <PhotoFace artist={shown} />
         </span>
       </button>
     )
@@ -81,9 +79,9 @@ export default function ArtistCard({ mode, kind, number, flipped, nudge, tone, s
       onClick={onClick}
     >
       <span className="card__inner">
-        <MysteryFace label={label} hidden={flipped} />
+        <MysteryFace hidden={flipped} />
         {shown ? (
-          <PhotoFace artist={shown} label={label} back tbc hidden={!flipped} />
+          <PhotoFace artist={shown} back tbc hidden={!flipped} />
         ) : (
           <TbcFace kindLabel={kindLabel} tone={tone} hidden={!flipped} />
         )}
