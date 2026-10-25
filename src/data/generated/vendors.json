@@ -246,6 +246,18 @@
       "description": {
         "es": "Linografías, grabados y llaveros con grabados estampados."
       }
+    },
+    {
+      "name": "Papelería Creativa de la Pequis",
+      "primary": [
+        "Emprendimiento"
+      ],
+      "secondary": [
+        "Papelería"
+      ],
+      "description": {
+        "es": "Papelería creativa y artículos personalizados, hechos a mano."
+      }
     }
   ]
 }
