@@ -1,6 +1,10 @@
-// Puestos de venta. Editar solo aquí: los filtros se generan solos a partir de esta lista.
+// Puestos de venta. Los filtros se generan solos a partir de esta lista.
 //
-// Forma de cada puesto:
+// LOS DATOS SE EDITAN EN LA PLANILLA, pestaña "Web Puestos", y se publican con la acción
+// "Actualizar web desde la planilla" de GitHub (o con `npm run sync`). Esa acción reescribe
+// src/data/generated/vendors.json: no lo edites a mano, se pierde en la próxima sincronización.
+//
+// Forma de cada puesto (la arma el sincronizador):
 // {
 //   name: 'Nombre del puesto',
 //   primary: ['Comida', 'Bebida'],        // una o más de PRIMARY_TAGS
@@ -11,14 +15,8 @@
 //
 // Filtros: dentro de un mismo grupo las etiquetas suman (Comida O Bebida);
 // entre el grupo principal y el secundario se restringe (Comida Y Merch Banda).
-export const PRIMARY_TAGS = ['Emprendimiento', 'Comida', 'Bebida']
+import data from './generated/vendors.json'
 
-export const vendors = [
-  {
-    name: 'Puesto de ejemplo',
-    primary: ['Comida'],
-    secondary: [],
-    description: { es: 'Descripción de ejemplo.', en: 'Sample description.' },
-    link: 'https://www.instagram.com/lookatflowers.cl/',
-  },
-]
+export { PRIMARY_TAGS } from './lineupConfig'
+
+export const vendors = data
