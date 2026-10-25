@@ -95,6 +95,17 @@
       }
     },
     {
+      "name": "Artefactos",
+      "confirmed": false,
+      "photo": "artists/artefactos-ca545dd9.webp",
+      "bio": {
+        "es": "Artefactos es una banda que nace de la cabeza de unos jóvenes entusiasmados por plasmar el sonido grunge de Seattle en una ciudad igual de lluviosa, Valdivia, dispuestos a demostrar que el sonido de los 90 aún sigue vigente en estos tiempos."
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/banda_artefactos/"
+      }
+    },
+    {
       "name": "Niko Contador",
       "confirmed": false,
       "photo": "artists/niko-contador-cfe2c611.webp",
