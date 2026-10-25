@@ -144,6 +144,9 @@
       "secondary": [
         "Ropa"
       ],
+      "description": {
+        "es": "Confección propia de prendas de vestir, accesorios, decoración, artículos de autocuidado y mucho más."
+      },
       "link": "https://instagram.com/ten.confecciones"
     },
     {
@@ -158,7 +161,7 @@
         "Reciclado"
       ],
       "description": {
-        "es": "Confección propia de prendas de vestir, accesorios, decoración, artículos de autocuidado y mucho más."
+        "es": "Joyas, intervención de prendas y accesorios (llaveros, monederos) hechos a mano con materiales reutilizados."
       },
       "link": "https://instagram.com/ecomehuin"
     },
