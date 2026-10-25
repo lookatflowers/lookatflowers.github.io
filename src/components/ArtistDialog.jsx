@@ -4,7 +4,6 @@ import { publicUrl } from '../utils/assets'
 import './cards.css'
 import { displayText } from '../utils/displayText'
 import LikeButton from './LikeButton'
-import { track } from '../utils/track'
 
 const LINK_LABELS = {
   instagram: 'Instagram',
@@ -62,12 +61,7 @@ export default function ArtistDialog({ artist, onClose }) {
               <ul className="dialog__links">
                 {links.map(([key, url]) => (
                   <li key={key}>
-                    <a
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => track(`Red ${LINK_LABELS[key] ?? key}`, artist.kind === 'dj' ? 'DJ' : 'Banda', artist.name)}
-                    >{LINK_LABELS[key] ?? key}</a>
+                    <a href={url} target="_blank" rel="noopener noreferrer">{LINK_LABELS[key] ?? key}</a>
                   </li>
                 ))}
               </ul>

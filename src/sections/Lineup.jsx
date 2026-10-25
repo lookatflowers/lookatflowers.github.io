@@ -4,7 +4,6 @@ import ArtistCard from '../components/ArtistCard'
 import ArtistDialog from '../components/ArtistDialog'
 import { confirmedAt, lineup, lists } from '../data/artists'
 import { useLang } from '../i18n/useLang'
-import { track } from '../utils/track'
 
 // Cuánto tiempo queda dada vuelta una carta antes de volver sola a "?"
 const AUTO_RETURN_MS = 5000
@@ -100,28 +99,20 @@ export default function Lineup() {
   }, [flipped, selected])
 
   const onCard = (type, slot, mode) => {
-    const kindName = type === 'dj' ? 'DJ' : 'Banda'
     if (mode === 'confirmed') {
-      track('Reseña', kindName, confirmedAt(type, slot).name)
       setSelected({ artist: { ...confirmedAt(type, slot), kind: type } })
       return
     }
     const current = flipped[type]
     if (current?.slot === slot) {
       // 2.º toque: con nombre abre la ventana; sin nombre vuelve a "?"
-      if (current.artist) {
-        track('Reseña', kindName, current.artist.name)
-        setSelected({ artist: { ...current.artist, kind: type, tbc: true }, type })
-      }
+      if (current.artist) setSelected({ artist: { ...current.artist, kind: type, tbc: true }, type })
       else setFlipped((prev) => ({ ...prev, [type]: null }))
       return
     }
     // Gira esta carta; la que estaba dada vuelta en el grupo vuelve a "?"
     const artist = mode === 'draw' ? drawName(type, lastName.current[type]) : null
-    if (artist) {
-      lastName.current[type] = artist.name
-      track('Carta', kindName, artist.name)
-    }
+    if (artist) lastName.current[type] = artist.name
     setNudge(null)
     setFlipped((prev) => ({ ...prev, [type]: { slot, tone: randomTone(), artist } }))
   }
