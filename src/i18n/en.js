@@ -28,8 +28,7 @@ export default {
     title: 'Line-up',
     bands: 'Bands',
     djs: 'DJs',
-    note: 'We will reveal the artists as they get confirmed.',
-    hint: 'Tap the cards to discover who could be playing at the festival.',
+    note: 'We will reveal artists as their participation is confirmed, give your favorites a like.',
   },
   cards: {
     band: 'Band',

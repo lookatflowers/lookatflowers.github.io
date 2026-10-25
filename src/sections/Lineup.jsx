@@ -129,9 +129,6 @@ export default function Lineup() {
     <Section id="lineup" title={t('lineup.title')}>
       <div ref={sectionRef}>
         <p className="note">{t('lineup.note')}</p>
-        <p className="lineup-hint">
-          <span aria-hidden="true">👆</span> {t('lineup.hint')}
-        </p>
         <Group type="band" title={t('lineup.bands')} flipped={flipped.band} nudge={nudge} onCard={onCard} />
         <Group type="dj" title={t('lineup.djs')} flipped={flipped.dj} nudge={nudge} onCard={onCard} />
       </div>
