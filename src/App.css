@@ -153,6 +153,8 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 }
 .note { margin: 0 0 2rem; max-width: 60ch; }
+.note:has(+ .lineup-hint) { margin-bottom: 0.5rem; }
+.lineup-hint { margin: 0 0 2rem; max-width: 60ch; font-weight: 700; }
 
 .facts { display: grid; gap: 1.25rem; margin: 0; max-width: 60ch; }
 .facts dt {

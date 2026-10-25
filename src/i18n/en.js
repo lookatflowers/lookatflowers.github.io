@@ -29,11 +29,13 @@ export default {
     bands: 'Bands',
     djs: 'DJs',
     note: 'We will reveal the artists as they get confirmed.',
+    hint: 'Tap the cards to discover who could be playing at the festival.',
   },
   cards: {
     band: 'Band',
     dj: 'DJ',
     tbc: 'To be confirmed',
+    tap: 'Tap to flip',
     more: 'Read more',
     close: 'Close',
     noBio: 'Bio coming soon.',
