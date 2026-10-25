@@ -2,19 +2,23 @@
   "bands": [
     {
       "name": "Desvelo",
-      "confirmed": false
+      "confirmed": false,
+      "photo": "artists/desvelo-ff7ff9ad.webp"
     },
     {
       "name": "El Peso del Arrepentimiento",
-      "confirmed": false
+      "confirmed": false,
+      "photo": "artists/el-peso-del-arrepentimiento-a71ef0f6.webp"
     },
     {
       "name": "ARGE",
-      "confirmed": false
+      "confirmed": false,
+      "photo": "artists/arge-39f72ff1.webp"
     },
     {
       "name": "Perla",
-      "confirmed": false
+      "confirmed": false,
+      "photo": "artists/perla-61c13594.webp"
     },
     {
       "name": "No Impulse",
@@ -29,6 +33,7 @@
     {
       "name": "Vorona Band",
       "confirmed": false,
+      "photo": "artists/vorona-band-ff2d913d.webp",
       "bio": {
         "es": "Propuesta ruidosa, intensa y emocional; entre la depresión y el amor, transforma la tristeza en canciones directas, con honestidad romántica y visceral."
       },
@@ -39,6 +44,7 @@
     {
       "name": "All Our Failures",
       "confirmed": false,
+      "photo": "artists/all-our-failures-45fff35e.webp",
       "bio": {
         "es": "Banda de Metalcore formada en mayo de 2024 en Valdivia. Canciones sobre la vida cotidiana y dilemas sociales; influencias de Trivium, Bullet For My Valentine, Megadeth y Metallica, mezclando Thrash ochentero y Metalcore moderno."
       },
@@ -49,6 +55,7 @@
     {
       "name": "Kemenssen Yerber",
       "confirmed": false,
+      "photo": "artists/kemenssen-yerber-983c91fe.webp",
       "bio": {
         "es": "Proyecto emergente desde 2025 que mezcla rock alternativo, riffs progresivos de guitarra y ritmos en distintos tiempos."
       },
@@ -59,6 +66,7 @@
     {
       "name": "Hombres de Marte",
       "confirmed": false,
+      "photo": "artists/hombres-de-marte-b6394708.webp",
       "bio": {
         "es": "Banda de rock formada por niños y jóvenes de la Escuela de Rock Los Lagos; canciones originales sobre inclusión, medioambiente y compromiso social. Lema: 'Sonido de Marte con los pies en la tierra'."
       },
@@ -69,6 +77,7 @@
     {
       "name": "Hora Punga",
       "confirmed": false,
+      "photo": "artists/hora-punga-8f503556.webp",
       "links": {
         "instagram": "https://www.instagram.com/horapunga/"
       }
@@ -98,6 +107,7 @@
     {
       "name": "Andrés Torres",
       "confirmed": false,
+      "photo": "artists/andres-torres-344c2e57.webp",
       "bio": {
         "es": "Set de house en clave festivalera: progressive house, electro house, big room y EDM."
       },
@@ -110,6 +120,7 @@
     {
       "name": "BIG POPA",
       "confirmed": false,
+      "photo": "artists/big-popa-0f356b6e.webp",
       "bio": {
         "es": "DJ set de diferentes estilos urbanos latinos, cargado de energía."
       },
@@ -121,6 +132,7 @@
     {
       "name": "Felipebeat Remix Live",
       "confirmed": false,
+      "photo": "artists/felipebeat-remix-live-4770c820.webp",
       "bio": {
         "es": "Más de 15 años de trayectoria; sets como show musical con energía de 'montaña rusa'. Su sello es mezclar en vivo tocando teclado."
       },
@@ -131,6 +143,7 @@
     {
       "name": "Dj Dash",
       "confirmed": false,
+      "photo": "artists/dj-dash-c5083737.webp",
       "bio": {
         "es": "Set inmersivo inspirado en Valdivia: empieza fluido como el río, gana energía y culmina en celebración colectiva."
       },
@@ -141,6 +154,7 @@
     {
       "name": "StarrKush",
       "confirmed": false,
+      "photo": "artists/starrkush-1e330d82.webp",
       "bio": {
         "es": "Viaje sonoro intenso y envolvente, con energía progresiva y grooves potentes."
       },
@@ -152,6 +166,7 @@
     {
       "name": "Dj Stely",
       "confirmed": false,
+      "photo": "artists/dj-stely-390b7b4b.webp",
       "bio": {
         "es": "Propuesta electro house old."
       },
@@ -163,6 +178,7 @@
     {
       "name": "VECEIT",
       "confirmed": false,
+      "photo": "artists/veceit-d08d5633.webp",
       "bio": {
         "es": "Viaje musical entre melodías nostálgicas e introspectivas y la intensidad del dubstep/riddim; busca acercar el dubstep a nuevo público en Valdivia."
       },
