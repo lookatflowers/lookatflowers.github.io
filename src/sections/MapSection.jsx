@@ -83,7 +83,6 @@ export default function MapSection() {
           ) : (
             <p className="map__text map__text--hint">{t('map.hint')}</p>
           )}
-          <a className="map__big" href={MAP_SRC} target="_blank" rel="noopener noreferrer">{t('map.big')}</a>
         </div>
       </div>
     </Section>

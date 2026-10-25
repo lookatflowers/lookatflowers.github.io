@@ -1,9 +1,15 @@
 /* Mapa interactivo */
 .map__chips { margin-bottom: 1.25rem; }
 .map { display: grid; gap: 1.25rem; align-items: start; }
+/* Computador: mapa grande y centrado (alto limitado a la pantalla), descripción a su derecha */
 @media (min-width: 56rem) {
-  .map { grid-template-columns: minmax(0, 38rem) minmax(16rem, 1fr); gap: 2rem; }
-  .map__info { position: sticky; top: calc(var(--header-h, 3.5rem) + 1.5rem); }
+  .map__chips { justify-content: center; margin-bottom: 1.75rem; }
+  .map {
+    grid-template-columns: min(48rem, calc((100svh - var(--header-h, 3.5rem) - 3rem) * 2169 / 2768)) minmax(15rem, 22rem);
+    justify-content: center;
+    gap: 2.5rem;
+  }
+  .map__info { position: sticky; top: calc(var(--header-h, 3.5rem) + 1.5rem); padding-top: 0.5rem; }
 }
 
 .map__frame {
@@ -43,8 +49,7 @@
 .map__text { margin: 0; }
 .map__text--hint { opacity: 0.8; }
 .map__link { justify-self: start; font-weight: 700; text-underline-offset: 0.25em; }
-.map__link:hover, .map__big:hover { color: var(--pink); }
-.map__big { justify-self: start; margin-top: 0.5rem; font-size: 0.85rem; text-underline-offset: 0.25em; }
+.map__link:hover { color: var(--pink); }
 
 @media (prefers-reduced-motion: reduce) {
   .map__ring { animation: none; }

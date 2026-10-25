@@ -82,7 +82,6 @@ export default {
     categories: 'Map areas',
     alt: 'Festival map at Miraflores Campus: Flowers Stage, Valdivia Stage, Casino, market, restrooms and entrance on General Lagos street.',
     hint: 'Choose an area to see what is there and where.',
-    big: 'Open the full-size map',
     cats: {
       escenarios: {
         label: 'Stages',

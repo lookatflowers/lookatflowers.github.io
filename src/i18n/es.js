@@ -82,7 +82,6 @@ export default {
     categories: 'Zonas del mapa',
     alt: 'Mapa del festival en el Campus Miraflores: Flowers Stage, Valdivia Stage, Casino, feria, baños y acceso por calle General Lagos.',
     hint: 'Elige una zona para ver qué hay y dónde está.',
-    big: 'Ver el mapa en grande',
     cats: {
       escenarios: {
         label: 'Escenarios',
