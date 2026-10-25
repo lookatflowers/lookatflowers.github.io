@@ -5,7 +5,7 @@
       "confirmed": false
     },
     {
-      "name": "El Peso del Arrepentimiento (EPDA)",
+      "name": "El Peso del Arrepentimiento",
       "confirmed": false
     },
     {
@@ -82,18 +82,29 @@
       "links": {
         "instagram": "https://www.instagram.com/bongvoyagereggae/"
       }
+    },
+    {
+      "name": "Niko Contador",
+      "confirmed": false,
+      "bio": {
+        "es": "Cantautor santiaguino inicia este proyecto el año 2019, lanzando su primer álbum \"al ver verás\". Ese mismo año sale de gira por el norte y sur de Chile y a Argentina y Uruguay. Se ha presentado en festivales como Festival Infinito (Talagante) y Ladera Sur (Santiago). Post Folk Progresivo Consciente."
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/nikocontador"
+      }
     }
   ],
   "djs": [
     {
-      "name": "BIG POPA",
+      "name": "Andrés Torres",
       "confirmed": false,
       "bio": {
-        "es": "DJ set de diferentes estilos urbanos latinos, cargado de energía."
+        "es": "Set de house en clave festivalera: progressive house, electro house, big room y EDM."
       },
       "links": {
-        "instagram": "https://instagram.com/bigpopadj",
-        "soundcloud": "https://on.soundcloud.com/zuej5oELUToXnNGfcS"
+        "instagram": "https://www.instagram.com/andres_t.wav/",
+        "soundcloud": "https://soundcloud.com/andres-torres-525609556",
+        "youtube": "https://www.youtube.com/user/andrhyxx"
       }
     },
     {
