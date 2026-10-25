@@ -5,10 +5,13 @@
     "Stickers",
     "Posters y láminas",
     "Arte y grabado",
+    "Pixel art",
     "Tejidos",
+    "Peluches",
     "Ropa",
     "Bolsos y estuches",
     "Figuras 3D",
+    "Coleccionables y TCG",
     "Anime y fanart",
     "Uñas",
     "Aromas y velas",
@@ -22,7 +25,16 @@
       "primary": [
         "Emprendimiento"
       ],
-      "secondary": []
+      "secondary": [
+        "Pixel art",
+        "Peluches",
+        "Figuras 3D",
+        "Coleccionables y TCG",
+        "Papelería"
+      ],
+      "description": {
+        "es": "Tienda online de pixel art, papelería e impresión 3D, con cartas TCG, peluches y más."
+      }
     },
     {
       "name": "Animedreak Valdivia",
@@ -72,10 +84,12 @@
         "Emprendimiento"
       ],
       "secondary": [
+        "Joyería",
+        "Peluches",
         "Anime y fanart"
       ],
       "description": {
-        "es": "Productos de creación propia inspirados en la naturaleza, Studio Ghibli, Harry Potter y Alicia en el País de las Maravillas."
+        "es": "Accesorios exclusivos, temáticos y personalizados: aros, pulseras, collares y peluches, inspirados en la naturaleza, Studio Ghibli, Harry Potter y Alicia en el País de las Maravillas."
       },
       "link": "https://instagram.com/el.bazar.delas.maravillas"
     },
