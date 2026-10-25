@@ -44,6 +44,7 @@ export default {
     ariaTbcMore: '{name}, to be confirmed. Press to read more.',
     ariaMore: '{name}. Press to read more.',
   },
+  likes: { like: 'Like', liked: 'Liked' },
   schedule: {
     title: 'Schedule',
     ambient: 'Welcome',

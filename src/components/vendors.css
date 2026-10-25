@@ -8,6 +8,7 @@
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
 }
 .vendor {
+  position: relative; /* para el ♥ de la esquina */
   container-type: inline-size; /* el título se ajusta al ancho real de la tarjeta */
   display: flex;
   flex-direction: column;
@@ -96,3 +97,7 @@
   text-underline-offset: 0.25em;
 }
 .vendor__link:hover { color: var(--pink); }
+
+/* Deja espacio al ♥ de la esquina superior derecha */
+.like--compact + .vendor__tags,
+.like--compact + .vendor__name { padding-right: 2.75rem; }

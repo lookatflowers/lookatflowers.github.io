@@ -1,6 +1,7 @@
 import { useLang } from '../i18n/useLang'
 import './vendors.css'
 import { displayText } from '../utils/displayText'
+import LikeButton from './LikeButton'
 
 // Solo se aceptan enlaces http(s); cualquier otra cosa (p. ej. javascript:) se ignora.
 const isSafeUrl = (url) => typeof url === 'string' && /^https?:\/\//i.test(url)
@@ -14,6 +15,7 @@ export default function VendorCard({ vendor, primaryLabel }) {
   const secondary = vendor.secondary ?? []
   return (
     <article className="vendor">
+      <LikeButton type="Puesto" name={vendor.name} compact />
       {primary.length > 0 && (
         <ul className="vendor__tags">
           {primary.map((tag) => <li key={tag} className="vtag">{primaryLabel(tag)}</li>)}

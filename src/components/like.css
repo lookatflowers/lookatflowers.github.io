@@ -1,0 +1,54 @@
+/* Botón ♥ de me gusta (ventana de artistas y tarjetas de puestos) */
+.like {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-self: start;
+  padding: 0.45rem 1rem 0.45rem 0.8rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.like svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+.like.is-liked { border-color: var(--pink); background: var(--pink); color: #fff; }
+.like.is-liked svg { fill: currentColor; }
+.like.is-pop svg { animation: like-pop 0.45s ease; }
+@keyframes like-pop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+@media (hover: hover) {
+  .like:not(.is-liked):hover { color: var(--pink); border-color: var(--pink); }
+}
+
+/* Solo corazón, arriba a la derecha de la tarjeta de puesto */
+.like--compact {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+}
+.like--compact svg { width: 1.2rem; height: 1.2rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .like.is-pop svg { animation: none; }
+}

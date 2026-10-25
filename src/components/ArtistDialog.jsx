@@ -3,6 +3,8 @@ import { useLang } from '../i18n/useLang'
 import { publicUrl } from '../utils/assets'
 import './cards.css'
 import { displayText } from '../utils/displayText'
+import LikeButton from './LikeButton'
+import { track } from '../utils/track'
 
 const LINK_LABELS = {
   instagram: 'Instagram',
@@ -54,12 +56,18 @@ export default function ArtistDialog({ artist, onClose }) {
               <p className="card__kind card__kind--inline">{t(`cards.${artist.kind}`)}</p>
               <h3 id="artist-dialog-title" className="dialog__title">{displayText(artist.name)}</h3>
             </div>
+            <LikeButton key={`${artist.kind}|${artist.name}`} type={artist.kind === 'dj' ? 'DJ' : 'Banda'} name={artist.name} />
             <p className="dialog__bio">{tr(artist.bio) || t('cards.noBio')}</p>
             {links.length > 0 && (
               <ul className="dialog__links">
                 {links.map(([key, url]) => (
                   <li key={key}>
-                    <a href={url} target="_blank" rel="noopener noreferrer">{LINK_LABELS[key] ?? key}</a>
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => track(`Red ${LINK_LABELS[key] ?? key}`, artist.kind === 'dj' ? 'DJ' : 'Banda', artist.name)}
+                    >{LINK_LABELS[key] ?? key}</a>
                   </li>
                 ))}
               </ul>

@@ -44,6 +44,7 @@ export default {
     ariaTbcMore: '{name}, por confirmar. Pulsa para ver más.',
     ariaMore: '{name}. Pulsa para ver la reseña.',
   },
+  likes: { like: 'Me gusta', liked: 'Te gusta' },
   schedule: {
     title: 'Cronograma',
     ambient: 'Bienvenida',
