@@ -28,7 +28,7 @@ export default {
     title: 'Line-up',
     bands: 'Bands',
     djs: 'DJs',
-    note: 'We will reveal artists as their participation is confirmed. Give your favorites a like! 🌸',
+    note: 'We will reveal artists as their participation is confirmed. Give your favorites a like!',
   },
   cards: {
     band: 'Band',
@@ -54,6 +54,7 @@ export default {
   vendors: {
     title: 'Vendors',
     empty: 'We will soon publish the participating vendors.',
+    note: 'Give your favorites a like!',
     visit: 'See more',
     filters: 'Filter vendors',
     moreFilters: 'More filters',

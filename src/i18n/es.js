@@ -28,7 +28,7 @@ export default {
     title: 'Line-up',
     bands: 'Bandas',
     djs: 'DJs',
-    note: 'Iremos revelando artistas a medida que se confirme su participación. ¡Dale me gusta a tus favoritos! 🌸',
+    note: 'Iremos revelando artistas a medida que se confirme su participación. ¡Dale me gusta a tus favoritos!',
   },
   cards: {
     band: 'Banda',
@@ -54,6 +54,7 @@ export default {
   vendors: {
     title: 'Puestos de venta',
     empty: 'Pronto publicaremos los puestos participantes.',
+    note: '¡Dale me gusta a tus favoritos!',
     visit: 'Ver más',
     filters: 'Filtrar puestos',
     moreFilters: 'Más filtros',

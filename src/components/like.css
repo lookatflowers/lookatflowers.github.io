@@ -37,7 +37,7 @@
   .like:not(.is-liked):hover { color: var(--pink); border-color: var(--pink); }
 }
 
-/* Solo corazón, arriba a la derecha de la tarjeta de puesto */
+/* Solo la flor, arriba a la derecha de la tarjeta de puesto */
 .like--compact {
   position: absolute;
   top: 0.7rem;
@@ -48,6 +48,16 @@
   padding: 0;
 }
 .like--compact svg { width: 1.35rem; height: 1.35rem; }
+
+/* Flor dentro de un texto ("¡Dale me gusta a tus favoritos!") */
+.inline-flower {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  margin-left: 0.2em;
+  vertical-align: -0.2em;
+  fill: var(--pink);
+}
 
 @media (prefers-reduced-motion: reduce) {
   .like.is-pop svg { animation: none; }

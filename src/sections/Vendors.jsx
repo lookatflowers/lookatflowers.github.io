@@ -4,6 +4,8 @@ import VendorCard from '../components/VendorCard'
 import { PRIMARY_TAGS, PRODUCT_TAGS, vendors } from '../data/vendors'
 import { useLang } from '../i18n/useLang'
 import { displayText } from '../utils/displayText'
+import FlowerIcon from '../components/FlowerIcon'
+import '../components/like.css'
 
 // Solo se muestran filtros que tengan al menos un puesto
 const usedSecondary = new Set(vendors.flatMap((v) => v.secondary ?? []))
@@ -51,6 +53,10 @@ export default function Vendors() {
         <p className="placeholder">{t('vendors.empty')}</p>
       ) : (
         <>
+          <p className="note">
+            {t('vendors.note')}
+            <FlowerIcon className="inline-flower" />
+          </p>
           <div className="filters" role="group" aria-label={t('vendors.filters')}>
             {SHOWN_PRIMARY.length > 0 && (
               <div className="filters__row">

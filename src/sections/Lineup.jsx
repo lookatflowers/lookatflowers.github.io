@@ -4,6 +4,8 @@ import ArtistCard from '../components/ArtistCard'
 import ArtistDialog from '../components/ArtistDialog'
 import { confirmedAt, lineup, lists } from '../data/artists'
 import { useLang } from '../i18n/useLang'
+import FlowerIcon from '../components/FlowerIcon'
+import '../components/like.css'
 
 // Cuánto tiempo queda dada vuelta una carta antes de volver sola a "?"
 const AUTO_RETURN_MS = 5000
@@ -127,7 +129,10 @@ export default function Lineup() {
   return (
     <Section id="lineup" title={t('lineup.title')}>
       <div ref={sectionRef}>
-        <p className="note">{t('lineup.note')}</p>
+        <p className="note">
+          {t('lineup.note')}
+          <FlowerIcon className="inline-flower" />
+        </p>
         <Group type="band" title={t('lineup.bands')} flipped={flipped.band} nudge={nudge} onCard={onCard} />
         <Group type="dj" title={t('lineup.djs')} flipped={flipped.dj} nudge={nudge} onCard={onCard} />
       </div>
