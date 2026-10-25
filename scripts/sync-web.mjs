@@ -90,6 +90,16 @@ async function loadCsv(label, file, url) {
   return text
 }
 
+/** Si una pestaña no está publicada, Google entrega otra: se detecta por sus encabezados. */
+function checkHeader(label, rows, expected) {
+  const header = (rows[0] || []).map((h) => h.trim())
+  const missing = expected.filter((h) => !header.includes(h))
+  if (missing.length) {
+    throw new Error(`el CSV de "${label}" no tiene las columnas ${missing.join(', ')}. ` +
+      `¿Está publicada esa pestaña y el enlace apunta a ella?`)
+  }
+}
+
 /* ----------------------------- ayudas ------------------------------ */
 
 const isChecked = (v) => /^(true|verdadero|s[ií]|1|x)$/i.test(String(v).trim())
@@ -289,8 +299,12 @@ async function main() {
     loadCsv('Web Line-up', option('--lineup'), lineupUrl),
     loadCsv('Web Puestos', option('--vendors'), vendorsUrl),
   ])
-  const lineupData = await buildLineup(toRecords(parseCsv(lineupCsv)))
-  const vendorsData = buildVendors(toRecords(parseCsv(vendorsCsv)))
+  const lineupRows = parseCsv(lineupCsv)
+  const vendorsRows = parseCsv(vendorsCsv)
+  checkHeader('Web Line-up', lineupRows, ['Publicar', 'Tipo', 'Nombre', 'Estado en la web', 'Carta N°'])
+  checkHeader('Web Puestos', vendorsRows, ['Publicar', 'Nombre', 'Tipo', 'Etiquetas', 'Link'])
+  const lineupData = await buildLineup(toRecords(lineupRows))
+  const vendorsData = buildVendors(toRecords(vendorsRows))
 
   for (const w of warnings) console.log(`Aviso · ${w}`)
   if (errors.length) {
