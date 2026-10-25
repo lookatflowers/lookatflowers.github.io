@@ -78,6 +78,41 @@ export default {
   map: {
     title: 'Location and map',
     text: 'Interactive event map in development.',
+    intro: 'Espacio 7k, UACh Miraflores Campus. Tap an area of the map or choose what you are looking for.',
+    categories: 'Map areas',
+    alt: 'Festival map at Miraflores Campus: Flowers Stage, Valdivia Stage, Casino, market, restrooms and entrance on General Lagos street.',
+    hint: 'Choose an area to see what is there and where.',
+    big: 'Open the full-size map',
+    cats: {
+      escenarios: {
+        label: 'Stages',
+        title: 'Stages',
+        text: 'Flowers Stage, with live bands, between Building 7000 and the Gym. Valdivia Stage, with the DJs, by the river next to the Casino.',
+        link: 'See the line-up',
+      },
+      feria: {
+        label: 'Market',
+        title: 'Makers market',
+        text: 'Stalls in front of the Casino, next to the Miraflores Gym and beside Building 7000.',
+        link: 'See the vendors',
+      },
+      comida: {
+        label: 'Food & drinks',
+        title: 'Food & drinks',
+        text: 'Food and drinks at the Casino. There are also drinks next to the Flowers Stage and Building 7000.',
+      },
+      banos: {
+        label: 'Restrooms',
+        title: 'Restrooms',
+        text: 'At the Casino and in Building 7000.',
+      },
+      acceso: {
+        label: 'Entrance & exit',
+        title: 'Entrance & exit',
+        text: 'Entrance and exit are on General Lagos street 2086, at separate points: entrance on the right, exit on the left.',
+        link: 'How to get there',
+      },
+    },
   },
   apply: {
     title: 'Applications',

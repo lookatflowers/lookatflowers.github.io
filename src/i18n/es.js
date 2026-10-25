@@ -78,6 +78,41 @@ export default {
   map: {
     title: 'Ubicación y mapa',
     text: 'Mapa interactivo del evento en desarrollo.',
+    intro: 'Espacio 7k, Campus Miraflores UACh. Toca una zona del mapa o elige qué quieres encontrar.',
+    categories: 'Zonas del mapa',
+    alt: 'Mapa del festival en el Campus Miraflores: Flowers Stage, Valdivia Stage, Casino, feria, baños y acceso por calle General Lagos.',
+    hint: 'Elige una zona para ver qué hay y dónde está.',
+    big: 'Ver el mapa en grande',
+    cats: {
+      escenarios: {
+        label: 'Escenarios',
+        title: 'Escenarios',
+        text: 'Flowers Stage, con las bandas en vivo, entre el Edificio 7000 y el Gimnasio. Valdivia Stage, con los DJs, junto al río y al Casino.',
+        link: 'Ver line-up',
+      },
+      feria: {
+        label: 'Feria',
+        title: 'Feria de emprendimientos',
+        text: 'Puestos frente al Casino, junto al Gimnasio Miraflores y al lado del Edificio 7000.',
+        link: 'Ver puestos',
+      },
+      comida: {
+        label: 'Comida y bebida',
+        title: 'Comida y bebida',
+        text: 'Comida y bebidas en el Casino. También hay bebidas junto al Flowers Stage y al Edificio 7000.',
+      },
+      banos: {
+        label: 'Baños',
+        title: 'Baños',
+        text: 'En el Casino y en el Edificio 7000.',
+      },
+      acceso: {
+        label: 'Acceso y salida',
+        title: 'Acceso y salida',
+        text: 'Se entra y se sale por calle General Lagos 2086, por puntos separados: el acceso a la derecha y la salida a la izquierda.',
+        link: 'Cómo llegar',
+      },
+    },
   },
   apply: {
     title: 'Postulaciones',
