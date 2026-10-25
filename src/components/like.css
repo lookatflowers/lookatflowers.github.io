@@ -39,9 +39,6 @@
 
 /* Solo la flor, arriba a la derecha de la tarjeta de puesto */
 .like--compact {
-  position: absolute;
-  top: 0.7rem;
-  right: 0.7rem;
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;

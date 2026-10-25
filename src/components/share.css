@@ -1,0 +1,92 @@
+/* Botón "Compartir historia" y su ventana con la vista previa */
+.share {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem 0.45rem 0.8rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.share svg, .story-btn svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (hover: hover) {
+  .share:hover { background: var(--ink); color: var(--paper); }
+}
+.share--compact {
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+}
+.share--compact svg { width: 1.2rem; height: 1.2rem; }
+
+/* Ventana */
+.story-dialog {
+  width: min(92vw, 26rem);
+  max-height: 94svh;
+  padding: 0;
+  border: 3px solid var(--ink);
+  border-radius: 1rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+.story-dialog::backdrop { background: rgb(37 37 37 / 0.8); }
+.story-dialog__body { position: relative; display: grid; gap: 0.9rem; padding: 1rem 1rem 1.25rem; }
+.story-dialog .dialog__close { top: 0.75rem; right: 0.75rem; }
+.story-dialog__title {
+  margin: 0.35rem 3.25rem 0 0.15rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+.story-dialog__preview {
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  height: min(58svh, 32rem);
+  aspect-ratio: 9 / 16;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--ink);
+}
+.story-dialog__preview img { width: 100%; height: 100%; object-fit: contain; }
+.story-dialog__status { margin: 0; padding: 1rem; color: var(--paper); font-size: 0.9rem; text-align: center; }
+.story-dialog__actions { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.story-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.story-btn--main { flex-basis: 100%; justify-content: center; border-color: var(--pink); background: var(--pink); color: #fff; font-size: 1rem; }
+@media (hover: hover) {
+  .story-btn:not(.story-btn--main):hover { background: var(--ink); color: var(--paper); }
+  .story-btn--main:hover { filter: brightness(1.08); }
+}
+.story-dialog__hint { margin: 0; font-size: 0.78rem; line-height: 1.45; text-align: center; opacity: 0.8; }

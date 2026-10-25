@@ -98,6 +98,7 @@
 }
 .vendor__link:hover { color: var(--pink); }
 
-/* Deja espacio al ♥ de la esquina superior derecha */
-.like--compact + .vendor__tags,
-.like--compact + .vendor__name { padding-right: 2.75rem; }
+/* Botones de la esquina superior derecha (compartir historia y me gusta) */
+.vendor__actions { position: absolute; top: 0.7rem; right: 0.7rem; display: flex; gap: 0.4rem; }
+.vendor__actions + .vendor__tags,
+.vendor__actions + .vendor__name { padding-right: 5.5rem; }

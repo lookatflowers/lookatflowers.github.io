@@ -4,6 +4,7 @@ import { publicUrl } from '../utils/assets'
 import './cards.css'
 import { displayText } from '../utils/displayText'
 import LikeButton from './LikeButton'
+import ShareStory from './ShareStory'
 
 const LINK_LABELS = {
   instagram: 'Instagram',
@@ -34,7 +35,7 @@ export default function ArtistDialog({ artist, onClose }) {
       ref={ref}
       className="dialog"
       aria-labelledby="artist-dialog-title"
-      onClose={onClose}
+      onClose={(e) => { if (e.target === ref.current) onClose() }}
       onClick={(e) => { if (e.target === ref.current) ref.current.close() }}
     >
       {artist && (
@@ -55,7 +56,14 @@ export default function ArtistDialog({ artist, onClose }) {
               <p className="card__kind card__kind--inline">{t(`cards.${artist.kind}`)}</p>
               <h3 id="artist-dialog-title" className="dialog__title">{displayText(artist.name)}</h3>
             </div>
-            <LikeButton key={`${artist.kind}|${artist.name}`} type={artist.kind === 'dj' ? 'DJ' : 'Banda'} name={artist.name} />
+            <div className="dialog__actions" key={`${artist.kind}|${artist.name}`}>
+              <LikeButton type={artist.kind === 'dj' ? 'DJ' : 'Banda'} name={artist.name} />
+              <ShareStory
+                item={{ kind: artist.kind === 'dj' ? 'dj' : 'band', artist: { ...artist, confirmed: !artist.tbc } }}
+                name={artist.name}
+                anchor="lineup"
+              />
+            </div>
             <p className="dialog__bio">{tr(artist.bio) || t('cards.noBio')}</p>
             {links.length > 0 && (
               <ul className="dialog__links">
