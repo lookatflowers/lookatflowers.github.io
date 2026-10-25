@@ -3,22 +3,34 @@
     {
       "name": "Desvelo",
       "confirmed": false,
-      "photo": "artists/desvelo-66f867b9.webp"
+      "photo": "artists/desvelo-66f867b9.webp",
+      "bio": {
+        "es": "Desvelo es una banda emergente que mezcla elementos del Groove, Acid Jazz, Neo-Soul y R&B, construyendo un sonido cálido, envolvente y profundamente emocional. Inspirados por artistas como NAFTA, Luis A. Spinetta y The Marías, el proyecto combina armonías vocales cuidadas, secciones de vientos y una base rítmica que busca conectar tanto desde la sensibilidad como desde el movimiento."
+      }
     },
     {
       "name": "El Peso del Arrepentimiento",
       "confirmed": false,
-      "photo": "artists/el-peso-del-arrepentimiento-c8a9f2b3.webp"
+      "photo": "artists/el-peso-del-arrepentimiento-c8a9f2b3.webp",
+      "bio": {
+        "es": "“El peso del arrepentimiento” es una banda chilena de rock atmosférico fundada en 2025 por 4 amigos. El sonido de la banda viene de diferentes influencias del noise, rock progresivo, shoegaze y emo. Como banda tenemos por objetivo plasmar el sonido del sur en nuestra música, específicamente el sonido de San José de la Mariquina, lugar de origen de los integrantes."
+      }
     },
     {
       "name": "ARGE",
       "confirmed": false,
-      "photo": "artists/arge-72c569a2.webp"
+      "photo": "artists/arge-72c569a2.webp",
+      "bio": {
+        "es": "Banda de Heavy y Power Metal fundada en Valdivia, Chile, en el año 2006. La alineación actual del quinteto está compuesta por Sebastián Lehmann (voz), Nicolás Bastián (guitarra), Daniel Chatre (guitarra), Felipe Saldivia (bajo) y Cristóbal Navarro (batería). Su propuesta musical se caracteriza por el uso de guitarras dobles con pasajes melódicos, voces limpias de registro agudo y baterías con doble bombo de ritmo medio y/o rápido. El nombre del grupo proviene de la palabra griega Arché, que hace referencia al concepto del \"principio\" o elemento primordial."
+      }
     },
     {
       "name": "Perla",
       "confirmed": false,
-      "photo": "artists/perla-9f22e70e.webp"
+      "photo": "artists/perla-9f22e70e.webp",
+      "bio": {
+        "es": "Perla nació hace tres años en Valdivia, Chile. La banda mezcla hip-hop, rap, funk y rock en un sonido que cambia de canción en canción. El funk predomina, con partes rockeras, canciones románticas y otras con un mensaje contestatario. En vivo, Perla se presenta con cuatro músicos, voces, samplers y secuencias."
+      }
     },
     {
       "name": "No Impulse",
@@ -79,6 +91,9 @@
       "name": "Hora Punga",
       "confirmed": false,
       "photo": "artists/hora-punga-348d217e.webp",
+      "bio": {
+        "es": "Hora Punga es una banda valdiviana conformada por tres estudiantes foráneos en el año 2022. Su proyecto musical oscila por distintos géneros musicales, predominando el funk, pasando por indie rock y llegando tanto a sonidos alternativos como experimentales. ¡Viva el rock, yeeah!"
+      },
       "links": {
         "instagram": "https://www.instagram.com/horapunga/"
       }
@@ -99,7 +114,7 @@
       "confirmed": false,
       "photo": "artists/artefactos-ca545dd9.webp",
       "bio": {
-        "es": "Artefactos es una banda que nace de la cabeza de unos jóvenes entusiasmados por plasmar el sonido grunge de Seattle en una ciudad igual de lluviosa, Valdivia, dispuestos a demostrar que el sonido de los 90 aún sigue vigente en estos tiempos."
+        "es": "Artefactos es una banda que nace de la cabeza de unos jóvenes entusiasmados por plasmar el sonido grunge de Seattle en una ciudad igual de lluviosa, Valdivia, dispuestos a demostrar que el sonido de los 90 aún sigue vigente en estos tiempos. Con escenarios como encuentros de cuerdas, festivales de Puerto Varas y hasta shows unplugged, Artefactos se ha ido formando un discreto pero potente nombre en la escena valdiviana; hoy vienen a mostrar algo de su trabajo ante todos ustedes."
       },
       "links": {
         "instagram": "https://www.instagram.com/banda_artefactos/"
