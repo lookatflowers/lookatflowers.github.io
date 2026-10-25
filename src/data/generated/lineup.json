@@ -108,6 +108,17 @@
       }
     },
     {
+      "name": "BIG POPA",
+      "confirmed": false,
+      "bio": {
+        "es": "DJ set de diferentes estilos urbanos latinos, cargado de energía."
+      },
+      "links": {
+        "instagram": "https://instagram.com/bigpopadj",
+        "soundcloud": "https://on.soundcloud.com/zuej5oELUToXnNGfcS"
+      }
+    },
+    {
       "name": "Felipebeat Remix Live",
       "confirmed": false,
       "bio": {
