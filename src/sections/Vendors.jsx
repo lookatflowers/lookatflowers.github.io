@@ -3,6 +3,7 @@ import Section from '../components/Section'
 import VendorCard from '../components/VendorCard'
 import { PRIMARY_TAGS, PRODUCT_TAGS, vendors } from '../data/vendors'
 import { useLang } from '../i18n/useLang'
+import { displayText } from '../utils/displayText'
 
 // Solo se muestran filtros que tengan al menos un puesto
 const usedSecondary = new Set(vendors.flatMap((v) => v.secondary ?? []))
@@ -13,6 +14,10 @@ const SECONDARY_TAGS = [
 // El filtro principal (Emprendimiento / Comida / Bebida) solo aparece si hay más de un tipo
 const usedPrimary = PRIMARY_TAGS.filter((tag) => vendors.some((v) => v.primary?.includes(tag)))
 const SHOWN_PRIMARY = usedPrimary.length > 1 ? usedPrimary : []
+
+// Letras de la palabra más larga entre todos los nombres: todas las tarjetas usan el mismo tamaño
+// de título, el mayor en que esa palabra cabe entera (ver .vendor__name en vendors.css)
+const LONGEST_WORD = Math.max(1, ...vendors.flatMap((v) => displayText(v.name).split(/\s+/).map((w) => w.length)))
 
 const toggle = (list, tag) => (list.includes(tag) ? list.filter((x) => x !== tag) : [...list, tag])
 
@@ -73,7 +78,7 @@ export default function Vendors() {
           {shown.length === 0 ? (
             <p className="placeholder" role="status">{t('vendors.noMatch')}</p>
           ) : (
-            <ul className="vendors">
+            <ul className="vendors" style={{ '--longest': LONGEST_WORD }}>
               {shown.map((v) => (
                 <li key={v.name}><VendorCard vendor={v} primaryLabel={primaryLabel} /></li>
               ))}
