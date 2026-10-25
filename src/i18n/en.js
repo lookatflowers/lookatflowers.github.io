@@ -28,7 +28,7 @@ export default {
     title: 'Line-up',
     bands: 'Bands',
     djs: 'DJs',
-    note: 'We will reveal artists as their participation is confirmed, give your favorites a like.',
+    note: 'We will reveal artists as their participation is confirmed. Give your favorites a like! 🌸',
   },
   cards: {
     band: 'Band',

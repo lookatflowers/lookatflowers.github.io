@@ -28,7 +28,7 @@ export default {
     title: 'Line-up',
     bands: 'Bandas',
     djs: 'DJs',
-    note: 'Iremos revelando artistas a medida que se confirme su participación, dale me gusta a tus favoritos.',
+    note: 'Iremos revelando artistas a medida que se confirme su participación. ¡Dale me gusta a tus favoritos! 🌸',
   },
   cards: {
     band: 'Banda',
