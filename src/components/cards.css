@@ -10,6 +10,14 @@
   grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
 }
 .group + .group { margin-top: 3.5rem; }
+/* En pantallas más anchas las cartas crecen hasta ocupar todo el ancho disponible:
+   3 por fila en tablet y todas las del grupo en una fila en el computador (--cols lo pone Lineup.jsx). */
+@media (min-width: 40rem) {
+  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+}
+@media (min-width: 64rem) {
+  .cards { grid-template-columns: repeat(var(--cols, 6), minmax(0, 1fr)); gap: clamp(1rem, 1.6vw, 1.75rem); }
+}
 
 /* ----- Carta ----- */
 .card {
@@ -109,7 +117,7 @@
 .card__tbc-text { font-size: 11cqw; overflow-wrap: anywhere; }
 
 .card__hint {
-  font-size: 0.6rem;
+  font-size: clamp(0.6rem, 3.6cqw, 0.85rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   opacity: 0.8;
@@ -136,14 +144,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  padding: 2rem 0.75rem 0.75rem;
+  padding: 2rem clamp(0.75rem, 6cqw, 1.25rem) clamp(0.75rem, 6cqw, 1.25rem);
   background: linear-gradient(to top, rgb(37 37 37 / 0.6) 45%, rgb(37 37 37 / 0));
   text-shadow: 0 1px 6px rgb(0 0 0 / 0.55); /* el nombre se lee aunque la franja sea más transparente */
 }
 .card__name {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: clamp(1.1rem, 9cqw, 1.9rem); /* crece con la carta en pantallas grandes */
   line-height: 1;
   text-transform: uppercase;
   overflow-wrap: anywhere;
@@ -156,7 +164,7 @@
   padding: 0.2rem 0.4rem;
   background: var(--yellow);
   color: var(--ink);
-  font-size: 0.65rem;
+  font-size: clamp(0.65rem, 4cqw, 0.95rem);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-align: center;
@@ -169,7 +177,7 @@
   bottom: 0.85rem;
   left: 0;
   right: 0;
-  font-size: 0.6rem;
+  font-size: clamp(0.6rem, 3.6cqw, 0.85rem);
   letter-spacing: 0.12em;
   text-align: center;
   text-transform: uppercase;

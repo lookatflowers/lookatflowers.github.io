@@ -34,7 +34,7 @@ function Group({ type, title, flipped, nudge, onCard }) {
   return (
     <div className="group">
       <h3 className="subtitle">{title}</h3>
-      <ul className="cards">
+      <ul className="cards" style={{ '--cols': lineup[type].total }}>
         {slotsOf(type).map((slot) => {
           const mode = modeFor(type, slot)
           const isFlipped = flipped?.slot === slot
