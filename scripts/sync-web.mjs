@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Sincroniza la web con la planilla "Postulaciones LOOKAT E2".
 //
-// Lee las pestañas "Web Line-up" y "Web Puestos" (publicadas como CSV), valida los datos,
+// Lee las pestañas "Web Line-up", "Web Puestos" y "Etiquetas" (publicadas como CSV), valida los datos,
 // prepara las fotos y reescribe:
 //   src/data/generated/lineup.json   (lo usa src/data/artists.js)
 //   src/data/generated/vendors.json  (lo usa src/data/vendors.js)
@@ -12,9 +12,9 @@
 // Uso:
 //   npm run sync                    lee las URLs de scripts/sync-web.config.json
 //   npm run sync -- --dry           muestra lo que haría, sin escribir
-//   npm run sync -- --lineup archivo.csv --vendors archivo.csv   (pruebas con CSV locales)
+//   npm run sync -- --lineup a.csv --vendors b.csv --tags c.csv   (pruebas con CSV locales)
 //
-// Las URLs también se pueden pasar con las variables LINEUP_CSV_URL y VENDORS_CSV_URL.
+// Las URLs también se pueden pasar con LINEUP_CSV_URL, VENDORS_CSV_URL y TAGS_CSV_URL.
 
 import { createHash } from 'node:crypto'
 import { existsSync } from 'node:fs'
@@ -102,6 +102,7 @@ function checkHeader(label, rows, expected) {
 
 /* ----------------------------- ayudas ------------------------------ */
 
+const fold = (s) => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim()
 const isChecked = (v) => /^(true|verdadero|s[ií]|1|x)$/i.test(String(v).trim())
 const isExample = (name) => /^ejemplo\b/i.test(name)
 const slugify = (s) =>
@@ -252,8 +253,9 @@ async function buildLineup(records) {
 
 /* ------------------------------ puestos ---------------------------- */
 
-function buildVendors(records) {
+function buildVendors(records, tagList) {
   const vendors = []
+  const official = new Map(tagList.map((t) => [fold(t), t]))
   const names = new Set()
   for (const r of records) {
     const name = r['Nombre'] || ''
@@ -273,7 +275,13 @@ function buildVendors(records) {
     }
     if (primary.length !== rawTags.length) continue
 
-    const secondary = [...new Set((r['Etiquetas'] || '').split(',').map((s) => s.trim()).filter(Boolean))]
+    const secondary = []
+    for (const raw of (r['Etiquetas'] || '').split(',').map((s) => s.trim()).filter(Boolean)) {
+      const tag = official.get(fold(raw))
+      if (!tag) fail(`${where}: la etiqueta "${raw}" no está en la pestaña Etiquetas (revisa cómo está escrita o agrégala allí).`)
+      else if (!secondary.includes(tag)) secondary.push(tag)
+    }
+    secondary.sort((a, b) => tagList.indexOf(a) - tagList.indexOf(b))
     const vendor = { name, primary, secondary }
     const description = bilingual(r['Descripción (ES)'], r['Descripción (EN)'])
     if (description) vendor.description = description
@@ -287,6 +295,21 @@ function buildVendors(records) {
   return vendors
 }
 
+/** Lista oficial de etiquetas de producto (pestaña "Etiquetas"), en su orden. */
+function buildTags(records) {
+  const seen = new Set()
+  const tags = []
+  for (const r of records) {
+    const tag = r['Etiqueta']
+    if (!tag) continue
+    if (seen.has(fold(tag))) { fail(`Etiquetas, fila ${r.row}: "${tag}" está repetida.`); continue }
+    if (tag.includes(',')) { fail(`Etiquetas, fila ${r.row}: "${tag}" no puede tener comas.`); continue }
+    seen.add(fold(tag))
+    tags.push(tag)
+  }
+  return tags
+}
+
 /* ------------------------------ principal -------------------------- */
 
 async function main() {
@@ -294,17 +317,22 @@ async function main() {
   const config = existsSync(configPath) ? JSON.parse(await readFile(configPath, 'utf8')) : {}
   const lineupUrl = process.env.LINEUP_CSV_URL || config.lineupCsv
   const vendorsUrl = process.env.VENDORS_CSV_URL || config.vendorsCsv
+  const tagsUrl = process.env.TAGS_CSV_URL || config.tagsCsv
 
-  const [lineupCsv, vendorsCsv] = await Promise.all([
+  const [lineupCsv, vendorsCsv, tagsCsv] = await Promise.all([
     loadCsv('Web Line-up', option('--lineup'), lineupUrl),
     loadCsv('Web Puestos', option('--vendors'), vendorsUrl),
+    loadCsv('Etiquetas', option('--tags'), tagsUrl),
   ])
   const lineupRows = parseCsv(lineupCsv)
   const vendorsRows = parseCsv(vendorsCsv)
   checkHeader('Web Line-up', lineupRows, ['Publicar', 'Tipo', 'Nombre', 'Estado en la web', 'Carta N°'])
   checkHeader('Web Puestos', vendorsRows, ['Publicar', 'Nombre', 'Tipo', 'Etiquetas', 'Link'])
+  const tagsRows = parseCsv(tagsCsv)
+  checkHeader('Etiquetas', tagsRows, ['Etiqueta', 'Puestos que la usan'])
+  const tagList = buildTags(toRecords(tagsRows))
   const lineupData = await buildLineup(toRecords(lineupRows))
-  const vendorsData = buildVendors(toRecords(vendorsRows))
+  const vendorsData = buildVendors(toRecords(vendorsRows), tagList)
 
   for (const w of warnings) console.log(`Aviso · ${w}`)
   if (errors.length) {
@@ -321,7 +349,7 @@ async function main() {
 
   for (const [path, buffer] of pendingPhotos) await writeFile(path, buffer)
   await writeFile(OUT_LINEUP, `${JSON.stringify(lineupData, null, 2)}\n`)
-  await writeFile(OUT_VENDORS, `${JSON.stringify(vendorsData, null, 2)}\n`)
+  await writeFile(OUT_VENDORS, `${JSON.stringify({ tags: tagList, vendors: vendorsData }, null, 2)}\n`)
 
   // Borra fotos que ya nadie usa
   const used = new Set([...lineupData.bands, ...lineupData.djs].map((a) => a.photo).filter(Boolean))
