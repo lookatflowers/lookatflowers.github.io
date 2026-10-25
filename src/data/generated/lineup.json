@@ -3,26 +3,27 @@
     {
       "name": "Desvelo",
       "confirmed": false,
-      "photo": "artists/desvelo-ff7ff9ad.webp"
+      "photo": "artists/desvelo-66f867b9.webp"
     },
     {
       "name": "El Peso del Arrepentimiento",
       "confirmed": false,
-      "photo": "artists/el-peso-del-arrepentimiento-a71ef0f6.webp"
+      "photo": "artists/el-peso-del-arrepentimiento-c8a9f2b3.webp"
     },
     {
       "name": "ARGE",
       "confirmed": false,
-      "photo": "artists/arge-39f72ff1.webp"
+      "photo": "artists/arge-72c569a2.webp"
     },
     {
       "name": "Perla",
       "confirmed": false,
-      "photo": "artists/perla-61c13594.webp"
+      "photo": "artists/perla-9f22e70e.webp"
     },
     {
       "name": "No Impulse",
       "confirmed": false,
+      "photo": "artists/no-impulse-a03a435e.webp",
       "bio": {
         "es": "Proyecto de Djent/metalcore instrumental con base actual en Valdivia, con paso por Santiago y Panguipulli. Influencias: Meshuggah, Animals As Leaders, Vein.fm. Formado por Anibal (guitarra/composición) y Tomás (batería)."
       },
@@ -33,7 +34,7 @@
     {
       "name": "Vorona Band",
       "confirmed": false,
-      "photo": "artists/vorona-band-ff2d913d.webp",
+      "photo": "artists/vorona-band-2e5b3a24.webp",
       "bio": {
         "es": "Propuesta ruidosa, intensa y emocional; entre la depresión y el amor, transforma la tristeza en canciones directas, con honestidad romántica y visceral."
       },
@@ -44,7 +45,7 @@
     {
       "name": "All Our Failures",
       "confirmed": false,
-      "photo": "artists/all-our-failures-45fff35e.webp",
+      "photo": "artists/all-our-failures-da320cba.webp",
       "bio": {
         "es": "Banda de Metalcore formada en mayo de 2024 en Valdivia. Canciones sobre la vida cotidiana y dilemas sociales; influencias de Trivium, Bullet For My Valentine, Megadeth y Metallica, mezclando Thrash ochentero y Metalcore moderno."
       },
@@ -55,7 +56,7 @@
     {
       "name": "Kemenssen Yerber",
       "confirmed": false,
-      "photo": "artists/kemenssen-yerber-983c91fe.webp",
+      "photo": "artists/kemenssen-yerber-3f33939b.webp",
       "bio": {
         "es": "Proyecto emergente desde 2025 que mezcla rock alternativo, riffs progresivos de guitarra y ritmos en distintos tiempos."
       },
@@ -66,7 +67,7 @@
     {
       "name": "Hombres de Marte",
       "confirmed": false,
-      "photo": "artists/hombres-de-marte-b6394708.webp",
+      "photo": "artists/hombres-de-marte-825205b4.webp",
       "bio": {
         "es": "Banda de rock formada por niños y jóvenes de la Escuela de Rock Los Lagos; canciones originales sobre inclusión, medioambiente y compromiso social. Lema: 'Sonido de Marte con los pies en la tierra'."
       },
@@ -77,7 +78,7 @@
     {
       "name": "Hora Punga",
       "confirmed": false,
-      "photo": "artists/hora-punga-8f503556.webp",
+      "photo": "artists/hora-punga-348d217e.webp",
       "links": {
         "instagram": "https://www.instagram.com/horapunga/"
       }
@@ -85,6 +86,7 @@
     {
       "name": "Bong Voyage Reggae",
       "confirmed": false,
+      "photo": "artists/bong-voyage-reggae-a2946f79.webp",
       "bio": {
         "es": "Banda valdiviana de reggae original, con 2 años de experiencia, repertorio propio y más de 20 presentaciones en la región."
       },
@@ -95,6 +97,7 @@
     {
       "name": "Niko Contador",
       "confirmed": false,
+      "photo": "artists/niko-contador-cfe2c611.webp",
       "bio": {
         "es": "Cantautor santiaguino inicia este proyecto el año 2019, lanzando su primer álbum \"al ver verás\". Ese mismo año sale de gira por el norte y sur de Chile y a Argentina y Uruguay. Se ha presentado en festivales como Festival Infinito (Talagante) y Ladera Sur (Santiago). Post Folk Progresivo Consciente."
       },
@@ -107,7 +110,7 @@
     {
       "name": "Andrés Torres",
       "confirmed": false,
-      "photo": "artists/andres-torres-344c2e57.webp",
+      "photo": "artists/andres-torres-3f11a52d.webp",
       "bio": {
         "es": "Set de house en clave festivalera: progressive house, electro house, big room y EDM."
       },
@@ -120,7 +123,7 @@
     {
       "name": "BIG POPA",
       "confirmed": false,
-      "photo": "artists/big-popa-0f356b6e.webp",
+      "photo": "artists/big-popa-595b7ea3.webp",
       "bio": {
         "es": "DJ set de diferentes estilos urbanos latinos, cargado de energía."
       },
@@ -132,7 +135,7 @@
     {
       "name": "Felipebeat Remix Live",
       "confirmed": false,
-      "photo": "artists/felipebeat-remix-live-4770c820.webp",
+      "photo": "artists/felipebeat-remix-live-73f28775.webp",
       "bio": {
         "es": "Más de 15 años de trayectoria; sets como show musical con energía de 'montaña rusa'. Su sello es mezclar en vivo tocando teclado."
       },
@@ -143,7 +146,7 @@
     {
       "name": "Dj Dash",
       "confirmed": false,
-      "photo": "artists/dj-dash-c5083737.webp",
+      "photo": "artists/dj-dash-edfd533a.webp",
       "bio": {
         "es": "Set inmersivo inspirado en Valdivia: empieza fluido como el río, gana energía y culmina en celebración colectiva."
       },
@@ -154,7 +157,7 @@
     {
       "name": "StarrKush",
       "confirmed": false,
-      "photo": "artists/starrkush-1e330d82.webp",
+      "photo": "artists/starrkush-cdf5544a.webp",
       "bio": {
         "es": "Viaje sonoro intenso y envolvente, con energía progresiva y grooves potentes."
       },
@@ -166,7 +169,7 @@
     {
       "name": "Dj Stely",
       "confirmed": false,
-      "photo": "artists/dj-stely-390b7b4b.webp",
+      "photo": "artists/dj-stely-fac09b86.webp",
       "bio": {
         "es": "Propuesta electro house old."
       },
@@ -178,7 +181,7 @@
     {
       "name": "VECEIT",
       "confirmed": false,
-      "photo": "artists/veceit-d08d5633.webp",
+      "photo": "artists/veceit-e6fec3e1.webp",
       "bio": {
         "es": "Viaje musical entre melodías nostálgicas e introspectivas y la intensidad del dubstep/riddim; busca acercar el dubstep a nuevo público en Valdivia."
       },
