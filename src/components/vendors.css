@@ -8,6 +8,7 @@
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
 }
 .vendor {
+  container-type: inline-size; /* el título se ajusta al ancho real de la tarjeta */
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -60,7 +61,20 @@
   text-underline-offset: 0.25em;
   cursor: pointer;
 }
-.vendor__name { font-size: clamp(1.3rem, 4vw, 1.8rem); overflow-wrap: anywhere; }
+/* Nombre: se parte solo entre palabras, nunca a la mitad de una.
+   Todas las tarjetas usan el mismo tamaño: el normal (1.8rem), salvo que la palabra más larga
+   de todos los puestos no quepa en el ancho de la tarjeta; entonces baja lo justo para que entre.
+   --longest lo pone Vendors.jsx; 0.8em es el ancho máximo medido de una mayúscula de
+   Anderson Grotesk Black (máx. real 0.794em). */
+.vendor__name {
+  margin: 0.15rem 0 0;
+  font-size: clamp(1rem, min(1.8rem, calc(100cqi / (var(--longest, 8) * 0.8))), 1.8rem);
+  line-height: 1.02;
+  overflow-wrap: break-word; /* último recurso, solo si aun así no cabe */
+  hyphens: manual;
+  text-wrap: balance;
+}
+.vendor__tags--products { margin-top: -0.15rem; }
 .vendor__description { margin: 0; font-size: 0.95rem; }
 .vendor__link {
   margin-top: auto;
