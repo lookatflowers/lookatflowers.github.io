@@ -48,21 +48,23 @@ export default function ArtistDialog({ artist, onClose }) {
           ) : (
             <div className="dialog__photo dialog__photo--empty" aria-hidden="true" />
           )}
-          {artist.tbc && <p className="dialog__tbc">{t('cards.tbc')}</p>}
-          <div>
-            <p className="card__kind card__kind--inline">{t(`cards.${artist.kind}`)}</p>
-            <h3 id="artist-dialog-title" className="dialog__title">{displayText(artist.name)}</h3>
+          <div className="dialog__text">
+            {artist.tbc && <p className="dialog__tbc">{t('cards.tbc')}</p>}
+            <div>
+              <p className="card__kind card__kind--inline">{t(`cards.${artist.kind}`)}</p>
+              <h3 id="artist-dialog-title" className="dialog__title">{displayText(artist.name)}</h3>
+            </div>
+            <p className="dialog__bio">{tr(artist.bio) || t('cards.noBio')}</p>
+            {links.length > 0 && (
+              <ul className="dialog__links">
+                {links.map(([key, url]) => (
+                  <li key={key}>
+                    <a href={url} target="_blank" rel="noopener noreferrer">{LINK_LABELS[key] ?? key}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-          <p className="dialog__bio">{tr(artist.bio) || t('cards.noBio')}</p>
-          {links.length > 0 && (
-            <ul className="dialog__links">
-              {links.map(([key, url]) => (
-                <li key={key}>
-                  <a href={url} target="_blank" rel="noopener noreferrer">{LINK_LABELS[key] ?? key}</a>
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
       )}
     </dialog>

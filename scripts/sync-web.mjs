@@ -28,7 +28,9 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const OUT_LINEUP = join(ROOT, 'src/data/generated/lineup.json')
 const OUT_VENDORS = join(ROOT, 'src/data/generated/vendors.json')
 const PHOTO_DIR = join(ROOT, 'public/artists')
-const PHOTO = { width: 630, height: 880, maxBytes: 100 * 1024 }
+// Las fotos se publican tal cual llegan: NO se recortan. Deben venir en proporción de carta (63:88,
+// p. ej. 2520×3520) y solo se achican a 945×1320 y se comprimen. Si la proporción no calza, se rechaza.
+const PHOTO = { width: 945, height: 1320, ratio: 63 / 88, tolerance: 0.01, maxBytes: 300 * 1024 }
 const LINK_KEYS = { Instagram: 'instagram', Spotify: 'spotify', SoundCloud: 'soundcloud', YouTube: 'youtube', Web: 'web' }
 
 const args = process.argv.slice(2)
@@ -151,13 +153,22 @@ async function downloadImage(url) {
   return Buffer.from(await res.arrayBuffer())
 }
 
-/** Recorta a 630×880, convierte a WebP y baja la calidad hasta quedar bajo 100 KB. */
+/** Sin recortar: revisa que la foto venga en proporción de carta, la achica a 945×1320 como máximo,
+ *  la convierte a WebP y baja la calidad hasta quedar bajo 300 KB. */
 export async function optimizePhoto(input) {
+  const { width, height } = await sharp(input).rotate().toBuffer({ resolveWithObject: true }).then((r) => r.info)
+  const ratio = width / height
+  if (Math.abs(ratio - PHOTO.ratio) / PHOTO.ratio > PHOTO.tolerance) {
+    const shown = `${width}×${height}`
+    throw new Error(`mide ${shown} y no está en proporción de carta 63:88 (vertical, p. ej. 2520×3520). ` +
+      'No se recorta automáticamente: ajústala y vuelve a subirla.')
+  }
+  if (width < 630) throw new Error(`mide ${width}×${height}: es muy pequeña, debe tener al menos 630 px de ancho.`)
   let out
-  for (let quality = 82; quality >= 20; quality -= 6) {
+  for (let quality = 88; quality >= 30; quality -= 6) {
     out = await sharp(input)
       .rotate()
-      .resize(PHOTO.width, PHOTO.height, { fit: 'cover', position: 'attention' })
+      .resize(PHOTO.width, PHOTO.height, { fit: 'inside', withoutEnlargement: true })
       .webp({ quality, effort: 5 })
       .toBuffer()
     if (out.length <= PHOTO.maxBytes) break
@@ -169,7 +180,7 @@ async function preparePhoto(link, name, where) {
   if (!link) return undefined
   const url = normalizeUrl(link)
   if (!url) { fail(`${where}: el link de la foto no es válido.`); return undefined }
-  const hash = createHash('sha1').update(driveId(url) || url).digest('hex').slice(0, 8)
+  const hash = createHash('sha1').update(`v2:${driveId(url) || url}`).digest('hex').slice(0, 8)
   const file = `${slugify(name)}-${hash}.webp`
   const path = join(PHOTO_DIR, file)
   if (!existsSync(path)) {

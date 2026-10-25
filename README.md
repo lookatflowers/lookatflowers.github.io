@@ -9,6 +9,9 @@ Los artistas y los puestos **se editan en la planilla "Postulaciones LOOKAT E2"*
 - Pestaña **Etiquetas**: lista oficial de etiquetas de producto (Joyería, Llaveros...). Los puestos solo pueden usar
   etiquetas de esta lista, y en la web aparecen como filtros en este mismo orden.
 - Solo salen a la web las filas con la casilla **Publicar** marcada.
+- **Fotos de artistas** (columna "Foto" de Web Line-up, link de Drive compartido como "Cualquier persona con el enlace"):
+  verticales en proporción de carta **63:88**, por ejemplo **2520 × 3520 px**. No se recortan: se publican enteras,
+  achicadas a 945 × 1320 y comprimidas. Si la proporción no calza, la actualización se detiene y avisa.
 
 Para publicar los cambios: en GitHub, **Actions → "Actualizar web desde la planilla" → Run workflow**.
 La acción revisa los datos y, si encuentra un error (por ejemplo, dos bandas en la misma carta),
