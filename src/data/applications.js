@@ -35,7 +35,7 @@ export const applications = [
     id: 'bandas',
     label: L('Bandas', 'Bands'),
     stage: 'Flowers Stage',
-    deadline: '2026-10-25T23:59:59-03:00',
+    deadline: '2026-10-26T12:00:00-03:00',
     subject: 'Postulación BANDA {bandName}',
     intro: L(
       '¿Tienen canciones propias y ganas de tocarlas en vivo? Queremos escucharlas en el Flowers Stage. 🌸',
