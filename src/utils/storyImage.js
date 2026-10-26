@@ -19,8 +19,8 @@ const MONTHS = {
 }
 
 const TEXT = {
-  es: { band: 'BANDA', dj: 'DJ', tbc: 'POR CONFIRMAR', vote: 'MI VOTO PARA EL LINE-UP', confirmed: 'NOS VEMOS EN EL FESTIVAL', vendor: festival.slogan },
-  en: { band: 'BAND', dj: 'DJ', tbc: 'TO BE CONFIRMED', vote: 'MY PICK FOR THE LINE-UP', confirmed: 'SEE YOU AT THE FESTIVAL', vendor: festival.slogan },
+  es: { band: 'BANDA', dj: 'DJ', tbc: 'POR CONFIRMAR', vote: 'MI FLOR FAVORITA', confirmed: 'MI FLOR FAVORITA', vendor: 'MI FLOR FAVORITA' },
+  en: { band: 'BAND', dj: 'DJ', tbc: 'TO BE CONFIRMED', vote: 'MY FAVORITE FLOWER', confirmed: 'MY FAVORITE FLOWER', vendor: 'MY FAVORITE FLOWER' },
 }
 
 const base = import.meta.env.BASE_URL
