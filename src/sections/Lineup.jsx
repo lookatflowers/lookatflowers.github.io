@@ -7,11 +7,11 @@ import { useLang } from '../i18n/useLang'
 import FlowerIcon from '../components/FlowerIcon'
 import '../components/like.css'
 
-// Ritmo de las cartas "por confirmar": boca arriba ~3 s (con variación para que no giren todas
+// Ritmo de las cartas "por confirmar": boca arriba ~5 s (con variación para que no giren todas
 // juntas), se dan vuelta, quedan ~1 s boca abajo y vuelven boca arriba con otro nombre.
-const UP_MIN_MS = 2600
-const UP_EXTRA_MS = 700 // + 0..0,7 s al azar → entre 2,6 y 3,3 s
-const DOWN_MS = 1700 // 0,7 s de giro + ~1 s boca abajo
+const UP_MIN_MS = 4500
+const UP_EXTRA_MS = 1000 // + 0..1 s al azar → entre 4,5 y 5,5 s
+const DOWN_MS = 1900 // 0,7 s de giro + ~1,2 s boca abajo
 const TICK_MS = 200
 
 const TYPES = ['band', 'dj']
