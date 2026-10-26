@@ -3,6 +3,7 @@ import Section from '../components/Section'
 import { MAP_SIZE, MAP_ZONES } from '../data/mapZones'
 import { useLang } from '../i18n/useLang'
 import { publicUrl } from '../utils/assets'
+import MapStory from '../components/MapStory'
 import './map.css'
 
 const MAP_SRC = publicUrl('mapa/mapa-lookat.svg')
@@ -65,24 +66,31 @@ export default function MapSection() {
           </svg>
         </div>
 
-        <div className="map__info" aria-live="polite">
-          {zone ? (
-            <>
-              <h3 className="map__title">{t(`map.cats.${zone.id}.title`)}</h3>
-              <p className="map__text">{t(`map.cats.${zone.id}.text`)}</p>
-              {zone.link && (
-                <a
-                  className="map__link"
-                  href={zone.link}
-                  {...(zone.link.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                >
-                  {t(`map.cats.${zone.id}.link`)} →
-                </a>
-              )}
-            </>
-          ) : (
-            <p className="map__text map__text--hint">{t('map.hint')}</p>
-          )}
+        <div className="map__info">
+          <div className="map__info-text" aria-live="polite">
+            {zone ? (
+              <>
+                <h3 className="map__title">{t(`map.cats.${zone.id}.title`)}</h3>
+                <p className="map__text">{t(`map.cats.${zone.id}.text`)}</p>
+                {zone.link && (
+                  <a
+                    className="map__link"
+                    href={zone.link}
+                    {...(zone.link.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  >
+                    {t(`map.cats.${zone.id}.link`)} →
+                  </a>
+                )}
+              </>
+            ) : (
+              <p className="map__text map__text--hint">{t('map.hint')}</p>
+            )}
+          </div>
+          <div className="mapstory-teaser">
+            <p className="mapstory-teaser__title">{t('mapStory.teaserTitle')}</p>
+            <p className="mapstory-teaser__text">{t('mapStory.teaserText')}</p>
+            <MapStory />
+          </div>
         </div>
       </div>
     </Section>

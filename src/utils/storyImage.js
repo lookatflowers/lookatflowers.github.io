@@ -6,6 +6,7 @@ import logoUrl from '../assets/brand/logo.svg'
 import { festival } from '../data/festival'
 import { displayText } from './displayText'
 import { FLOWER_PATH } from '../components/FlowerIcon'
+import { pinLabel } from './mapStoryText'
 
 const W = 1080
 const H = 1920
@@ -387,4 +388,114 @@ export async function makeStory(item, { phrase } = {}) {
   const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.92))
   const slug = name.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   return new File([blob], `lookatflowers-${slug}.jpg`, { type: 'image/jpeg' })
+}
+
+// ── Historia del mapa: "Encuéntrame aquí" ────────────────────────────────────────────────────
+// El mapa completo con un pin (flor) donde la persona dice que va a estar, con su nombre encima.
+// El pin es opcional: sin pin queda solo el mapa. Coordenadas del pin en el sistema del SVG del
+// mapa (MAP_SIZE de src/data/mapZones.js).
+const MAP_IMG = 'stories/mapa.webp' // versión en imagen del SVG (se dibuja igual en todos los navegadores)
+const MAP_W = 2169
+const MAP_H = 2768
+const PIN_LABEL_BELOW_Y = 540 // pin muy arriba: la etiqueta va bajo el pin (igual que en el editor)
+
+/** Pin con forma de gota, rosado con borde negro y flor blanca; la punta queda en (x, y). */
+function drawPin(ctx, x, y, s = 1) {
+  const r = 34 * s
+  const cy = y - 62 * s
+  ctx.save()
+  ctx.shadowColor = 'rgba(0,0,0,0.35)'; ctx.shadowBlur = 14; ctx.shadowOffsetY = 6
+  ctx.beginPath()
+  ctx.moveTo(x, y)
+  ctx.bezierCurveTo(x - 10 * s, cy + r * 0.9, x - r, cy + r * 0.55, x - r, cy)
+  ctx.arc(x, cy, r, Math.PI, 0)
+  ctx.bezierCurveTo(x + r, cy + r * 0.55, x + 10 * s, cy + r * 0.9, x, y)
+  ctx.closePath()
+  ctx.fillStyle = C.pink
+  ctx.fill()
+  ctx.shadowColor = 'transparent'
+  ctx.lineWidth = 6 * s
+  ctx.strokeStyle = C.ink
+  ctx.stroke()
+  drawFlower(ctx, x - 22 * s, cy - 22 * s, 44 * s, '#fff')
+  ctx.restore()
+}
+
+/** Etiqueta negra con el nombre, sobre el pin (o bajo la punta si no cabe arriba). */
+function drawPinLabel(ctx, text, x, y, minX, maxX, below) {
+  const fit = fitFont(ctx, displayText(text), DISPLAY, 900, 52, 34, maxX - minX - 60, 1)
+  ctx.font = `900 ${fit.size}px ${DISPLAY}`
+  const tw = ctx.measureText(fit.lines[0]).width
+  const w = tw + 52
+  const h = fit.size + 34
+  const top = below ? y + 22 : y - 140 - h
+  const left = Math.min(Math.max(x - w / 2, minX), maxX - w)
+  ctx.save()
+  ctx.shadowColor = 'rgba(0,0,0,0.3)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 6
+  ctx.fillStyle = C.ink
+  roundRect(ctx, left, top, w, h, 18)
+  ctx.fill()
+  // piquito hacia el pin
+  const tx = Math.min(Math.max(x, left + 26), left + w - 26)
+  ctx.beginPath()
+  if (below) { ctx.moveTo(tx - 14, top + 1); ctx.lineTo(tx, top - 14); ctx.lineTo(tx + 14, top + 1) }
+  else { ctx.moveTo(tx - 14, top + h - 1); ctx.lineTo(tx, top + h + 14); ctx.lineTo(tx + 14, top + h - 1) }
+  ctx.fill()
+  ctx.shadowColor = 'transparent'
+  ctx.fillStyle = C.paper
+  ctx.textBaseline = 'middle'
+  ctx.textAlign = 'center'
+  ctx.fillText(fit.lines[0], left + w / 2, top + h / 2 + 3)
+  ctx.restore()
+}
+
+/**
+ * Historia del mapa.
+ *  pin: { x, y } en coordenadas del SVG, o null (sin pin) · name, time: para la etiqueta del pin
+ *  phrase: frase de la cinta (vacía = sin cinta)
+ */
+export async function makeMapStory({ pin = null, name = '', time = '', phrase = '' } = {}) {
+  await ensureFonts()
+  const canvas = document.createElement('canvas')
+  canvas.width = W
+  canvas.height = H
+  const ctx = canvas.getContext('2d')
+  const bg = await loadImage(`${base}${BACKGROUNDS[hash(`mapa${name}`) % BACKGROUNDS.length]}`).catch(() => null)
+  if (bg) ctx.drawImage(bg, 0, 0, W, H)
+  else { ctx.fillStyle = C.pink; ctx.fillRect(0, 0, W, H) }
+  await drawHeader(ctx, 'es')
+
+  // Mapa: entre la cinta de la fecha y la frase, levemente inclinado
+  const mw = 760
+  const mh = Math.round((mw * MAP_H) / MAP_W)
+  const cx = W / 2
+  const cy = 532 + mh / 2
+  const map = await loadImage(`${base}${MAP_IMG}`)
+  ctx.save()
+  ctx.translate(cx, cy)
+  ctx.rotate((-1.5 * Math.PI) / 180)
+  const x = -mw / 2
+  const y = -mh / 2
+  ctx.shadowColor = 'rgba(0,0,0,0.35)'; ctx.shadowBlur = 50; ctx.shadowOffsetY = 20
+  ctx.fillStyle = C.ink
+  roundRect(ctx, x - 10, y - 10, mw + 20, mh + 20, 34)
+  ctx.fill()
+  ctx.shadowColor = 'transparent'
+  ctx.save()
+  roundRect(ctx, x, y, mw, mh, 26)
+  ctx.clip()
+  ctx.drawImage(map, x, y, mw, mh)
+  ctx.restore()
+  if (pin) {
+    const px = x + (pin.x / MAP_W) * mw
+    const py = y + (pin.y / MAP_H) * mh
+    const below = pin.y < PIN_LABEL_BELOW_Y // muy arriba: la etiqueta va bajo el pin para no salirse del mapa
+    drawPin(ctx, px, py, 1.35)
+    drawPinLabel(ctx, pinLabel(name, time), px, py, x - 40, x + mw + 40, below)
+  }
+  ctx.restore()
+
+  drawFooter(ctx, phrase, null)
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.92))
+  return new File([blob], 'lookatflowers-mapa.jpg', { type: 'image/jpeg' })
 }

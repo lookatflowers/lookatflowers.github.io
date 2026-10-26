@@ -44,7 +44,8 @@
 }
 .map__hit:focus-visible { stroke: var(--ink); stroke-width: 10; stroke-dasharray: 24 14; }
 
-.map__info { display: grid; gap: 0.75rem; align-content: start; }
+.map__info { display: grid; gap: 1.25rem; align-content: start; }
+.map__info-text { display: grid; gap: 0.75rem; align-content: start; }
 .map__title { margin: 0; font-size: clamp(1.6rem, 5vw, 2.2rem); }
 .map__text { margin: 0; }
 .map__text--hint { opacity: 0.8; }
