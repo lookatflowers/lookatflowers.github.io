@@ -4,12 +4,12 @@ import './cards.css'
 import { displayText } from '../utils/displayText'
 
 /** Frente con la incógnita. */
-function MysteryFace({ hidden }) {
+function MysteryFace({ hidden, tap }) {
   const { t } = useLang()
   return (
     <span className="card__face card__face--mystery" aria-hidden={hidden || undefined}>
       <span className="card__mark">?</span>
-      <span className="card__tap">{t('cards.tap')}</span>
+      {tap && <span className="card__tap">{t('cards.tap')}</span>}
     </span>
   )
 }
@@ -48,11 +48,11 @@ function PhotoFace({ artist, back, tbc, hidden }) {
 /**
  * Carta de artista. El modo lo decide Lineup a partir de src/data/artists.js:
  *  - 'mystery'   "?" -> gira y muestra BANDA / POR CONFIRMAR.
- *  - 'draw'      borde verde + "?" -> gira y muestra `shown` (nombre sorteado, por confirmar)
- *                o BANDA / POR CONFIRMAR si ya no quedan nombres libres.
+ *  - 'draw'      borde verde, boca arriba con `shown` (por confirmar); Lineup la gira sola cada
+ *                ~3 s y la vuelve a mostrar con otro nombre.
  *  - 'confirmed' borde verde, foto + nombre de `shown` al frente; sin giro.
  */
-export default function ArtistCard({ mode, kind, flipped, nudge, tone, shown, onClick }) {
+export default function ArtistCard({ mode, kind, flipped, nudge, tone, shown, onClick, ...rest }) {
   const { t } = useLang()
   const kindLabel = t(`cards.${kind}`)
   // Sin número de carta a la vista ("Banda 1"...): el número solo ordena el cronograma.
@@ -60,7 +60,7 @@ export default function ArtistCard({ mode, kind, flipped, nudge, tone, shown, on
 
   if (mode === 'confirmed') {
     return (
-      <button type="button" className="card card--green" aria-label={fill('cards.ariaMore')} onClick={onClick}>
+      <button type="button" className="card card--green" aria-label={fill('cards.ariaMore')} onClick={onClick} {...rest}>
         <span className="card__inner">
           <PhotoFace artist={shown} />
         </span>
@@ -77,9 +77,10 @@ export default function ArtistCard({ mode, kind, flipped, nudge, tone, shown, on
       className={`card${mode === 'draw' ? ' card--green' : ''}${flipped ? ' is-flipped' : ''}${nudge && !flipped ? ' is-nudging' : ''}`}
       aria-label={aria}
       onClick={onClick}
+      {...rest}
     >
       <span className="card__inner">
-        <MysteryFace hidden={flipped} />
+        <MysteryFace hidden={flipped} tap={mode === 'mystery'} />
         {shown ? (
           <PhotoFace artist={shown} back tbc hidden={!flipped} />
         ) : (
