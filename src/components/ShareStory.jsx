@@ -26,7 +26,7 @@ const canShareFile = (file) => {
  *  compact: solo el ícono (tarjetas de puestos)
  */
 export default function ShareStory({ item, name, anchor, compact = false }) {
-  const { t, lang } = useLang()
+  const { t } = useLang()
   const ref = useRef(null)
   const [open, setOpen] = useState(false)
   const [file, setFile] = useState(null)
@@ -56,7 +56,7 @@ export default function ShareStory({ item, name, anchor, compact = false }) {
     if (file) return
     try {
       const { makeStory } = await import('../utils/storyImage')
-      const made = await makeStory(item, lang)
+      const made = await makeStory(item)
       setFile(made)
       setUrl(URL.createObjectURL(made))
     } catch {

@@ -19,7 +19,7 @@ const MONTHS = {
 }
 
 const TEXT = {
-  es: { band: 'BANDA', dj: 'DJ', tbc: 'POR CONFIRMAR', vote: 'MI FLOR FAVORITA', confirmed: 'MI FLOR FAVORITA', vendor: 'MI FLOR FAVORITA' },
+  es: { band: 'BANDA', dj: 'DJ', tbc: 'POR CONFIRMAR', vote: 'MI FLOR FAVORITA', confirmed: 'NOS VEMOS EN EL FESTIVAL', vendor: 'ENCUÉNTRANOS EN EL LOOKAT' },
   en: { band: 'BAND', dj: 'DJ', tbc: 'TO BE CONFIRMED', vote: 'MY FAVORITE FLOWER', confirmed: 'MY FAVORITE FLOWER', vendor: 'MY FAVORITE FLOWER' },
 }
 
@@ -162,8 +162,13 @@ function drawFooter(ctx, phrase, handle) {
   ctx.save()
   ctx.translate(W / 2, 1585)
   ctx.rotate((2 * Math.PI) / 180)
-  ctx.font = `900 54px ${DISPLAY}`
   const text = displayText(phrase)
+  let size = 54
+  ctx.font = `900 ${size}px ${DISPLAY}`
+  while (ctx.measureText(text).width + 150 > 940 && size > 36) { // frases largas: la cinta no toca los bordes
+    size -= 2
+    ctx.font = `900 ${size}px ${DISPLAY}`
+  }
   const tw = ctx.measureText(text).width
   const pw = tw + 150
   ctx.shadowColor = 'rgba(0,0,0,0.3)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 10
@@ -340,7 +345,8 @@ async function ensureFonts() {
  * Crea la historia y la entrega como archivo JPG.
  *  item: { kind: 'band' | 'dj', artist } o { kind: 'vendor', vendor, primaryLabel, description }
  */
-export async function makeStory(item, lang = 'es') {
+export async function makeStory(item) {
+  const lang = 'es' // las historias van siempre en español, sin importar el idioma de la página
   await ensureFonts()
   const canvas = document.createElement('canvas')
   canvas.width = W
@@ -354,7 +360,8 @@ export async function makeStory(item, lang = 'es') {
 
   await drawHeader(ctx, lang)
   if (item.kind === 'vendor') {
-    drawVendorCard(ctx, item.vendor, item.primaryLabel, item.description)
+    // En español siempre: tipo y descripción salen de los datos en español, no del idioma de la página
+    drawVendorCard(ctx, item.vendor, item.vendor.primary?.[0] ?? 'Emprendimiento', item.vendor.description?.es ?? item.description)
     drawFooter(ctx, T.vendor, handleFrom(item.vendor.link))
   } else {
     await drawArtistCard(ctx, item.artist, item.kind, lang)
