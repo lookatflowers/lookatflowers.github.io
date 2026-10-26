@@ -33,6 +33,11 @@ export default function ShareStory({ item, name, anchor, compact = false }) {
   const [url, setUrl] = useState(null)
   const [error, setError] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [phrase, setPhrase] = useState(null) // null = aún no se carga la frase por defecto
+  const [defaultText, setDefaultText] = useState('')
+  const [renderedFor, setRenderedFor] = useState(null) // frase de la imagen que se ve ahora
+  const renderId = useRef(0)
+  const firstRender = useRef(true)
   const link = `${window.location.origin}${import.meta.env.BASE_URL}#${anchor}`
 
   useEffect(() => {
@@ -48,22 +53,44 @@ export default function ShareStory({ item, name, anchor, compact = false }) {
       () => setCopied(false),
     )
 
+  // Arma la imagen al abrir y cada vez que cambia la frase (con una pausa corta mientras se escribe)
+  useEffect(() => {
+    if (!open || phrase === null) return
+    const id = ++renderId.current
+    const wait = firstRender.current ? 0 : 450
+    firstRender.current = false
+    const timer = setTimeout(async () => {
+      try {
+        const { makeStory } = await import('../utils/storyImage')
+        const made = await makeStory(item, { phrase })
+        if (id !== renderId.current) return // llegó una versión más nueva
+        setFile(made)
+        setUrl(URL.createObjectURL(made))
+        setRenderedFor(phrase)
+        setError(false)
+      } catch {
+        if (id === renderId.current) setError(true)
+      }
+    }, wait)
+    return () => clearTimeout(timer)
+  }, [open, phrase, item])
+
   const onOpen = async (e) => {
     e.stopPropagation()
     setOpen(true)
-    setError(false)
     copyLink() // así queda listo para pegarlo en el sticker de enlace de Instagram
-    if (file) return
+    if (phrase !== null) return
     try {
-      const { makeStory } = await import('../utils/storyImage')
-      const made = await makeStory(item)
-      setFile(made)
-      setUrl(URL.createObjectURL(made))
+      const { defaultPhrase } = await import('../utils/storyImage')
+      const text = defaultPhrase(item)
+      setDefaultText(text)
+      setPhrase(text)
     } catch {
       setError(true)
     }
   }
 
+  const busy = phrase !== null && phrase !== renderedFor
   const close = () => ref.current?.close()
 
   const onShare = async () => {
@@ -105,14 +132,40 @@ export default function ShareStory({ item, name, anchor, compact = false }) {
             <p className="story-dialog__title">{t('share.title')}</p>
             <div className="story-dialog__preview">
               {url ? (
-                <img src={url} alt={t('share.alt').replace('{name}', name)} width="1080" height="1920" />
+                <img className={busy ? 'is-busy' : undefined} src={url} alt={t('share.alt').replace('{name}', name)} width="1080" height="1920" />
               ) : (
                 <p className="story-dialog__status">{error ? t('share.error') : t('share.loading')}</p>
               )}
             </div>
+            {phrase !== null && (
+              <div className="story-phrase">
+                <label className="story-phrase__label" htmlFor={`phrase-${anchor}-${name}`}>{t('share.phrase')}</label>
+                <div className="story-phrase__row">
+                  <input
+                    id={`phrase-${anchor}-${name}`}
+                    className="story-phrase__input"
+                    type="text"
+                    value={phrase}
+                    maxLength={30}
+                    placeholder={t('share.phraseEmpty')}
+                    autoComplete="off"
+                    enterKeyHint="done"
+                    onChange={(e) => setPhrase(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur() }}
+                  />
+                  {phrase !== defaultText && (
+                    <button type="button" className="story-phrase__reset" onClick={() => setPhrase(defaultText)} title={t('share.reset')} aria-label={t('share.reset')}>
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v5h5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
             <div className="story-dialog__actions">
               {canShareFile(file) && (
-                <button type="button" className="story-btn story-btn--main" onClick={onShare}>
+                <button type="button" className="story-btn story-btn--main" onClick={onShare} disabled={busy}>
                   <ShareIcon /> {t('share.share')}
                 </button>
               )}

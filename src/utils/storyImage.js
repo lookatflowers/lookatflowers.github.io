@@ -159,10 +159,16 @@ async function drawHeader(ctx, lang) {
 
 /** Cinta inferior: frase (tinta, inclinada) y pastillas con el @ y la web. */
 function drawFooter(ctx, phrase, handle) {
+  if (String(phrase ?? '').trim()) drawPhrase(ctx, phrase)
+  drawPills(ctx, handle)
+}
+
+/** Cinta negra inclinada con la frase y la flor. */
+function drawPhrase(ctx, phrase) {
   ctx.save()
   ctx.translate(W / 2, 1585)
   ctx.rotate((2 * Math.PI) / 180)
-  const text = displayText(phrase)
+  const text = displayText(String(phrase).trim().toUpperCase())
   let size = 54
   ctx.font = `900 ${size}px ${DISPLAY}`
   while (ctx.measureText(text).width + 150 > 940 && size > 36) { // frases largas: la cinta no toca los bordes
@@ -182,7 +188,10 @@ function drawFooter(ctx, phrase, handle) {
   ctx.fillText(text, -pw / 2 + 50, 4)
   drawFlower(ctx, pw / 2 - 90, -22, 46, C.pink)
   ctx.restore()
+}
 
+/** Pastillas con el @ del artista o puesto y la web. */
+function drawPills(ctx, handle) {
   const pills = [handle && { text: handle, bg: C.pink, fg: '#fff' }, { text: 'lookatflowers.github.io', bg: C.paper, fg: C.ink }].filter(Boolean)
   ctx.font = `700 32px ${MONO}`
   const widths = pills.map((p) => ctx.measureText(p.text).width + 52)
@@ -345,14 +354,21 @@ async function ensureFonts() {
  * Crea la historia y la entrega como archivo JPG.
  *  item: { kind: 'band' | 'dj', artist } o { kind: 'vendor', vendor, primaryLabel, description }
  */
-export async function makeStory(item) {
+/** Frase por defecto de la cinta (siempre en español). */
+export function defaultPhrase(item) {
+  if (item.kind === 'vendor') return TEXT.es.vendor
+  return item.artist.confirmed ? TEXT.es.confirmed : TEXT.es.vote
+}
+
+/** phrase: texto propio para la cinta (vacío = sin cinta); si no viene, la frase por defecto. */
+export async function makeStory(item, { phrase } = {}) {
   const lang = 'es' // las historias van siempre en español, sin importar el idioma de la página
+  const text = phrase ?? defaultPhrase(item)
   await ensureFonts()
   const canvas = document.createElement('canvas')
   canvas.width = W
   canvas.height = H
   const ctx = canvas.getContext('2d')
-  const T = TEXT[lang] ?? TEXT.es
   const name = item.kind === 'vendor' ? item.vendor.name : item.artist.name
   const bg = await loadImage(`${base}${BACKGROUNDS[hash(name) % BACKGROUNDS.length]}`).catch(() => null)
   if (bg) ctx.drawImage(bg, 0, 0, W, H)
@@ -362,10 +378,10 @@ export async function makeStory(item) {
   if (item.kind === 'vendor') {
     // En español siempre: tipo y descripción salen de los datos en español, no del idioma de la página
     drawVendorCard(ctx, item.vendor, item.vendor.primary?.[0] ?? 'Emprendimiento', item.vendor.description?.es ?? item.description)
-    drawFooter(ctx, T.vendor, handleFrom(item.vendor.link))
+    drawFooter(ctx, text, handleFrom(item.vendor.link))
   } else {
     await drawArtistCard(ctx, item.artist, item.kind, lang)
-    drawFooter(ctx, item.artist.confirmed ? T.confirmed : T.vote, handleFrom(item.artist.links?.instagram))
+    drawFooter(ctx, text, handleFrom(item.artist.links?.instagram))
   }
 
   const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.92))
