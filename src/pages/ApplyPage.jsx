@@ -20,6 +20,10 @@ const tabFromHash = () => {
   return ids.includes(id) ? id : ids[0]
 }
 
+// Enlace privado para postular fuera de plazo: postulaciones.html?extra#bandas
+// (no aparece en ninguna parte de la web; se comparte solo con quien corresponda).
+const LATE_OK = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('extra')
+
 /** Plazo con cuenta regresiva. */
 function Deadline({ iso }) {
   const { lang, t } = useLang()
@@ -27,7 +31,7 @@ function Deadline({ iso }) {
   let badge = t('apply.daysLeft').replace('{n}', left)
   if (left === 1) badge = t('apply.oneDay')
   if (left === 0) badge = t('apply.lastDay')
-  if (left < 0) badge = t('apply.closed')
+  if (left < 0) badge = LATE_OK ? (lang === 'en' ? 'Late entry enabled' : 'Habilitado fuera de plazo') : t('apply.closed')
   return (
     <p className={`deadline${left < 0 ? ' deadline--closed' : ''}${left >= 0 && left <= 2 ? ' deadline--soon' : ''}`}>
       <span className="deadline__icon" aria-hidden="true">📅</span>
@@ -41,7 +45,7 @@ function Deadline({ iso }) {
 
 function Panel({ app, active }) {
   const { t, tr } = useLang()
-  const closed = daysLeft(app.deadline) < 0
+  const closed = daysLeft(app.deadline) < 0 && !LATE_OK
   return (
     <div
       id={`panel-${app.id}`}
