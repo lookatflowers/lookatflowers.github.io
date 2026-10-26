@@ -59,7 +59,7 @@ export default {
     phraseEmpty: 'No caption',
     reset: 'Back to original',
     hintMobile: 'Tap Share, choose Instagram and then Story. We already copied the website link: paste it with the link sticker.',
-    hintDesktop: 'Download the image and post it to your story from your phone. For the link sticker, use “Copy link”.',
+    hintDesktop: 'On a computer, Share saves the image: post it to your story from your phone. For the link sticker, use “Copy link”.',
   },
   mapStory: {
     teaserTitle: 'Where will we find you?',

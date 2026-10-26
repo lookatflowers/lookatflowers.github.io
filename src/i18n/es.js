@@ -59,7 +59,7 @@ export default {
     phraseEmpty: 'Sin frase',
     reset: 'Volver a la original',
     hintMobile: 'Toca Compartir, elige Instagram y luego Historia. Ya copiamos el enlace de la web: pégalo con el sticker de enlace.',
-    hintDesktop: 'Descarga la imagen y súbela a tu historia desde el celular. Para el sticker de enlace, usa «Copiar enlace».',
+    hintDesktop: 'En el computador, Compartir guarda la imagen: súbela a tu historia desde el celular. Para el sticker de enlace, usa «Copiar enlace».',
   },
   mapStory: {
     teaserTitle: '¿Dónde te vamos a encontrar?',

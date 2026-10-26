@@ -93,12 +93,22 @@ export default function ShareStory({ item, name, anchor, compact = false }) {
   const busy = phrase !== null && phrase !== renderedFor
   const close = () => ref.current?.close()
 
+  // Celular: menú de compartir (Instagram → Historia). Si el navegador no puede compartir
+  // archivos (algunos computadores), el mismo botón guarda la imagen.
   const onShare = async () => {
-    try {
-      await navigator.share({ files: [file] })
-    } catch {
-      /* el usuario canceló */
+    if (!file) return
+    if (canShareFile(file)) {
+      try {
+        await navigator.share({ files: [file] })
+      } catch {
+        /* el usuario canceló */
+      }
+      return
     }
+    const a = document.createElement('a')
+    a.href = url
+    a.download = file.name
+    a.click()
   }
 
   return (
@@ -164,16 +174,9 @@ export default function ShareStory({ item, name, anchor, compact = false }) {
               </div>
             )}
             <div className="story-dialog__actions">
-              {canShareFile(file) && (
-                <button type="button" className="story-btn story-btn--main" onClick={onShare} disabled={busy}>
+              <button type="button" className="story-btn story-btn--main" onClick={onShare} disabled={!file || busy}>
                   <ShareIcon /> {t('share.share')}
                 </button>
-              )}
-              {url && (
-                <a className="story-btn" href={url} download={file.name}>
-                  {t('share.download')}
-                </a>
-              )}
               <button type="button" className="story-btn" onClick={copyLink}>
                 {copied ? t('share.copied') : t('share.copy')}
               </button>
