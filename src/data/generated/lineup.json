@@ -100,17 +100,6 @@
       }
     },
     {
-      "name": "Hora Punga",
-      "confirmed": false,
-      "photo": "artists/hora-punga-348d217e.webp",
-      "bio": {
-        "es": "Hora Punga es una banda valdiviana conformada por tres estudiantes foráneos en el año 2022. Su proyecto musical oscila por distintos géneros musicales, predominando el funk, pasando por indie rock y llegando tanto a sonidos alternativos como experimentales. ¡Viva el rock, yeeah!"
-      },
-      "links": {
-        "instagram": "https://www.instagram.com/horapunga/"
-      }
-    },
-    {
       "name": "Bong Voyage Reggae",
       "confirmed": false,
       "photo": "artists/bong-voyage-reggae-a2946f79.webp",
@@ -141,6 +130,16 @@
       },
       "links": {
         "instagram": "https://www.instagram.com/nikocontador"
+      }
+    },
+    {
+      "name": "Lethal Madness",
+      "confirmed": false,
+      "bio": {
+        "es": "Lethal Madness es una banda de metalcore y metal moderno de Valdivia, con una propuesta cyberpunk oscura que explora la fragmentación del ser, la realidad y la identidad. Su primer EP, “New Wave of Madness” (2026), parte desde la estética de Serial Experiments Lain y recorre la búsqueda de un objetivo, el cuestionamiento de la realidad y los sueños, la distancia y la frialdad, la resiliencia y el poder de unirse en un mismo camino."
+      },
+      "links": {
+        "instagram": "https://instagram.com/lethalmadnesscl/"
       }
     }
   ],
