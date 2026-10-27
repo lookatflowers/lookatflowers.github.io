@@ -13,6 +13,7 @@ export const sponsors = [
   { name: 'RED BULL CHILE', svg: 'sponsors/A_redbull.svg', size: 'large', link: 'https://www.redbull.com/' },
   { name: 'DAE UACh', svg: 'sponsors/A_dae.svg', size: 'large', link: 'https://dae.uach.cl/' },
   { name: 'FCI UACh', svg: 'sponsors/A_fci.svg', size: 'large', link: 'https://ingenieria.uach.cl/' },
-  { name: 'ASPRINTEC ARQUITECTOS', svg: 'sponsors/B_asprintec.svg', size: 'medium', link: 'https://asprintec.cl/' },
-  { name: 'CAFÉ EL ESCRITORIO', svg: 'sponsors/B_escritorio.svg', size: 'medium', link: 'https://www.instagram.com/cafeelescritorio/?hl=es' },
+  { name: 'Radio UACh', svg: 'sponsors/A_radio_uach.svg', size: 'large', link: 'https://vinculacion.uach.cl/espacio/radio/' },
+  // { name: 'ASPRINTEC ARQUITECTOS', svg: 'sponsors/B_asprintec.svg', size: 'medium', link: 'https://asprintec.cl/' },
+  // { name: 'CAFÉ EL ESCRITORIO', svg: 'sponsors/B_escritorio.svg', size: 'medium', link: 'https://www.instagram.com/cafeelescritorio/?hl=es' },
 ]
