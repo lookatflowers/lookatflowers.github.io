@@ -135,11 +135,19 @@
     {
       "name": "Lethal Madness",
       "confirmed": false,
+      "photo": "artists/lethal-madness-b6caa225.webp",
       "bio": {
         "es": "Lethal Madness es una banda de metalcore y metal moderno de Valdivia, con una propuesta cyberpunk oscura que explora la fragmentación del ser, la realidad y la identidad. Su primer EP, “New Wave of Madness” (2026), parte desde la estética de Serial Experiments Lain y recorre la búsqueda de un objetivo, el cuestionamiento de la realidad y los sueños, la distancia y la frialdad, la resiliencia y el poder de unirse en un mismo camino."
       },
       "links": {
         "instagram": "https://instagram.com/lethalmadnesscl/"
+      }
+    },
+    {
+      "name": "Frecuencia Modulada",
+      "confirmed": false,
+      "bio": {
+        "es": "Banda conformada por dos estudiantes de la Facultad de Música de la UACh, un docente de la UACh, un ingeniero acústico de la UACh y otros dos integrantes ligados a la música y a diferentes centros de estudio. Nos dedicamos principalmente a tocar versiones modificadas de temas existentes, incorporando arreglos diferentes, varios de ellos propios, otros con líneas de bajo con diferente rítmica, arreglos melódicos con teclado y guittaras, etc. También disponemos de lo necesario para incorporar batería electrónica y detalles que podemos ir consultando para llevar y sonar adecuadamente."
       }
     }
   ],

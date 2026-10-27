@@ -258,6 +258,17 @@
       "description": {
         "es": "Papelería creativa y artículos personalizados, hechos a mano."
       }
+    },
+    {
+      "name": "Fungicitos",
+      "primary": [
+        "Emprendimiento"
+      ],
+      "secondary": [],
+      "description": {
+        "es": "Figuras en porcelana fría, acrilicos y sellados en resina uv. Aros, llaveros, pins, imanes, entre otros. Todo con temática fungi, flora, fauna y mucha magia!"
+      },
+      "link": "https://www.instagram.com/fungicitos"
     }
   ]
 }
