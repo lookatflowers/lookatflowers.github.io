@@ -34,6 +34,7 @@ export default {
     band: 'Band',
     dj: 'DJ',
     tbc: 'To be confirmed',
+    confirmed: 'Confirmed',
     tap: 'Tap to flip',
     more: 'Read more',
     close: 'Close',

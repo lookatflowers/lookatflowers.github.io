@@ -34,6 +34,7 @@ export default {
     band: 'Banda',
     dj: 'DJ',
     tbc: 'Por confirmar',
+    confirmed: 'Confirmado',
     tap: 'Toca para girar',
     more: 'Ver reseña',
     close: 'Cerrar',

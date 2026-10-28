@@ -20,8 +20,8 @@ const MONTHS = {
 }
 
 const TEXT = {
-  es: { band: 'BANDA', dj: 'DJ', tbc: 'POR CONFIRMAR', vote: 'MI FLOR FAVORITA', confirmed: 'NOS VEMOS EN EL FESTIVAL', vendor: 'ENCUÉNTRANOS EN EL LOOKAT' },
-  en: { band: 'BAND', dj: 'DJ', tbc: 'TO BE CONFIRMED', vote: 'MY FAVORITE FLOWER', confirmed: 'MY FAVORITE FLOWER', vendor: 'MY FAVORITE FLOWER' },
+  es: { band: 'BANDA', dj: 'DJ', tbc: 'POR CONFIRMAR', ok: 'CONFIRMADO', vote: 'MI FLOR FAVORITA', confirmed: 'NOS VEMOS EN EL FESTIVAL', vendor: 'ENCUÉNTRANOS EN EL LOOKAT' },
+  en: { band: 'BAND', dj: 'DJ', tbc: 'TO BE CONFIRMED', ok: 'CONFIRMED', vote: 'MY FAVORITE FLOWER', confirmed: 'MY FAVORITE FLOWER', vendor: 'MY FAVORITE FLOWER' },
 }
 
 const base = import.meta.env.BASE_URL
@@ -262,14 +262,12 @@ async function drawArtistCard(ctx, artist, kind, lang) {
   spacedText(ctx, kind === 'dj' ? T.dj : T.band, x + pad, ty - fit.size - 6, 6)
   ctx.globalAlpha = 1
   // cinta "Por confirmar"
-  if (!artist.confirmed) {
-    ctx.fillStyle = C.yellow
-    ctx.fillRect(x + 26, y + 26, cw - 52, 64)
-    ctx.fillStyle = C.ink
-    ctx.font = `700 30px ${MONO}`
-    ctx.textBaseline = 'middle'
-    spacedText(ctx, T.tbc, 0, y + 60, 5, 'center')
-  }
+  ctx.fillStyle = artist.confirmed ? C.green : C.yellow
+  ctx.fillRect(x + 26, y + 26, cw - 52, 64)
+  ctx.fillStyle = C.ink
+  ctx.font = `700 30px ${MONO}`
+  ctx.textBaseline = 'middle'
+  spacedText(ctx, artist.confirmed ? T.ok : T.tbc, 0, y + 60, 5, 'center')
   ctx.restore()
 }
 

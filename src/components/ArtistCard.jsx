@@ -26,7 +26,7 @@ function TbcFace({ kindLabel, tone, hidden }) {
 }
 
 /** Cara con foto y nombre. `back`: va en el reverso · `tbc`: marca visible de por confirmar. */
-function PhotoFace({ artist, back, tbc, hidden }) {
+function PhotoFace({ artist, back, tbc, confirmed, hidden }) {
   const { t } = useLang()
   const photo = publicUrl(artist.photo)
   return (
@@ -41,6 +41,7 @@ function PhotoFace({ artist, back, tbc, hidden }) {
         <span className="card__hint">{t('cards.more')}</span>
       </span>
       {tbc && <span className="card__tbc-badge">{t('cards.tbc')}</span>}
+      {confirmed && <span className="card__tbc-badge card__tbc-badge--ok">{t('cards.confirmed')}</span>}
     </span>
   )
 }
@@ -62,7 +63,7 @@ export default function ArtistCard({ mode, kind, flipped, nudge, tone, shown, on
     return (
       <button type="button" className="card card--green" aria-label={fill('cards.ariaMore')} onClick={onClick} {...rest}>
         <span className="card__inner">
-          <PhotoFace artist={shown} />
+          <PhotoFace artist={shown} confirmed />
         </span>
       </button>
     )

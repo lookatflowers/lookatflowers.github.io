@@ -51,7 +51,7 @@ export default function ArtistDialog({ artist, onClose }) {
             <div className="dialog__photo dialog__photo--empty" aria-hidden="true" />
           )}
           <div className="dialog__text">
-            {artist.tbc && <p className="dialog__tbc">{t('cards.tbc')}</p>}
+            {artist.tbc ? <p className="dialog__tbc">{t('cards.tbc')}</p> : <p className="dialog__tbc dialog__tbc--ok">{t('cards.confirmed')}</p>}
             <div>
               <p className="card__kind card__kind--inline">{t(`cards.${artist.kind}`)}</p>
               <h3 id="artist-dialog-title" className="dialog__title">{displayText(artist.name)}</h3>
