@@ -158,6 +158,7 @@
     {
       "name": "Anémona",
       "confirmed": false,
+      "photo": "artists/anemona-27e20741.webp",
       "bio": {
         "es": "Somos una banda de pop rock progresivo de Osorno. Hacemos canciones que mezclan melodías pop, sintetizadores y guitarras eléctricas con la exploración del rock progresivo. Tenemos actualmente un single publicado en todas las plataformas de streaming y con rotación en las radios locales."
       },
