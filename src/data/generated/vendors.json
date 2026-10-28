@@ -269,6 +269,37 @@
         "es": "Figuras en porcelana fría, acrilicos y sellados en resina uv. Aros, llaveros, pins, imanes, entre otros. Todo con temática fungi, flora, fauna y mucha magia!"
       },
       "link": "https://www.instagram.com/fungicitos"
+    },
+    {
+      "name": "nebumiko",
+      "primary": [
+        "Emprendimiento"
+      ],
+      "secondary": [],
+      "description": {
+        "es": "Vendo mis ilustraciones originales en formatos variados como prints, stickers, llaveros y chapitas, con personajes de franquicias de videojuegos y manga. También le doy un espacio a mis OC's (personajes originales) para que se den a conocer a través de mis productos."
+      },
+      "link": "https://instagram.com/nebumiko"
+    },
+    {
+      "name": "Aka.flowstreet",
+      "primary": [
+        "Emprendimiento"
+      ],
+      "secondary": [],
+      "description": {
+        "es": "Mi tienda es netamente de accesorios con una propuesta streetwear/Y2K. Este año inicié con Jockeys Customizados lo que ha dado un giro a la dirección de la tienda. Pronto, todos los accesorios serán Customizados y sacaré stock a pedido."
+      }
+    },
+    {
+      "name": "Shopping_sur",
+      "primary": [
+        "Emprendimiento"
+      ],
+      "secondary": [],
+      "description": {
+        "es": "Moda circular"
+      }
     }
   ]
 }

@@ -1,6 +1,18 @@
 {
   "bands": [
     {
+      "name": "ARGE",
+      "confirmed": true,
+      "slot": 1,
+      "photo": "artists/arge-72c569a2.webp",
+      "bio": {
+        "es": "Banda de Heavy y Power Metal fundada en Valdivia, Chile, en el año 2006. La alineación actual del quinteto está compuesta por Sebastián Lehmann (voz), Nicolás Bastián (guitarra), Daniel Chatre (guitarra), Felipe Saldivia (bajo) y Cristóbal Navarro (batería). Su propuesta musical se caracteriza por el uso de guitarras dobles con pasajes melódicos, voces limpias de registro agudo y baterías con doble bombo de ritmo medio y/o rápido. El nombre del grupo proviene de la palabra griega Arché, que hace referencia al concepto del \"principio\" o elemento primordial."
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/argepowermetal/"
+      }
+    },
+    {
       "name": "Desvelo",
       "confirmed": false,
       "photo": "artists/desvelo-66f867b9.webp",
@@ -20,17 +32,6 @@
       },
       "links": {
         "instagram": "https://www.instagram.com/elpesodelarrepentimiento/"
-      }
-    },
-    {
-      "name": "ARGE",
-      "confirmed": false,
-      "photo": "artists/arge-72c569a2.webp",
-      "bio": {
-        "es": "Banda de Heavy y Power Metal fundada en Valdivia, Chile, en el año 2006. La alineación actual del quinteto está compuesta por Sebastián Lehmann (voz), Nicolás Bastián (guitarra), Daniel Chatre (guitarra), Felipe Saldivia (bajo) y Cristóbal Navarro (batería). Su propuesta musical se caracteriza por el uso de guitarras dobles con pasajes melódicos, voces limpias de registro agudo y baterías con doble bombo de ritmo medio y/o rápido. El nombre del grupo proviene de la palabra griega Arché, que hace referencia al concepto del \"principio\" o elemento primordial."
-      },
-      "links": {
-        "instagram": "https://www.instagram.com/argepowermetal/"
       }
     },
     {
@@ -142,6 +143,26 @@
       "links": {
         "instagram": "https://instagram.com/lethalmadnesscl/"
       }
+    },
+    {
+      "name": "Palabras Como Dagas",
+      "confirmed": false,
+      "bio": {
+        "es": "sexteto de emo hardcore que lleva casi un año tocando, con 1 album grabado y subido y un ep en camino..."
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/palabrascomodagas/"
+      }
+    },
+    {
+      "name": "Anémona",
+      "confirmed": false,
+      "bio": {
+        "es": "Somos una banda de pop rock progresivo de Osorno. Hacemos canciones que mezclan melodías pop, sintetizadores y guitarras eléctricas con la exploración del rock progresivo. Tenemos actualmente un single publicado en todas las plataformas de streaming y con rotación en las radios locales."
+      },
+      "links": {
+        "instagram": "https://instagram.com/anemonabanda"
+      }
     }
   ],
   "djs": [
@@ -238,6 +259,49 @@
       "links": {
         "instagram": "https://instagram.com/jkobs__dj",
         "soundcloud": "https://soundcloud.com/@jkobs__dj"
+      }
+    },
+    {
+      "name": "TnT live",
+      "confirmed": false,
+      "bio": {
+        "es": "Hola soy TnT live, dj y productor de technostep, un genero que incluye bass y hardkicks, mis presentaciones son modo live set o hybrid set con mis maquinas, usando midis y Ableton, creando un set versátil y bien bailable, con momentos nostálgicos con el bass y subiendo la energía para reventar con hardkicks"
+      },
+      "links": {
+        "instagram": "https://instagram.com/eltintaa",
+        "soundcloud": "https://soundcloud.com/boo00mm?ref=clipboard&p=a&c=1&si=bab9f033cbcc4839ab526fcb663b3650&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
+      }
+    },
+    {
+      "name": "belmont lachance",
+      "confirmed": false,
+      "bio": {
+        "es": "Mi propuesta de set será de bastante energía, acompañado por un buen ritmo y buena performance."
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/belmontlachance_/"
+      }
+    },
+    {
+      "name": "AMOONS",
+      "confirmed": false,
+      "bio": {
+        "es": "Me gustaría llevar un set enfocado completamente en el riddim dubstep, mostrando el sonido que trabajo y la forma en que entiendo este género, desde sus sintetizadores y ritmos hasta los drops más pesados. la idea es mantener una línea musical marcada, pero jugando con distintos sonidos y cambios a lo largo de la presentación. También me gustaría tener la oportunidad de mostrar mi proyecto en Valdivia y acercar el riddim a personas que quizás no están tan familiarizadas con el género. Aunque no soy estudiante de la UACh, me interesa participar en este tipo de espacios, conocer otros proyectos y ser parte de las instancias que ayudan a mantener activa la escena electrónica. 2.CONTACTO"
+      },
+      "links": {
+        "instagram": "https://instagram.com/amoonsss_",
+        "soundcloud": "https://m.soundcloud.com/amoonsdubs?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAb21jcAVNDOpleHRuA2FlbQIxMQBwZG9mAnNydGMGYXBwX2lkDzU2NzA2NzM0MzM1MjQyNwABp3bFwqDWDfaBLxgClFlTjY9GH3WKx6JtZTb77FfX88LYmsYbTiNH0VhSvbnW_aem_41AzOStd0LRc53c-eiHrlQ&utm_id=97760_v0_s00_e0_tv3_a1denni61os425"
+      }
+    },
+    {
+      "name": "Rukoura",
+      "confirmed": false,
+      "bio": {
+        "es": "Depende del line up y lo que ustedes necesiten puedo dar algo mas ambiental como el DeepHouse que suelo tocar en los cafes o bares, sinó puedo tocar algo mas rápido como es el techno o hard techno, depende del lineup que exista"
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/rukoura",
+        "soundcloud": "https://soundcloud.com/felipe-rosales-427719011"
       }
     }
   ]
