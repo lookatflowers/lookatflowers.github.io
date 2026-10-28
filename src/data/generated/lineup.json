@@ -13,6 +13,18 @@
       }
     },
     {
+      "name": "Kemenssen Yerber",
+      "confirmed": true,
+      "slot": 2,
+      "photo": "artists/kemenssen-yerber-3f33939b.webp",
+      "bio": {
+        "es": "Proyecto emergente desde 2025 que mezcla rock alternativo, riffs progresivos de guitarra y ritmos en distintos tiempos."
+      },
+      "links": {
+        "instagram": "https://instagram.com/kemenssen_yerber"
+      }
+    },
+    {
       "name": "Desvelo",
       "confirmed": false,
       "photo": "artists/desvelo-66f867b9.webp",
@@ -76,17 +88,6 @@
       },
       "links": {
         "web": "https://linktr.ee/allourfailures"
-      }
-    },
-    {
-      "name": "Kemenssen Yerber",
-      "confirmed": false,
-      "photo": "artists/kemenssen-yerber-3f33939b.webp",
-      "bio": {
-        "es": "Proyecto emergente desde 2025 que mezcla rock alternativo, riffs progresivos de guitarra y ritmos en distintos tiempos."
-      },
-      "links": {
-        "instagram": "https://instagram.com/kemenssen_yerber"
       }
     },
     {
