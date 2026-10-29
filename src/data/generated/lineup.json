@@ -3,13 +3,49 @@
     {
       "name": "ARGE",
       "confirmed": true,
-      "slot": 3,
+      "slot": 1,
       "photo": "artists/arge-72c569a2.webp",
       "bio": {
         "es": "Banda de Heavy y Power Metal fundada en Valdivia, Chile, en el año 2006. La alineación actual del quinteto está compuesta por Sebastián Lehmann (voz), Nicolás Bastián (guitarra), Daniel Chatre (guitarra), Felipe Saldivia (bajo) y Cristóbal Navarro (batería). Su propuesta musical se caracteriza por el uso de guitarras dobles con pasajes melódicos, voces limpias de registro agudo y baterías con doble bombo de ritmo medio y/o rápido. El nombre del grupo proviene de la palabra griega Arché, que hace referencia al concepto del \"principio\" o elemento primordial."
       },
       "links": {
         "instagram": "https://www.instagram.com/argepowermetal/"
+      }
+    },
+    {
+      "name": "Kemenssen Yerber",
+      "confirmed": true,
+      "slot": 2,
+      "photo": "artists/kemenssen-yerber-3f33939b.webp",
+      "bio": {
+        "es": "Proyecto emergente desde 2025 que mezcla rock alternativo, riffs progresivos de guitarra y ritmos en distintos tiempos."
+      },
+      "links": {
+        "instagram": "https://instagram.com/kemenssen_yerber"
+      }
+    },
+    {
+      "name": "Perla",
+      "confirmed": true,
+      "slot": 3,
+      "photo": "artists/perla-9f22e70e.webp",
+      "bio": {
+        "es": "Perla nació hace tres años en Valdivia, Chile. La banda mezcla hip-hop, rap, funk y rock en un sonido que cambia de canción en canción. El funk predomina, con partes rockeras, canciones románticas y otras con un mensaje contestatario. En vivo, Perla se presenta con cuatro músicos, voces, samplers y secuencias."
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/bandaperla.oficial/"
+      }
+    },
+    {
+      "name": "Lethal Madness",
+      "confirmed": true,
+      "slot": 4,
+      "photo": "artists/lethal-madness-b6caa225.webp",
+      "bio": {
+        "es": "Lethal Madness es una banda de metalcore y metal moderno de Valdivia, con una propuesta cyberpunk oscura que explora la fragmentación del ser, la realidad y la identidad. Su primer EP, “New Wave of Madness” (2026), parte desde la estética de Serial Experiments Lain y recorre la búsqueda de un objetivo, el cuestionamiento de la realidad y los sueños, la distancia y la frialdad, la resiliencia y el poder de unirse en un mismo camino."
+      },
+      "links": {
+        "instagram": "https://instagram.com/lethalmadnesscl/"
       }
     },
     {
@@ -32,18 +68,6 @@
       },
       "links": {
         "instagram": "https://www.instagram.com/elpesodelarrepentimiento/"
-      }
-    },
-    {
-      "name": "Perla",
-      "confirmed": true,
-      "slot": 2,
-      "photo": "artists/perla-9f22e70e.webp",
-      "bio": {
-        "es": "Perla nació hace tres años en Valdivia, Chile. La banda mezcla hip-hop, rap, funk y rock en un sonido que cambia de canción en canción. El funk predomina, con partes rockeras, canciones románticas y otras con un mensaje contestatario. En vivo, Perla se presenta con cuatro músicos, voces, samplers y secuencias."
-      },
-      "links": {
-        "instagram": "https://www.instagram.com/bandaperla.oficial/"
       }
     },
     {
@@ -77,18 +101,6 @@
       },
       "links": {
         "web": "https://linktr.ee/allourfailures"
-      }
-    },
-    {
-      "name": "Kemenssen Yerber",
-      "confirmed": true,
-      "slot": 4,
-      "photo": "artists/kemenssen-yerber-3f33939b.webp",
-      "bio": {
-        "es": "Proyecto emergente desde 2025 que mezcla rock alternativo, riffs progresivos de guitarra y ritmos en distintos tiempos."
-      },
-      "links": {
-        "instagram": "https://instagram.com/kemenssen_yerber"
       }
     },
     {
@@ -136,20 +148,9 @@
       }
     },
     {
-      "name": "Lethal Madness",
-      "confirmed": true,
-      "slot": 1,
-      "photo": "artists/lethal-madness-b6caa225.webp",
-      "bio": {
-        "es": "Lethal Madness es una banda de metalcore y metal moderno de Valdivia, con una propuesta cyberpunk oscura que explora la fragmentación del ser, la realidad y la identidad. Su primer EP, “New Wave of Madness” (2026), parte desde la estética de Serial Experiments Lain y recorre la búsqueda de un objetivo, el cuestionamiento de la realidad y los sueños, la distancia y la frialdad, la resiliencia y el poder de unirse en un mismo camino."
-      },
-      "links": {
-        "instagram": "https://instagram.com/lethalmadnesscl/"
-      }
-    },
-    {
       "name": "Palabras Como Dagas",
       "confirmed": false,
+      "photo": "artists/palabras-como-dagas-1ba62c7e.webp",
       "bio": {
         "es": "sexteto de emo hardcore que lleva casi un año tocando, con 1 album grabado y subido y un ep en camino..."
       },
@@ -160,6 +161,7 @@
     {
       "name": "Anémona",
       "confirmed": false,
+      "photo": "artists/anemona-27e20741.webp",
       "bio": {
         "es": "Somos una banda de pop rock progresivo de Osorno. Hacemos canciones que mezclan melodías pop, sintetizadores y guitarras eléctricas con la exploración del rock progresivo. Tenemos actualmente un single publicado en todas las plataformas de streaming y con rotación en las radios locales."
       },
@@ -231,7 +233,7 @@
     {
       "name": "Dj Stely",
       "confirmed": false,
-      "photo": "artists/dj-stely-fac09b86.webp",
+      "photo": "artists/dj-stely-aef9f1fd.webp",
       "bio": {
         "es": "Propuesta electro house old."
       },
@@ -299,6 +301,7 @@
     {
       "name": "Rukoura",
       "confirmed": false,
+      "photo": "artists/rukoura-7b017581.webp",
       "bio": {
         "es": "Depende del line up y lo que ustedes necesiten puedo dar algo mas ambiental como el DeepHouse que suelo tocar en los cafes o bares, sinó puedo tocar algo mas rápido como es el techno o hard techno, depende del lineup que exista"
       },
