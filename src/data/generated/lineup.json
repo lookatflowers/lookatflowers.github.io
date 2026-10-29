@@ -13,6 +13,18 @@
       }
     },
     {
+      "name": "Kemenssen Yerber",
+      "confirmed": true,
+      "slot": 2,
+      "photo": "artists/kemenssen-yerber-3f33939b.webp",
+      "bio": {
+        "es": "Proyecto emergente desde 2025 que mezcla rock alternativo, riffs progresivos de guitarra y ritmos en distintos tiempos."
+      },
+      "links": {
+        "instagram": "https://instagram.com/kemenssen_yerber"
+      }
+    },
+    {
       "name": "Desvelo",
       "confirmed": false,
       "photo": "artists/desvelo-66f867b9.webp",
@@ -80,6 +92,7 @@
       }
     },
     {
+<<<<<<< HEAD
       "name": "Kemenssen Yerber",
       "confirmed": true,
       "slot": 4,
@@ -92,6 +105,8 @@
       }
     },
     {
+=======
+>>>>>>> 804da943c67d128e5cbd76708f35fb7dd382e12c
       "name": "Hombres de Marte",
       "confirmed": false,
       "photo": "artists/hombres-de-marte-825205b4.webp",
@@ -150,6 +165,7 @@
     {
       "name": "Palabras Como Dagas",
       "confirmed": false,
+      "photo": "artists/palabras-como-dagas-1ba62c7e.webp",
       "bio": {
         "es": "sexteto de emo hardcore que lleva casi un año tocando, con 1 album grabado y subido y un ep en camino..."
       },
@@ -160,6 +176,7 @@
     {
       "name": "Anémona",
       "confirmed": false,
+      "photo": "artists/anemona-27e20741.webp",
       "bio": {
         "es": "Somos una banda de pop rock progresivo de Osorno. Hacemos canciones que mezclan melodías pop, sintetizadores y guitarras eléctricas con la exploración del rock progresivo. Tenemos actualmente un single publicado en todas las plataformas de streaming y con rotación en las radios locales."
       },
@@ -231,7 +248,7 @@
     {
       "name": "Dj Stely",
       "confirmed": false,
-      "photo": "artists/dj-stely-fac09b86.webp",
+      "photo": "artists/dj-stely-aef9f1fd.webp",
       "bio": {
         "es": "Propuesta electro house old."
       },
@@ -299,6 +316,7 @@
     {
       "name": "Rukoura",
       "confirmed": false,
+      "photo": "artists/rukoura-7b017581.webp",
       "bio": {
         "es": "Depende del line up y lo que ustedes necesiten puedo dar algo mas ambiental como el DeepHouse que suelo tocar en los cafes o bares, sinó puedo tocar algo mas rápido como es el techno o hard techno, depende del lineup que exista"
       },
