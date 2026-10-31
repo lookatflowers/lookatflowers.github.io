@@ -49,8 +49,21 @@
       }
     },
     {
+      "name": "Bong Voyage Reggae",
+      "confirmed": true,
+      "slot": 5,
+      "photo": "artists/bong-voyage-reggae-a2946f79.webp",
+      "bio": {
+        "es": "Banda valdiviana de reggae original, con 2 años de experiencia, repertorio propio y más de 20 presentaciones en la región."
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/bongvoyagereggae/"
+      }
+    },
+    {
       "name": "Desvelo",
-      "confirmed": false,
+      "confirmed": true,
+      "slot": 6,
       "photo": "artists/desvelo-66f867b9.webp",
       "bio": {
         "es": "Desvelo es una banda emergente que mezcla elementos del Groove, Acid Jazz, Neo-Soul y R&B, construyendo un sonido cálido, envolvente y profundamente emocional. Inspirados por artistas como NAFTA, Luis A. Spinetta y The Marías, el proyecto combina armonías vocales cuidadas, secciones de vientos y una base rítmica que busca conectar tanto desde la sensibilidad como desde el movimiento."
@@ -112,17 +125,6 @@
       },
       "links": {
         "instagram": "https://www.instagram.com/hombres_de_marte_oficial/"
-      }
-    },
-    {
-      "name": "Bong Voyage Reggae",
-      "confirmed": false,
-      "photo": "artists/bong-voyage-reggae-a2946f79.webp",
-      "bio": {
-        "es": "Banda valdiviana de reggae original, con 2 años de experiencia, repertorio propio y más de 20 presentaciones en la región."
-      },
-      "links": {
-        "instagram": "https://www.instagram.com/bongvoyagereggae/"
       }
     },
     {
