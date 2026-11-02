@@ -267,6 +267,18 @@
       }
     },
     {
+      "name": "TnT live",
+      "confirmed": false,
+      "photo": "artists/tnt-live-96cb417b.webp",
+      "bio": {
+        "es": "Hola soy TnT live, dj y productor de technostep, un genero que incluye bass y hardkicks, mis presentaciones son modo live set o hybrid set con mis maquinas, usando midis y Ableton, creando un set versátil y bien bailable, con momentos nostálgicos con el bass y subiendo la energía para reventar con hardkicks"
+      },
+      "links": {
+        "instagram": "https://instagram.com/eltintaa",
+        "soundcloud": "https://soundcloud.com/boo00mm?ref=clipboard&p=a&c=1&si=bab9f033cbcc4839ab526fcb663b3650&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
+      }
+    },
+    {
       "name": "Rukoura",
       "confirmed": false,
       "photo": "artists/rukoura-7b017581.webp",
