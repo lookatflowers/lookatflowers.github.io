@@ -236,6 +236,11 @@ async function buildLineup(records) {
 
     const photo = await preparePhoto(r['Foto (link de Drive)'], name, where)
     if (photo) entry.photo = photo
+    else if (!confirmed) {
+      // Por confirmar sin foto: no sale en la web hasta que tenga una (se publica sola al agregarla)
+      warn(`${where}: no tiene foto, así que no se muestra en la web hasta que se agregue.`)
+      continue
+    }
     const bio = bilingual(r['Reseña (ES)'], r['Reseña (EN)'])
     if (bio) entry.bio = bio
     if (bio && !r['Reseña (EN)']) missingEnglish.push(name)
