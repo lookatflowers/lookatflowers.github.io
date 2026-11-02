@@ -300,6 +300,48 @@
       "description": {
         "es": "Moda circular"
       }
+    },
+    {
+      "name": "Entre lanas y telas",
+      "primary": [
+        "Emprendimiento"
+      ],
+      "secondary": [],
+      "description": {
+        "es": "Trabajos en tela, bolsas, estuches, organizadores.. y tejidos en lana, zapatitos de bebe, llaveros.."
+      },
+      "link": "https://www.instagram.com/_entrelanasytelas_?xtok=dTZzMGc2ZXAycnV1"
+    },
+    {
+      "name": "Mis Pequeñas Grandes manos",
+      "primary": [
+        "Emprendimiento"
+      ],
+      "secondary": [],
+      "description": {
+        "es": "Ropa Boinas cuellos de lanas Soy la creadora de mi propia bisutería y accesorios"
+      }
+    },
+    {
+      "name": "Kekimiau",
+      "primary": [
+        "Emprendimiento"
+      ],
+      "secondary": [],
+      "description": {
+        "es": "En Kekimiau, hacer arte va más allá de crear objetos estéticos: es hacer una pausa consciente en la rutina para reconectar con la sensibilidad y lo humano. Nace como un espacio de calma donde conviven la ilustración, piezas artesanales únicas y talleres vivenciales diseñados desde el corazón. Cada propuesta está pensada como una invitación a regalarte un momento de juego, desconexión y ternura a través de la creación con tus propias manos."
+      }
+    },
+    {
+      "name": "Arte&Sucu",
+      "primary": [
+        "Emprendimiento"
+      ],
+      "secondary": [],
+      "description": {
+        "es": "Mi emprendimiento combina naturaleza, artesanía, creatividad e identidad territorial. Elaboro macetas de yeso pintadas a mano, terrarios con suculentas, mini jardines y objetos decorativos, utilizando técnicas como macramé y decoupage. También doy una nueva vida a materiales reciclados como vidrio, latas y telas, transformándolos en piezas únicas y originales. Mi propuesta busca poner en valor el trabajo artesanal, la creatividad local y la sustentabilidad, integrando naturaleza y arte en objetos con identidad propia."
+      },
+      "link": "https://www.instagram.com/arte.sucu/"
     }
   ]
 }
