@@ -1,9 +1,33 @@
 {
   "bands": [
     {
-      "name": "ARGE",
+      "name": "Lethal Madness",
       "confirmed": true,
       "slot": 1,
+      "photo": "artists/lethal-madness-b6caa225.webp",
+      "bio": {
+        "es": "Lethal Madness es una banda de metalcore y metal moderno de Valdivia, con una propuesta cyberpunk oscura que explora la fragmentación del ser, la realidad y la identidad. Su primer EP, “New Wave of Madness” (2026), parte desde la estética de Serial Experiments Lain y recorre la búsqueda de un objetivo, el cuestionamiento de la realidad y los sueños, la distancia y la frialdad, la resiliencia y el poder de unirse en un mismo camino."
+      },
+      "links": {
+        "instagram": "https://instagram.com/lethalmadnesscl/"
+      }
+    },
+    {
+      "name": "Perla",
+      "confirmed": true,
+      "slot": 2,
+      "photo": "artists/perla-9f22e70e.webp",
+      "bio": {
+        "es": "Perla nació hace tres años en Valdivia, Chile. La banda mezcla hip-hop, rap, funk y rock en un sonido que cambia de canción en canción. El funk predomina, con partes rockeras, canciones románticas y otras con un mensaje contestatario. En vivo, Perla se presenta con cuatro músicos, voces, samplers y secuencias."
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/bandaperla.oficial/"
+      }
+    },
+    {
+      "name": "ARGE",
+      "confirmed": true,
+      "slot": 3,
       "photo": "artists/arge-72c569a2.webp",
       "bio": {
         "es": "Banda de Heavy y Power Metal fundada en Valdivia, Chile, en el año 2006. La alineación actual del quinteto está compuesta por Sebastián Lehmann (voz), Nicolás Bastián (guitarra), Daniel Chatre (guitarra), Felipe Saldivia (bajo) y Cristóbal Navarro (batería). Su propuesta musical se caracteriza por el uso de guitarras dobles con pasajes melódicos, voces limpias de registro agudo y baterías con doble bombo de ritmo medio y/o rápido. El nombre del grupo proviene de la palabra griega Arché, que hace referencia al concepto del \"principio\" o elemento primordial."
@@ -15,7 +39,7 @@
     {
       "name": "Kemenssen Yerber",
       "confirmed": true,
-      "slot": 2,
+      "slot": 4,
       "photo": "artists/kemenssen-yerber-3f33939b.webp",
       "bio": {
         "es": "Proyecto emergente desde 2025 que mezcla rock alternativo, riffs progresivos de guitarra y ritmos en distintos tiempos."
@@ -25,51 +49,27 @@
       }
     },
     {
-      "name": "Perla",
-      "confirmed": true,
-      "slot": 3,
-      "photo": "artists/perla-9f22e70e.webp",
-      "bio": {
-        "es": "Perla nació hace tres años en Valdivia, Chile. La banda mezcla hip-hop, rap, funk y rock en un sonido que cambia de canción en canción. El funk predomina, con partes rockeras, canciones románticas y otras con un mensaje contestatario. En vivo, Perla se presenta con cuatro músicos, voces, samplers y secuencias."
-      },
-      "links": {
-        "instagram": "https://www.instagram.com/bandaperla.oficial/"
-      }
-    },
-    {
-      "name": "Lethal Madness",
-      "confirmed": true,
-      "slot": 4,
-      "photo": "artists/lethal-madness-b6caa225.webp",
-      "bio": {
-        "es": "Lethal Madness es una banda de metalcore y metal moderno de Valdivia, con una propuesta cyberpunk oscura que explora la fragmentación del ser, la realidad y la identidad. Su primer EP, “New Wave of Madness” (2026), parte desde la estética de Serial Experiments Lain y recorre la búsqueda de un objetivo, el cuestionamiento de la realidad y los sueños, la distancia y la frialdad, la resiliencia y el poder de unirse en un mismo camino."
-      },
-      "links": {
-        "instagram": "https://instagram.com/lethalmadnesscl/"
-      }
-    },
-    {
-      "name": "Desvelo",
-      "confirmed": true,
-      "slot": 5,
-      "photo": "artists/desvelo-66f867b9.webp",
-      "bio": {
-        "es": "Desvelo es una banda emergente que mezcla elementos del Groove, Acid Jazz, Neo-Soul y R&B, construyendo un sonido cálido, envolvente y profundamente emocional. Inspirados por artistas como NAFTA, Luis A. Spinetta y The Marías, el proyecto combina armonías vocales cuidadas, secciones de vientos y una base rítmica que busca conectar tanto desde la sensibilidad como desde el movimiento."
-      },
-      "links": {
-        "instagram": "https://www.instagram.com/desvelo.__/"
-      }
-    },
-    {
       "name": "Bong Voyage Reggae",
       "confirmed": true,
-      "slot": 6,
+      "slot": 5,
       "photo": "artists/bong-voyage-reggae-a2946f79.webp",
       "bio": {
         "es": "Banda valdiviana de reggae original, con 2 años de experiencia, repertorio propio y más de 20 presentaciones en la región."
       },
       "links": {
         "instagram": "https://www.instagram.com/bongvoyagereggae/"
+      }
+    },
+    {
+      "name": "Desvelo",
+      "confirmed": true,
+      "slot": 6,
+      "photo": "artists/desvelo-66f867b9.webp",
+      "bio": {
+        "es": "Desvelo es una banda emergente que mezcla elementos del Groove, Acid Jazz, Neo-Soul y R&B, construyendo un sonido cálido, envolvente y profundamente emocional. Inspirados por artistas como NAFTA, Luis A. Spinetta y The Marías, el proyecto combina armonías vocales cuidadas, secciones de vientos y una base rítmica que busca conectar tanto desde la sensibilidad como desde el movimiento."
+      },
+      "links": {
+        "instagram": "https://www.instagram.com/desvelo.__/"
       }
     },
     {
@@ -174,8 +174,21 @@
   ],
   "djs": [
     {
+      "name": "Felipebeat Remix Live",
+      "confirmed": true,
+      "slot": 1,
+      "photo": "artists/felipebeat-remix-live-73f28775.webp",
+      "bio": {
+        "es": "Más de 15 años de trayectoria; sets como show musical con energía de 'montaña rusa'. Su sello es mezclar en vivo tocando teclado."
+      },
+      "links": {
+        "instagram": "https://instagram.com/felipebeat.remixlive"
+      }
+    },
+    {
       "name": "Andrés Torres",
-      "confirmed": false,
+      "confirmed": true,
+      "slot": 2,
       "photo": "artists/andres-torres-3f11a52d.webp",
       "bio": {
         "es": "Set de house en clave festivalera: progressive house, electro house, big room y EDM."
@@ -187,8 +200,35 @@
       }
     },
     {
+      "name": "StarrKush",
+      "confirmed": true,
+      "slot": 3,
+      "photo": "artists/starrkush-cdf5544a.webp",
+      "bio": {
+        "es": "Viaje sonoro intenso y envolvente, con energía progresiva y grooves potentes."
+      },
+      "links": {
+        "instagram": "https://instagram.com/starr.kush",
+        "soundcloud": "https://on.soundcloud.com/ek5C5f97k99d3jqyRC"
+      }
+    },
+    {
+      "name": "DJ JKOBS",
+      "confirmed": true,
+      "slot": 4,
+      "photo": "artists/dj-jkobs-bed63924.webp",
+      "bio": {
+        "es": "DJ de Ancud, Chiloé, más de 8 años de trayectoria; se ha presentado en Calafate (Santiago), Estadio Monumental, Dubái Club (Valdivia), Club W (Puerto Montt), Festival Bicentenario y Gira Teletón Chiloé."
+      },
+      "links": {
+        "instagram": "https://instagram.com/jkobs__dj",
+        "soundcloud": "https://soundcloud.com/@jkobs__dj"
+      }
+    },
+    {
       "name": "BIG POPA",
-      "confirmed": false,
+      "confirmed": true,
+      "slot": 5,
       "photo": "artists/big-popa-595b7ea3.webp",
       "bio": {
         "es": "DJ set de diferentes estilos urbanos latinos, cargado de energía."
@@ -199,14 +239,54 @@
       }
     },
     {
-      "name": "Felipebeat Remix Live",
-      "confirmed": false,
-      "photo": "artists/felipebeat-remix-live-73f28775.webp",
+      "name": "Rukoura",
+      "confirmed": true,
+      "slot": 6,
+      "photo": "artists/rukoura-7b017581.webp",
       "bio": {
-        "es": "Más de 15 años de trayectoria; sets como show musical con energía de 'montaña rusa'. Su sello es mezclar en vivo tocando teclado."
+        "es": "Depende del line up y lo que ustedes necesiten puedo dar algo mas ambiental como el DeepHouse que suelo tocar en los cafes o bares, sinó puedo tocar algo mas rápido como es el techno o hard techno, depende del lineup que exista"
       },
       "links": {
-        "instagram": "https://instagram.com/felipebeat.remixlive"
+        "instagram": "https://www.instagram.com/rukoura",
+        "soundcloud": "https://soundcloud.com/felipe-rosales-427719011"
+      }
+    },
+    {
+      "name": "VECEIT",
+      "confirmed": true,
+      "slot": 7,
+      "photo": "artists/veceit-e6fec3e1.webp",
+      "bio": {
+        "es": "Viaje musical entre melodías nostálgicas e introspectivas y la intensidad del dubstep/riddim; busca acercar el dubstep a nuevo público en Valdivia."
+      },
+      "links": {
+        "instagram": "https://instagram.com/veceit_prod",
+        "soundcloud": "https://on.soundcloud.com/i0t4zjiEWopRUyxTz9"
+      }
+    },
+    {
+      "name": "AMOONS",
+      "confirmed": true,
+      "slot": 8,
+      "bio": {
+        "es": "Me gustaría llevar un set enfocado completamente en el riddim dubstep, mostrando el sonido que trabajo y la forma en que entiendo este género, desde sus sintetizadores y ritmos hasta los drops más pesados. la idea es mantener una línea musical marcada, pero jugando con distintos sonidos y cambios a lo largo de la presentación. También me gustaría tener la oportunidad de mostrar mi proyecto en Valdivia y acercar el riddim a personas que quizás no están tan familiarizadas con el género. Aunque no soy estudiante de la UACh, me interesa participar en este tipo de espacios, conocer otros proyectos y ser parte de las instancias que ayudan a mantener activa la escena electrónica. 2.CONTACTO"
+      },
+      "links": {
+        "instagram": "https://instagram.com/amoonsss_",
+        "soundcloud": "https://m.soundcloud.com/amoonsdubs?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAb21jcAVNDOpleHRuA2FlbQIxMQBwZG9mAnNydGMGYXBwX2lkDzU2NzA2NzM0MzM1MjQyNwABp3bFwqDWDfaBLxgClFlTjY9GH3WKx6JtZTb77FfX88LYmsYbTiNH0VhSvbnW_aem_41AzOStd0LRc53c-eiHrlQ&utm_id=97760_v0_s00_e0_tv3_a1denni61os425"
+      }
+    },
+    {
+      "name": "TnT live",
+      "confirmed": true,
+      "slot": 9,
+      "photo": "artists/tnt-live-96cb417b.webp",
+      "bio": {
+        "es": "Hola soy TnT live, dj y productor de technostep, un genero que incluye bass y hardkicks, mis presentaciones son modo live set o hybrid set con mis maquinas, usando midis y Ableton, creando un set versátil y bien bailable, con momentos nostálgicos con el bass y subiendo la energía para reventar con hardkicks"
+      },
+      "links": {
+        "instagram": "https://instagram.com/eltintaa",
+        "soundcloud": "https://soundcloud.com/boo00mm?ref=clipboard&p=a&c=1&si=bab9f033cbcc4839ab526fcb663b3650&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
       }
     },
     {
@@ -221,18 +301,6 @@
       }
     },
     {
-      "name": "StarrKush",
-      "confirmed": false,
-      "photo": "artists/starrkush-cdf5544a.webp",
-      "bio": {
-        "es": "Viaje sonoro intenso y envolvente, con energía progresiva y grooves potentes."
-      },
-      "links": {
-        "instagram": "https://instagram.com/starr.kush",
-        "soundcloud": "https://on.soundcloud.com/ek5C5f97k99d3jqyRC"
-      }
-    },
-    {
       "name": "Dj Stely",
       "confirmed": false,
       "photo": "artists/dj-stely-aef9f1fd.webp",
@@ -242,54 +310,6 @@
       "links": {
         "instagram": "https://instagram.com/stely_cs",
         "soundcloud": "https://soundcloud.com/stely10"
-      }
-    },
-    {
-      "name": "VECEIT",
-      "confirmed": false,
-      "photo": "artists/veceit-e6fec3e1.webp",
-      "bio": {
-        "es": "Viaje musical entre melodías nostálgicas e introspectivas y la intensidad del dubstep/riddim; busca acercar el dubstep a nuevo público en Valdivia."
-      },
-      "links": {
-        "instagram": "https://instagram.com/veceit_prod",
-        "soundcloud": "https://on.soundcloud.com/i0t4zjiEWopRUyxTz9"
-      }
-    },
-    {
-      "name": "DJ JKOBS",
-      "confirmed": false,
-      "photo": "artists/dj-jkobs-bed63924.webp",
-      "bio": {
-        "es": "DJ de Ancud, Chiloé, más de 8 años de trayectoria; se ha presentado en Calafate (Santiago), Estadio Monumental, Dubái Club (Valdivia), Club W (Puerto Montt), Festival Bicentenario y Gira Teletón Chiloé."
-      },
-      "links": {
-        "instagram": "https://instagram.com/jkobs__dj",
-        "soundcloud": "https://soundcloud.com/@jkobs__dj"
-      }
-    },
-    {
-      "name": "TnT live",
-      "confirmed": false,
-      "photo": "artists/tnt-live-96cb417b.webp",
-      "bio": {
-        "es": "Hola soy TnT live, dj y productor de technostep, un genero que incluye bass y hardkicks, mis presentaciones son modo live set o hybrid set con mis maquinas, usando midis y Ableton, creando un set versátil y bien bailable, con momentos nostálgicos con el bass y subiendo la energía para reventar con hardkicks"
-      },
-      "links": {
-        "instagram": "https://instagram.com/eltintaa",
-        "soundcloud": "https://soundcloud.com/boo00mm?ref=clipboard&p=a&c=1&si=bab9f033cbcc4839ab526fcb663b3650&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
-      }
-    },
-    {
-      "name": "Rukoura",
-      "confirmed": false,
-      "photo": "artists/rukoura-7b017581.webp",
-      "bio": {
-        "es": "Depende del line up y lo que ustedes necesiten puedo dar algo mas ambiental como el DeepHouse que suelo tocar en los cafes o bares, sinó puedo tocar algo mas rápido como es el techno o hard techno, depende del lineup que exista"
-      },
-      "links": {
-        "instagram": "https://www.instagram.com/rukoura",
-        "soundcloud": "https://soundcloud.com/felipe-rosales-427719011"
       }
     }
   ]
