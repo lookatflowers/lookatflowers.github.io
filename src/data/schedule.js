@@ -28,7 +28,7 @@ export const days = [
   {
     id: 'dubai',
     name: { es: 'Jornada Club Dubai', en: 'Club Dubai Night' },
-    place: { es: 'Dubai Club', en: 'Dubai Club' },
+    place: { es: 'Dubai Club · noche del viernes 6 de noviembre', en: 'Dubai Club · Friday night, November 6' },
     stages: [
       {
         id: 'dubai',
