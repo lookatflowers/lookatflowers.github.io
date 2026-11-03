@@ -1,32 +1,42 @@
-// Cronograma por escenario. kind: 'ambient' | 'artist' | 'close'
-// Las franjas de artista indican type ('band' | 'dj') y slot (número de carta, ver artists.js):
-// muestran el nombre del confirmado con ese slot o, si no hay, "BANDA 1", "DJ 2"...
-export const stages = [
+// Cronograma del festival: jornadas → escenarios → artistas en orden de presentación.
+// Solo se publica la hora de inicio de cada escenario.
+// Cada artista se indica con type ('band' | 'dj') y slot (número de carta, ver lineupConfig.js):
+// el nombre sale del confirmado con esa carta. Un arreglo de varios ([{…}, {…}]) es un B2B.
+const band = (slot) => ({ type: 'band', slot })
+const dj = (slot) => ({ type: 'dj', slot })
+
+export const days = [
   {
-    id: 'flowers',
-    name: 'Flowers Stage',
-    slots: [
-      { time: '14:00', kind: 'ambient' },
-      { time: '14:30', kind: 'artist', type: 'band', slot: 1 },
-      { time: '15:15', kind: 'artist', type: 'band', slot: 2 },
-      { time: '16:00', kind: 'artist', type: 'band', slot: 3 },
-      { time: '16:45', kind: 'artist', type: 'band', slot: 4 },
-      { time: '17:30', kind: 'artist', type: 'band', slot: 5 },
-      { time: '18:15', kind: 'artist', type: 'band', slot: 6 },
-      { time: '19:30', kind: 'close' },
+    id: 'miraflores',
+    name: { es: 'Jornada Miraflores', en: 'Miraflores Day' },
+    place: { es: 'Campus Miraflores UACh · viernes 6 de noviembre', en: 'Campus Miraflores UACh · Friday, November 6' },
+    stages: [
+      {
+        id: 'flowers',
+        name: 'Flowers Stage',
+        start: '14:00',
+        acts: [band(1), band(2), band(3), band(4), band(5), band(6)],
+      },
+      {
+        id: 'valdivia',
+        name: 'Valdivia Stage',
+        start: '13:00',
+        acts: [dj(1), dj(2), dj(3), dj(4), dj(5), dj(6)],
+      },
     ],
   },
   {
-    id: 'valdivia',
-    name: 'Valdivia Stage',
-    slots: [
-      { time: '14:00', kind: 'artist', type: 'dj', slot: 1 },
-      { time: '15:00', kind: 'artist', type: 'dj', slot: 2 },
-      { time: '16:00', kind: 'artist', type: 'dj', slot: 3 },
-      { time: '17:00', kind: 'artist', type: 'dj', slot: 4 },
-      { time: '18:00', kind: 'artist', type: 'dj', slot: 5 },
-      { time: '19:00', kind: 'artist', type: 'dj', slot: 6 }, // hora provisional: confirmar con producción
-      { time: '20:00', kind: 'close' },
+    id: 'dubai',
+    name: { es: 'Jornada Club Dubai', en: 'Club Dubai Night' },
+    place: { es: 'Dubai Club · noche del viernes 6 de noviembre', en: 'Dubai Club · Friday night, November 6' },
+    stages: [
+      {
+        id: 'dubai',
+        name: 'Dubai Club',
+        start: '00:00',
+        // VECEIT B2B AMOONS · TnT live · StarrKush
+        acts: [[dj(7), dj(8)], dj(9), dj(3)],
+      },
     ],
   },
 ]

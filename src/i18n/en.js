@@ -85,9 +85,9 @@ export default {
   },
   schedule: {
     title: 'Schedule',
-    ambient: 'Welcome',
-    close: 'Farewell',
-    tbc: '?',
+    start: 'Starts at',
+    hrs: '',
+    tbcName: 'To be confirmed',
   },
   vendors: {
     title: 'Vendors',

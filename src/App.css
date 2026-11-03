@@ -175,6 +175,14 @@
 .roster__name { font-weight: 700; }
 .roster li[data-status='tbc'] .roster__name { opacity: 0.5; }
 .slots time { min-width: 4.5ch; font-weight: 700; color: var(--pink); }
+/* Cronograma: jornadas con sus escenarios (hora de inicio + orden de artistas) */
+.schedule { display: grid; gap: 3rem; }
+.schedule__day-title { margin: 0; font-size: clamp(1.6rem, 5vw, 2.6rem); }
+.schedule__place { margin: 0.35rem 0 1.5rem; opacity: 0.75; }
+.schedule__stage .subtitle { margin-bottom: 0.35rem; }
+.schedule__start { margin: 0 0 0.75rem; font-weight: 700; }
+.schedule__start time { color: var(--pink); }
+.schedule__n { min-width: 2ch; font-weight: 700; color: var(--pink); }
 .slots__tbc { display: inline-block; min-width: 2ch; font-family: var(--font-display); font-size: 1.35em; line-height: 1; text-align: center; }
 
 .tag {

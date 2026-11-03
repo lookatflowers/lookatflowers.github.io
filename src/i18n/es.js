@@ -85,9 +85,9 @@ export default {
   },
   schedule: {
     title: 'Cronograma',
-    ambient: 'Bienvenida',
-    close: 'Despedida',
-    tbc: '?',
+    start: 'Inicio',
+    hrs: 'hrs',
+    tbcName: 'Por confirmar',
   },
   vendors: {
     title: 'Puestos de venta',

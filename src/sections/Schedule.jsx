@@ -1,35 +1,44 @@
 import Section from '../components/Section'
 import { confirmedAt } from '../data/artists'
-import { stages } from '../data/schedule'
+import { days } from '../data/schedule'
 import { useLang } from '../i18n/useLang'
+import { displayText } from '../utils/displayText'
 
+/** Cronograma: por jornada, cada escenario con su hora de inicio y sus artistas en orden. */
 export default function Schedule() {
-  const { t } = useLang()
+  const { t, tr } = useLang()
 
-  const labelFor = (slot) => {
-    if (slot.kind === 'ambient') return t('schedule.ambient')
-    if (slot.kind === 'close') return t('schedule.close')
-    const artist = confirmedAt(slot.type, slot.slot)
-    if (artist) return artist.name
-    if (!slot.slot) return <span className="slots__tbc">{t('schedule.tbc')}</span>
-    // Por confirmar: "BANDA 1", "DJ 2"...
-    return `${t(`cards.${slot.type}`)} ${slot.slot}`.toUpperCase()
+  const nameOf = (act) => {
+    const artist = confirmedAt(act.type, act.slot)
+    return artist ? displayText(artist.name) : t('schedule.tbcName')
   }
+  const labelFor = (act) => (Array.isArray(act) ? act.map(nameOf).join(' B2B ') : nameOf(act))
 
   return (
     <Section id="schedule" title={t('schedule.title')}>
-      <div className="columns">
-        {stages.map((stage) => (
-          <div key={stage.id}>
-            <h3 className="subtitle">{stage.name}</h3>
-            <ol className="slots">
-              {stage.slots.map((slot) => (
-                <li key={slot.time}>
-                  <time>{slot.time}</time>
-                  <span>{labelFor(slot)}</span>
-                </li>
+      <div className="schedule">
+        {days.map((day) => (
+          <div key={day.id} className="schedule__day">
+            <h3 className="schedule__day-title">{tr(day.name)}</h3>
+            <p className="schedule__place">{tr(day.place)}</p>
+            <div className="columns">
+              {day.stages.map((stage) => (
+                <div key={stage.id} className="schedule__stage">
+                  <h4 className="subtitle">{stage.name}</h4>
+                  <p className="schedule__start">
+                    {t('schedule.start')} <time>{stage.start}</time> {t('schedule.hrs')}
+                  </p>
+                  <ol className="slots schedule__acts">
+                    {stage.acts.map((act, i) => (
+                      <li key={i}>
+                        <span className="schedule__n">{i + 1}</span>
+                        <span>{labelFor(act)}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
               ))}
-            </ol>
+            </div>
           </div>
         ))}
       </div>
